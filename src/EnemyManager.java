@@ -13,7 +13,7 @@ public class EnemyManager
         scanner = new Scanner(System.in);
     }
 
-    // Clase auxiliar para devolver resultado del turno
+    //Auxiliar class to return the turn result
     private static class TurnResult 
     {
         int enemyHP;
@@ -40,7 +40,7 @@ public class EnemyManager
         } 
         else if (winCounter >= 10)
         {
-            enemyFound = FinalBoss.MEGADIOSMORTIFERO;
+            enemyFound = FinalBoss.LETHALDEMIGOD;
         }
 
         System.out.println(FontColors.RED + "\nEvent: An enemy appears! It's a mysterious creature.");
@@ -48,7 +48,6 @@ public class EnemyManager
         System.out.println(FontColors.RED +"\nHP: " + FontColors.WHITE + enemyFound.getEnemyHP());
         System.out.println(FontColors.RED +"Attack: "  + FontColors.WHITE +  enemyFound.getEnemyAttack());
         System.out.println(FontColors.RED +"Attack Speed: "  + FontColors.WHITE +  enemyFound.getEnemyAttackSpeed());
-        System.out.println(FontColors.RED +"Range: "  + FontColors.WHITE +  enemyFound.getEnemyRange());
 
         System.out.println(FontColors.WHITE + "\nYou gonna fight him? Enter 'Y' to fight, 'N' to scape or 'S' to show your stats.");
         
@@ -64,7 +63,7 @@ public class EnemyManager
             }
             else if (input.equalsIgnoreCase("N"))
             {
-                System.out.println(FontColors.RED +"\nYou have run away.");
+                System.out.println(FontColors.YELLOW +"\nYou have run away.");
                 break;
             }
             else if (input.equalsIgnoreCase("S"))
@@ -84,7 +83,7 @@ public class EnemyManager
         int enemyHP = enemy.getEnemyHP(); 
         boolean combatEnded = false;
 
-        System.out.println("\nComienza el combate:");
+        System.out.println("\nA battle is about to begin!:");
 
         while (player.getHP() > 0 && enemyHP > 0 && !combatEnded) 
         {
@@ -100,7 +99,7 @@ public class EnemyManager
             else 
             {
                 playerFirst = rand.nextBoolean();
-                System.out.println(FontColors.YELLOW + "\n¡Ambos tienen la misma velocidad! Se decide al azar quién va primero... (Pulse 'ENTER')");
+                System.out.println(FontColors.YELLOW + "\nBoth have the same attack speed! Who goes first will be decided randomly... (Press ENTER).");
                 scanner.nextLine().trim();
             }
 
@@ -127,9 +126,9 @@ public class EnemyManager
                 }
             }
 
-            // Mostrar HP tras la ronda
-            System.out.println(FontColors.GREEN + "\nHP jugador: " + FontColors.WHITE + Math.max(player.getHP(), 0));
-            System.out.println(FontColors.RED + "HP enemigo: " + FontColors.WHITE + Math.max(enemyHP, 0));
+            //Show HP
+            System.out.println(FontColors.GREEN + "\nPlayer HP: " + FontColors.WHITE + Math.max(player.getHP(), 0));
+            System.out.println(FontColors.RED + "Enemy HP: " + FontColors.WHITE + Math.max(enemyHP, 0));
 
             if (player.getHP() <= 0 || enemyHP <= 0) 
             {
@@ -140,19 +139,21 @@ public class EnemyManager
         
         if (player.getHP() <= 0) 
         {
-            System.out.println(FontColors.RED + "\nHas sido derrotado...");
+            System.out.println(FontColors.RED + "\nYou were defeated... (Press ENTER).");
             scanner.nextLine();
-        } 
+            System.out.println("The game will now close.");
+            System.exit(0);
+        }
         else if (enemyHP <= 0) 
         {
-            System.out.println(FontColors.GREEN + "\n¡Has ganado!");
+            System.out.println(FontColors.GREEN + "\nYou have won!");
             winCounter++;
-            System.out.println("llevas " + winCounter + " victorias");
+            System.out.println("Current wins: " + winCounter + " (Press ENTER).");
             scanner.nextLine();
         } 
         else if (combatEnded) 
         {
-            System.out.println(FontColors.YELLOW + "\nHas huido del combate.");
+            System.out.println(FontColors.YELLOW + "\nYou have run away.");
             scanner.nextLine();
         }
     }
@@ -164,22 +165,22 @@ public class EnemyManager
 
         while (!actionTaken && !combatEnded) 
         {
-            System.out.println(FontColors.WHITE + "\nTu turno:");
-            System.out.println("Pulsa Z para atacar, X para curarte, C para intentar huir o 'S' para mostrar tus stats: ");
+            System.out.println(FontColors.WHITE + "\nIt's your turn!");
+            System.out.println("Press 'Z' to attack, 'X' to heal, 'C' to try to escape or 'S' to show your stats:");
             String input = scanner.nextLine().trim();
 
             if (input.equalsIgnoreCase("Z")) 
             {
-                System.out.println(FontColors.GREEN + "Lanzas un Kaioken.");
+                System.out.println(FontColors.GREEN + "\nYou strike the enemy!");
                 enemyHP -= player.getAttack();
-                System.out.println("Le has quitado " + FontColors.WHITE + player.getAttack() + FontColors.GREEN + " de HP.");
+                System.out.println("You dealt " + FontColors.WHITE + player.getAttack() + FontColors.GREEN + " HP damage.");
                 actionTaken = true;
             } 
             else if (input.equalsIgnoreCase("X")) 
             {
-                System.out.println(FontColors.GREEN + "Te has tomado una poción.");
+                System.out.println(FontColors.GREEN + "\nYou restore some health by drinking a potion.");
                 player.setHP(player.getHP() + Potions.HEALING_POTION);
-                System.out.println(FontColors.GREEN + "Tu vida actual es de " + FontColors.WHITE + player.getHP());
+                System.out.println(FontColors.GREEN + "Your actual HP is " + FontColors.WHITE + player.getHP());
                 actionTaken = true;
             } 
             else if (input.equalsIgnoreCase("C")) 
@@ -188,12 +189,12 @@ public class EnemyManager
 
                 if (chance < 65) 
                 {
-                    System.out.println("Has huido con éxito.");
+                    System.out.println(FontColors.YELLOW + "\nYou have run away.");
                     combatEnded = true; 
                 } 
                 else 
                 {
-                    System.out.println("No has podido escapar.");
+                    System.out.println(FontColors.YELLOW + "\nYou couldn't escape!");
                     actionTaken = true;
                 }
             } 
@@ -203,7 +204,7 @@ public class EnemyManager
             } 
             else 
             {
-                System.out.println("\nEntrada inválida. Usa 'Z', 'X', 'C' o 'S'.");
+                System.out.println("\nInvalid input. Use 'Z', 'X', 'C' o 'S'.");
             }
         }
         return new TurnResult(enemyHP, combatEnded);
@@ -211,11 +212,10 @@ public class EnemyManager
 
     private boolean doEnemyTurn(Classes player, EnemyType enemy) 
     {
-        System.out.println(FontColors.WHITE + "\nTurno del enemigo:");
-        System.out.println(FontColors.RED + "El enemigo ha lanzado una bomba invasora de mundos");
-
+        System.out.println(FontColors.WHITE + "\nEnemy's turn:");
+        System.out.println(FontColors.RED + "The enemy attacks you!");
         player.setHP(player.getHP() - enemy.getEnemyAttack());
-        System.out.println("Te ha quitado " + FontColors.WHITE + enemy.getEnemyAttack() + FontColors.RED + " de HP.");
+        System.out.println("It deals " + FontColors.WHITE + enemy.getEnemyAttack() + FontColors.RED + " HP damage.");
 
         return false; 
     }

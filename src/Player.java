@@ -38,13 +38,13 @@ public class Player
                     switch (randomOption) 
                     {
                         case 0:
-                            events.generateEvent(); // enemigo/evento
+                            events.generateEvent();
                             break;
                         case 1:
-                            poti.generatePotions(); // poción
+                            poti.generatePotions();
                             break;
                         case 2:
-                            coin.foundCoins(); // moneda
+                            coin.foundCoins();
                             break;
                         case 3:
                             System.out.println("\nNothing happens. You keep advancing.\n");

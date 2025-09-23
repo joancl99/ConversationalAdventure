@@ -4,7 +4,7 @@ public class Events
 {
     private Random rand = new Random();
 
-    private EnemyManager enemyManager; // referencia a enemyManager
+    private EnemyManager enemyManager;
     private Classes player;
     private EnemyType enemyType;
     private Chest chest;
@@ -28,29 +28,14 @@ public class Events
         {
             int event = rand.nextInt(2); // 0 o 1
 
-            if (enemyManager.winCounter < 5)
+            switch (event) 
             {
-                switch (event) 
-                {
-                    case 0:
-                        chest.foundChest();
-                        break;
-                    case 1:
-                        enemyManager.enemyAppears(player, enemyType);
-                        break;
-                }
-            }
-            else if (enemyManager.winCounter >= 5)
-            {
-                switch (event) 
-                {
-                    case 0:
-                        chest.foundChest();
-                        break;
-                    case 1:
-                        enemyManager.enemyAppears(player, enemyType);
-                        break;
-                }
+                case 0:
+                    chest.foundChest();
+                    break;
+                case 1:
+                    enemyManager.enemyAppears(player, enemyType);
+                    break;
             }
         }
     }

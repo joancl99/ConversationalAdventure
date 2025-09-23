@@ -1,24 +1,22 @@
 public enum Enemies implements EnemyType
 {
-    GOBLIN(200, 100, 5.5, 5),
-    TROLL(200, 100, 5.5, 5),
-    SKELETON(200, 100, 5.5, 5),
-    DRAGON(200, 100, 5.5, 5),
-    WOLVE(200, 100, 5.5, 5),
-    GHOST(200, 100, 5.5, 5),
-    SPIDER(200, 100, 5.5, 5);
+    GOBLIN(100, 50, 5.5),
+    TROLL(120,60, 5),
+    SKELETON(110, 55, 5.5),
+    DRAGON(150, 70, 6),
+    WOLVE(100, 50, 6),
+    GHOST(90, 50, 6.5),
+    SPIDER(80, 40, 6);
 
     private final int enemyHp;
     private final int enemyAttack;
     private final double enemyAttackSpeed;
-    private final int enemyRange;
 
-    Enemies(int enemyHp, int enemyAttack, double enemyAttackSpeed, int enemyRange) 
+    Enemies(int enemyHp, int enemyAttack, double enemyAttackSpeed) 
     {
         this.enemyHp = enemyHp;
         this.enemyAttack = enemyAttack;
         this.enemyAttackSpeed = enemyAttackSpeed;
-        this.enemyRange = enemyRange;
     }
 
     public String getName() 
@@ -38,9 +36,5 @@ public enum Enemies implements EnemyType
     public double getEnemyAttackSpeed() 
     { 
         return enemyAttackSpeed; 
-    }
-    public int getEnemyRange() 
-    { 
-        return enemyRange; 
     }
 }

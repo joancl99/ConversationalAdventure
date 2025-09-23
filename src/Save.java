@@ -4,7 +4,7 @@ public class Save
 {
     private static final String SAVE_FILE = "./saveFile/save.txt";
 
-    // Guarda el nombre de la clase del jugador en el archivo
+    //Save the player class name in the file.
     public static void saveClass(Classes clase) {
         try {
             File file = new File(SAVE_FILE);
@@ -20,26 +20,33 @@ public class Save
         }
     }
 
-    // Carga la clase guardada desde el archivo, si existe
-    public static Classes loadSavedClass() {
+    //Load the saved class from the file, if it exists.
+    public static Classes loadSavedClass() 
+    {
         File file = new File(SAVE_FILE);
-        if (!file.exists()) {
+        if (!file.exists()) 
+        {
             return null;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) 
+        {
             String line = reader.readLine();
-            return Classes.valueOf(line); // Convierte el string a enum
-        } catch (Exception e) {
+            return Classes.valueOf(line); //Convert the string to an enum
+        } 
+        catch (Exception e) 
+        {
             System.out.println("Failed to load save file.");
             return null;
         }
     }
 
-    // Elimina el archivo de guardado (opcional)
-    public static void resetSave() {
+    //Delete the save file (optional)
+    public static void resetSave() 
+    {
         File file = new File(SAVE_FILE);
-        if (file.exists()) {
+        if (file.exists()) 
+        {
             file.delete();
         }
     }

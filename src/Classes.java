@@ -1,20 +1,18 @@
 enum Classes
 {
-    WARRIOR (200, 100, 5.5, 5),
-    MAGE (200, 750, 76.5,50),
-    ROGUE (50, 200, 10,20);
+    WARRIOR (250, 100, 6),
+    MAGE (200, 250, 8),
+    ROGUE (100, 350, 10);
 
     private int hp;
     private int attack;
     private double attackSpeed;
-    private int range;
 
-    Classes (int hp, int attack, double attackSpeed, int range)
+    Classes (int hp, int attack, double attackSpeed)
     {
         this.hp = hp;
         this.attack = attack;
         this.attackSpeed = attackSpeed;
-        this.range = range;
     }
 
     public int getHP()
@@ -37,17 +35,11 @@ enum Classes
         return attackSpeed;
     }
 
-    public int getRange()
-    {
-        return range;
-    }
-
     public void showStats()
     {
-        System.out.println(FontColors.CYAN + "\nStats of the " + name() + ":");  // Imprime el nombre del enum, método name() se utiliza exclusivamente con enums, devuelve el nombre exacto de la constante del enum
+        System.out.println(FontColors.CYAN + "\nStats of the " + name() + ":");  //Prints the name of the enum; the name() method is used exclusively with enums and returns the exact name of the enum constant.
         System.out.println(FontColors.PURPLE + "\nHP: " + FontColors.WHITE + hp);
         System.out.println(FontColors.PURPLE + "Attack: " + FontColors.WHITE + attack);
         System.out.println(FontColors.PURPLE + "Attack Speed: " + FontColors.WHITE + attackSpeed);
-        System.out.println(FontColors.PURPLE + "Range: " + FontColors.WHITE + range);
     }
 }

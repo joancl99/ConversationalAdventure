@@ -1,22 +1,20 @@
 enum MiniBosses implements EnemyType
 {
-    MegaGoblin (400, 200, 7.5, 10),
-    AncientDragon (400, 200, 7.5, 10),
-    SkeletonKing (400, 200, 7.5, 10),
-    IronColossus (400, 200, 7.5, 10),
-    AbyssalHydra (400, 200, 7.5, 10);
+    MegaGoblin (200, 80, 7),
+    AncientDragon (220, 90, 7.5),
+    SkeletonKing (200, 85, 7),
+    IronColossus (250, 100, 6.5),
+    AbyssalHydra (230, 95, 7.5);
 
     private final int enemyHp;
     private final int enemyAttack;
     private final double enemyAttackSpeed;
-    private final int enemyRange;
 
-    MiniBosses(int enemyHp, int enemyAttack, double enemyAttackSpeed, int enemyRange) 
+    MiniBosses(int enemyHp, int enemyAttack, double enemyAttackSpeed) 
     {
         this.enemyHp = enemyHp;
         this.enemyAttack = enemyAttack;
         this.enemyAttackSpeed = enemyAttackSpeed;
-        this.enemyRange = enemyRange;
     }
 
     public String getName() 
@@ -36,9 +34,5 @@ enum MiniBosses implements EnemyType
     public double getEnemyAttackSpeed() 
     { 
         return enemyAttackSpeed; 
-    }
-    public int getEnemyRange() 
-    { 
-        return enemyRange; 
     }
 }

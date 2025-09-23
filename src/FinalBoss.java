@@ -1,18 +1,16 @@
 enum FinalBoss implements EnemyType
 {
-    MEGADIOSMORTIFERO(400, 200, 7.5, 10);
+    LETHALDEMIGOD(500, 150, 8);
 
     private final int enemyHp;
     private final int enemyAttack;
     private final double enemyAttackSpeed;
-    private final int enemyRange;
 
-    FinalBoss(int enemyHp, int enemyAttack, double enemyAttackSpeed, int enemyRange) 
+    FinalBoss(int enemyHp, int enemyAttack, double enemyAttackSpeed) 
     {
         this.enemyHp = enemyHp;
         this.enemyAttack = enemyAttack;
         this.enemyAttackSpeed = enemyAttackSpeed;
-        this.enemyRange = enemyRange;
     }
 
     public String getName() 
@@ -32,9 +30,5 @@ enum FinalBoss implements EnemyType
     public double getEnemyAttackSpeed() 
     { 
         return enemyAttackSpeed; 
-    }
-    public int getEnemyRange() 
-    { 
-        return enemyRange; 
     }
 }

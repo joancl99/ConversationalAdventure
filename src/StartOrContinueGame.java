@@ -8,7 +8,7 @@ public class StartOrContinueGame
 
         Classes playerClass = Save.loadSavedClass();
 
-        Potions poti = new Potions(1, 0, 0, 0);
+        Potions poti = new Potions(1, 0);
 
         Coins coin = new Coins(5);
 
