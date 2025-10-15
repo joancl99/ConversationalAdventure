@@ -16,9 +16,14 @@ public class Coins
         this.amountOfCoins = amountOfCoins;
     }
 
-    public void getCoins()
+    public int getCoins()
     {
+        return amountOfCoins;
+    }
 
+    public void removeCoins(int amount) 
+    {
+        amountOfCoins -= amount;
     }
 
     public void foundCoins()

@@ -32,7 +32,7 @@ public class Player
             switch (option) 
             {
                 case "W":
-                System.out.println(FontColors.GREEN + "\nYou move forward.");
+                    System.out.println(FontColors.GREEN + "\nYou move forward.");
                 
                     int randomOption = random.nextInt(4); // 0,1,2,3
                     switch (randomOption) 
@@ -62,7 +62,7 @@ public class Player
                     System.out.println(FontColors.RED + "\nYou stopped your adventure.\n");
                     return;
                 default:
-                System.out.println(FontColors.GREEN + "\nInvalid input. Please enter W, A, S, D, or Q.");
+                    System.out.println(FontColors.RED + "\nInvalid input. Please enter W, A, S, D, or Q.");
             }
         }
     }
