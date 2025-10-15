@@ -4,11 +4,11 @@ public class StartOrContinueGame
     {
         Player player = new Player();
 
-        EnemyManager enemyManager = new EnemyManager();
+        BattleManager enemyManager = new BattleManager();
 
         Classes playerClass = Save.loadSavedClass();
 
-        Potions poti = new Potions(1, 0);
+        Potions poti = new Potions(0, 0);
 
         Coins coin = new Coins(5);
 

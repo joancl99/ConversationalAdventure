@@ -19,7 +19,7 @@ enum MiniBosses implements EnemyType
         this.name = name;
     }
 
-    public String getName() 
+    public String getEnemyName() 
     { 
         return this.name(); 
     }

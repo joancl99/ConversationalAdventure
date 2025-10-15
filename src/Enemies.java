@@ -19,7 +19,7 @@ public enum Enemies implements EnemyType
         this.enemyAttackSpeed = enemyAttackSpeed;
     }
 
-    public String getName() 
+    public String getEnemyName() 
     { 
         return this.name(); 
     }

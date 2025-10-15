@@ -1,6 +1,6 @@
 public interface EnemyType
 {
-    String getName();
+    String getEnemyName();
     int getEnemyHP();
     int getEnemyAttack();
     double getEnemyAttackSpeed();

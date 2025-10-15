@@ -4,19 +4,19 @@ public class Events
 {
     private Random rand = new Random();
 
-    private EnemyManager enemyManager;
+    private BattleManager enemyManager;
     private Classes player;
     private EnemyType enemyType;
     private Chest chest;
 
-    public Events(EnemyManager enemyManager, Classes player, Chest chest) 
+    public Events(BattleManager enemyManager, Classes player, Chest chest) 
     {
         this.enemyManager = enemyManager;
         this.player = player;
         this.chest = chest;
     }
 
-    public void generateEvent() 
+    public void generateEvent(Potions poti) 
     {
         int chance = rand.nextInt(100); // 0-99
 
@@ -34,7 +34,7 @@ public class Events
                     chest.foundChest();
                     break;
                 case 1:
-                    enemyManager.enemyAppears(player, enemyType);
+                    enemyManager.enemyAppears(player, enemyType, poti);
                     break;
             }
         }

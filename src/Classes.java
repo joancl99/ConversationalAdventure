@@ -32,6 +32,11 @@ enum Classes
         return attack;
     }
 
+    public void setAttack(int attack) 
+    {
+        this.attack = attack;
+    }
+
     public double getAttackSpeed()
     {
         return attackSpeed;

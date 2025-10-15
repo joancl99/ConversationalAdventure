@@ -11,7 +11,7 @@ public class Player
     }
 
 
-    public void playerMovement(Classes clase, EnemyManager enemyManager, Potions poti, Coins coin, Chest chest)
+    public void playerMovement(Classes clase, BattleManager enemyManager, Potions poti, Coins coin, Chest chest)
     {
         Random random = new Random();
 
@@ -38,7 +38,7 @@ public class Player
                     switch (randomOption) 
                     {
                         case 0:
-                            events.generateEvent();
+                            events.generateEvent(poti);
                             break;
                         case 1:
                             poti.generatePotions();
@@ -62,14 +62,14 @@ public class Player
                     System.out.println(FontColors.RED + "\nYou stopped your adventure.\n");
                     return;
                 default:
-                    System.out.println(FontColors.RED + "\nInvalid input. Please enter W, A, S, D, or Q.");
+                    System.out.println(FontColors.RED + "\nInvalid input. Please enter W, E, R or Q.");
             }
         }
     }
 
     public Classes chooseClass() 
     {
-        System.out.println("Which class do you want to choose? WARRIOR, MAGE or ROGUE");
+        System.out.println("Which class do you want to choose, WARRIOR, MAGE or ROGUE? Write it: ");
         String input = scanner.nextLine().toUpperCase();
 
         try 

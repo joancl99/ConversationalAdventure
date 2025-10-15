@@ -1,14 +1,14 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class EnemyManager 
+public class BattleManager 
 {
     protected int winCounter = 0;
 
     private Scanner scanner;
     private Random rand = new Random();
 
-    public EnemyManager() 
+    public BattleManager() 
     {
         scanner = new Scanner(System.in);
     }
@@ -26,7 +26,7 @@ public class EnemyManager
         }
     }
     
-    public void enemyAppears(Classes player, EnemyType enemyFound)
+    public void enemyAppears(Classes player, EnemyType enemyFound, Potions poti)
     {
         if (winCounter < 5) 
         {
@@ -58,7 +58,7 @@ public class EnemyManager
             if (input.equalsIgnoreCase("Y"))
             {
                 System.out.println(FontColors.GREEN + "\nYou're going to fight.");
-                Battle(player, enemyFound);
+                Battle(player, enemyFound, poti);
                 break;
             }
             else if (input.equalsIgnoreCase("N"))
@@ -78,7 +78,7 @@ public class EnemyManager
         }
     }
 
-    public void Battle(Classes player, EnemyType enemy) 
+    public void Battle(Classes player, EnemyType enemy, Potions poti) 
     {
         int enemyHP = enemy.getEnemyHP(); 
         boolean combatEnded = false;
@@ -105,7 +105,7 @@ public class EnemyManager
 
             if (playerFirst) 
             {
-                TurnResult result = doPlayerTurn(player, enemyHP);
+                TurnResult result = doPlayerTurn(player, enemyHP, poti);
                 enemyHP = result.enemyHP;
                 combatEnded = result.combatEnded;
 
@@ -120,7 +120,7 @@ public class EnemyManager
 
                 if (!combatEnded && enemyHP > 0 && player.getHP() > 0) 
                 {
-                    TurnResult result = doPlayerTurn(player, enemyHP);
+                    TurnResult result = doPlayerTurn(player, enemyHP, poti);
                     enemyHP = result.enemyHP;
                     combatEnded = result.combatEnded;
                 }
@@ -150,15 +150,10 @@ public class EnemyManager
             winCounter++;
             System.out.println("Current wins: " + winCounter + " (Press ENTER).");
             scanner.nextLine();
-        } 
-        else if (combatEnded) 
-        {
-            System.out.println(FontColors.YELLOW + "\nYou have run away.");
-            scanner.nextLine();
         }
     }
 
-    private TurnResult doPlayerTurn(Classes player, int enemyHP) 
+    private TurnResult doPlayerTurn(Classes player, int enemyHP, Potions poti) 
     {
         boolean actionTaken = false;
         boolean combatEnded = false;
@@ -166,7 +161,7 @@ public class EnemyManager
         while (!actionTaken && !combatEnded) 
         {
             System.out.println(FontColors.WHITE + "\nIt's your turn!");
-            System.out.println("Press 'Z' to attack, 'X' to heal, 'C' to try to escape or 'S' to show your stats:");
+            System.out.println("Press 'Z' to attack, 'X' to use a potion, 'E' to show your stats, 'R' to look your inventory or 'C' to try to escape:");
             String input = scanner.nextLine().trim();
 
             if (input.equalsIgnoreCase("Z")) 
@@ -178,10 +173,62 @@ public class EnemyManager
             } 
             else if (input.equalsIgnoreCase("X")) 
             {
-                System.out.println(FontColors.GREEN + "\nYou restore some health by drinking a potion.");
-                player.setHP(player.getHP() + Potions.HEALING_POTION);
-                System.out.println(FontColors.GREEN + "Your actual HP is " + FontColors.WHITE + player.getHP());
-                actionTaken = true;
+                boolean potionChosen = false;
+
+                if (poti.counterHealPot <= 0 && poti.counterDmgPot <= 0) 
+                {
+                    System.out.println(FontColors.RED + "You don't have any potion!");
+                    continue;
+                }
+
+                while (!potionChosen)
+                {
+                    System.out.println("Which potion do you want to use?: Healing potion (1) or damage increase potion (2): ");
+                    String potionChoice = scanner.nextLine().trim();
+
+                    if (potionChoice.equals("1"))
+                    {
+                        if (poti.counterHealPot <= 0) 
+                        {
+                            System.out.println(FontColors.RED + "You don't have any healing potion!");
+                            System.out.println(FontColors.RED + "You were distracted looking for a potion and now it's the enemy's turn!");
+                            potionChosen = true;
+                            actionTaken = true;
+                        }
+                        else
+                        {
+                            System.out.println(FontColors.GREEN + "\nYou restore some health by drinking a healing potion.");
+                            player.setHP(player.getHP() + Potions.HEALING_POTION);
+                            System.out.println(FontColors.GREEN + "Your actual HP is " + FontColors.WHITE + player.getHP());
+                            poti.counterHealPot--;
+                            potionChosen = true;
+                            actionTaken = true;
+                        }
+                    }
+                    else if (potionChoice.equals("2"))
+                    {
+                        if (poti.counterHealPot <= 0) 
+                        {
+                            System.out.println(FontColors.RED + "You don't have any damage increase potion!");
+                            System.out.println(FontColors.RED + "You were distracted looking for a potion and now it's the enemy's turn!");
+                            potionChosen = true;
+                            actionTaken = true;
+                        }
+                        else 
+                        {
+                            System.out.println(FontColors.GREEN + "\nYou gained some damage by drinking a damage increase potion.");
+                            player.setAttack(player.getAttack() + Potions.DMG_POTION);
+                            System.out.println(FontColors.GREEN + "Your actual damage is " + FontColors.WHITE + player.getAttack());
+                            poti.counterDmgPot--;
+                            potionChosen = true;
+                            actionTaken = true;
+                        }
+                    }
+                    else
+                    {
+                        System.out.println("Invalid input, please enter (1) or (2).");
+                    }
+                }
             } 
             else if (input.equalsIgnoreCase("C")) 
             {
@@ -190,6 +237,7 @@ public class EnemyManager
                 if (chance < 65) 
                 {
                     System.out.println(FontColors.YELLOW + "\nYou have run away.");
+                    scanner.nextLine();
                     combatEnded = true; 
                 } 
                 else 
@@ -198,13 +246,17 @@ public class EnemyManager
                     actionTaken = true;
                 }
             } 
-            else if (input.equalsIgnoreCase("S")) 
+            else if (input.equalsIgnoreCase("E")) 
             {
                 player.showStats();
             } 
+            else if (input.equalsIgnoreCase("R"))
+            {
+                poti.showPotions();
+            }
             else 
             {
-                System.out.println("\nInvalid input. Use 'Z', 'X', 'C' o 'S'.");
+                System.out.println("\nInvalid input. Use 'Z', 'X', 'E', 'R' or 'C'.");
             }
         }
         return new TurnResult(enemyHP, combatEnded);
