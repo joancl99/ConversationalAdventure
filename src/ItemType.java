@@ -4,4 +4,5 @@ public interface ItemType
     int getItemHP();
     int getItemAttack();
     double getItemAttackSpeed();
+    int getItemPrice();
 }

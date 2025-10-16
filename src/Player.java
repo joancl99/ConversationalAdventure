@@ -11,7 +11,7 @@ public class Player
     }
 
 
-    public void playerMovement(Classes clase, BattleManager enemyManager, Potions poti, Coins coin, Chest chest)
+    public void playerMovement(Classes clase, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager)
     {
         Random random = new Random();
 
@@ -34,7 +34,7 @@ public class Player
                 case "W":
                     System.out.println(FontColors.GREEN + "\nYou move forward.");
                 
-                    int randomOption = random.nextInt(4); // 0,1,2,3
+                    int randomOption = random.nextInt(5); // 0,1,2,3,4
                     switch (randomOption) 
                     {
                         case 0:
@@ -47,6 +47,8 @@ public class Player
                             coin.foundCoins();
                             break;
                         case 3:
+                            villager.foundVillager(clase, null, coin, poti);
+                        case 4:
                             System.out.println("\nNothing happens. You keep advancing.\n");
                             break;
                     }

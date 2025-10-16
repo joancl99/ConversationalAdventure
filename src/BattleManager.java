@@ -207,7 +207,7 @@ public class BattleManager
                     }
                     else if (potionChoice.equals("2"))
                     {
-                        if (poti.counterHealPot <= 0) 
+                        if (poti.counterDmgPot <= 0) 
                         {
                             System.out.println(FontColors.RED + "You don't have any damage increase potion!");
                             System.out.println(FontColors.RED + "You were distracted looking for a potion and now it's the enemy's turn!");

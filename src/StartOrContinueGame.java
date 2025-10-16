@@ -13,6 +13,8 @@ public class StartOrContinueGame
         Coins coin = new Coins(5);
 
         Chest chest = new Chest(poti, coin);
+
+        Villager villager = new Villager();
         
 
         if (playerClass == null) 
@@ -26,6 +28,6 @@ public class StartOrContinueGame
             playerClass.showStats();
         }
 
-        player.playerMovement(playerClass, enemyManager, poti, coin, chest);
+        player.playerMovement(playerClass, enemyManager, poti, coin, chest, villager);
     }
 }

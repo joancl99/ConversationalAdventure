@@ -8,6 +8,8 @@ public class Potions
     protected int counterHealPot = 0;
     protected int counterDmgPot = 0;
 
+    protected final int pricePotions = 15;
+
     private Random rand = new Random();
 
     public Potions(int counterHealPot, int counterDmgPot) 
@@ -40,6 +42,11 @@ public class Potions
                     break;
             }
         }
+    }
+
+    public int getPotionPrice()
+    {
+        return pricePotions;
     }
 
     public void showPotions()

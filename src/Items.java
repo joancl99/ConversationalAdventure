@@ -1,26 +1,27 @@
 enum Items implements ItemType
 {
-    BRUTAL_THIEF_KNIFE (0, 20, 0, "Brutal Thief's Knife"),
-    DEAD_MANS_ARMOR (50, 0, 0, "Dead Man's Armor"),
+    BRUTAL_THIEF_KNIFE (0, 20, 0, "Brutal Thief's Knife", 25),
+    DEAD_MANS_ARMOR (50, 0, 0, "Dead Man's Armor", 25),
 
-    HAMMER_OF_PURIFICATION (10, 80, 0, "Hammer of Purification"),
-    SORCERER_HEAD (80, 10, 0, "Sorcerer's Head"),
+    HAMMER_OF_PURIFICATION (10, 80, 0, "Hammer of Purification", 50),
+    SORCERER_HEAD (80, 10, 0, "Sorcerer's Head", 50),
 
-    STAFF_OF_THE_CURSED_ABYSS (50, 150, 2, "Staff of the Cursed Abyss"),
-    NECROMANCER_SKELETON (250, 50, 2, "Necromancer's Skeleton"),
-    MALEFIC_FIRE_SWORD (50, 200, 2, "Malefic Fire Sword");
+    HELMET_OF_THE_CURSED_ABYSS (250, 50, 2, "Staff of the Cursed Abyss", 100),
+    MALEFIC_FIRE_SWORD (50, 250, 2, "Malefic Fire Sword", 100);
     
     protected final int hp;
     protected final int attack;
     protected final double attackSpeed;
     protected final String name;
+    protected final int price;
 
-    Items (int hp, int attack, double attackSpeed, String name)
+    Items (int hp, int attack, double attackSpeed, String name, int price)
     {
         this.hp = hp;
         this.attack = attack;
         this.attackSpeed = attackSpeed;
         this.name = name;
+        this.price = price;
     }
 
     public String getItemName() 
@@ -41,5 +42,10 @@ enum Items implements ItemType
     public double getItemAttackSpeed() 
     { 
         return attackSpeed; 
+    }
+
+    public int getItemPrice()
+    {
+        return price;
     }
 }
