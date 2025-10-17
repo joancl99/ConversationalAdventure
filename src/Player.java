@@ -47,7 +47,7 @@ public class Player
                             coin.foundCoins();
                             break;
                         case 3:
-                            villager.foundVillager(clase, null, coin, poti);
+                            villager.foundVillager(clase, coin, poti);
                         case 4:
                             System.out.println("\nNothing happens. You keep advancing.\n");
                             break;

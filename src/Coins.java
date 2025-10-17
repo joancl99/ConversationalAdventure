@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Coins 
 {
-    protected static final int COIN = 1;
+    protected static final int COIN = 5;
     protected static final int BRONZE_COIN = 10;
     protected static final int SILVER_COIN = 25;
     protected static final int GOLD_COIN = 50;
@@ -36,26 +36,27 @@ public class Coins
         }
         else 
         {
-            int coinAppears = rand.nextInt(4); // 0 o 3
+            int coinChance = rand.nextInt(100);
 
-            switch (coinAppears) 
+            if (coinChance < 60) 
             {
-                case 0:
-                    System.out.println(FontColors.GREEN + "\nEvent: You found a coin! +" + COIN +" coin added.\n");
-                    amountOfCoins += COIN;
-                    break;
-                case 1:
-                    System.out.println(FontColors.GREEN + "\nEvent: You found a bronze coin! +" + BRONZE_COIN +" coin added.\n");
-                    amountOfCoins += BRONZE_COIN;
-                    break;
-                case 2:
-                    System.out.println(FontColors.GREEN + "\nEvent: Wow! You found a silver coin! +" + SILVER_COIN +" coin added.\n");
-                    amountOfCoins += SILVER_COIN;
-                    break;
-                case 3:
-                    System.out.println(FontColors.GREEN + "\nEvent: Amazing! You found a gold coin! +" + GOLD_COIN +" coin added.\n");
-                    amountOfCoins += GOLD_COIN;
-                    break;
+                System.out.println(FontColors.GREEN + "\nEvent: You found a coin! +" + COIN +" coin added.\n");
+                amountOfCoins += COIN;
+            } 
+            else if (coinChance < 85) 
+            {
+                System.out.println(FontColors.GREEN + "\nEvent: You found a bronze coin! +" + BRONZE_COIN +" coin added.\n");
+                amountOfCoins += BRONZE_COIN;
+            } 
+            else if (coinChance < 95) 
+            {
+                System.out.println(FontColors.GREEN + "\nEvent: Wow! You found a silver coin! +" + SILVER_COIN +" coin added.\n");
+                amountOfCoins += SILVER_COIN;
+            } 
+            else 
+            {
+                System.out.println(FontColors.GREEN + "\nEvent: Amazing! You found a gold coin! +" + GOLD_COIN +" coin added.\n");
+                amountOfCoins += GOLD_COIN;
             }
         }
     }

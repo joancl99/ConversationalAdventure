@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 public class BattleManager 
 {
-    protected int winCounter = 0;
-
     private Scanner scanner;
     private Random rand = new Random();
+
+    protected int winCounter = 0;
 
     public BattleManager() 
     {
@@ -126,7 +126,6 @@ public class BattleManager
                 }
             }
 
-            //Show HP
             System.out.println(FontColors.GREEN + "\nPlayer HP: " + FontColors.WHITE + Math.max(player.getHP(), 0));
             System.out.println(FontColors.RED + "Enemy HP: " + FontColors.WHITE + Math.max(enemyHP, 0));
 
@@ -146,7 +145,7 @@ public class BattleManager
         }
         else if (enemyHP <= 0) 
         {
-            System.out.println(FontColors.GREEN + "\nYou have won!");
+            System.out.println(FontColors.GREEN + "\nYou have won! You won 5 coins.");
             winCounter++;
             System.out.println("Current wins: " + winCounter + " (Press ENTER).");
             scanner.nextLine();
