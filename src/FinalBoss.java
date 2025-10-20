@@ -15,11 +15,6 @@ enum FinalBoss implements EnemyType
         this.name = name;
     }
 
-    public String getEnemyName() 
-    { 
-        return this.name(); 
-    }
-
     public int getEnemyHP() 
     { 
         return enemyHp; 
@@ -35,7 +30,7 @@ enum FinalBoss implements EnemyType
         return enemyAttackSpeed; 
     }
 
-    public String getFinalBossName()
+    public String getEnemyName()
     {
         return name;
     }

@@ -15,10 +15,10 @@ public class GameManager
 
         while (true) 
         {
-            System.out.println(FontColors.GREEN + "\nMain Menu:");
-            System.out.println("\n1. Start Game.");
-            System.out.println("2. Reset Save.");
-            System.out.println("3. Exit.");
+            System.out.println(FontColors.CYAN + "\nMain Menu:");
+            System.out.println(FontColors.WHITE + "\n1. " + FontColors.GREEN + "Start Game.");
+            System.out.println(FontColors.WHITE + "2. " + FontColors.GREEN + "Reset Save.");
+            System.out.println(FontColors.WHITE + "3. " + FontColors.GREEN + "Exit.");
 
             System.out.println();
             System.out.println(FontColors.RESET + "Enter option: ");

@@ -11,19 +11,19 @@ public class Player
     }
 
 
-    public void playerMovement(Classes clase, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager)
+    public void playerMovement(Classes player, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager)
     {
         Random random = new Random();
 
-        Events events = new Events(enemyManager, clase, chest);
+        Events events = new Events(enemyManager, player, chest, poti, coin, villager);
 
         while (true) 
         {
             System.out.println(FontColors.BLUE + "\nWhat would you like to do?");
-            System.out.println(FontColors.WHITE + "\n  'W' " + FontColors.BLUE + "- Advance.");
-            System.out.println(FontColors.WHITE + "\n  'E' " + FontColors.PURPLE + "- Look your stats.");
-            System.out.println(FontColors.WHITE + "\n  'R' " + FontColors.CYAN + "- Inventory.");
-            System.out.println(FontColors.WHITE + "\n  'Q' " + FontColors.RED + "- Quit game.");
+            System.out.println(FontColors.WHITE + "\n  'W' -" + FontColors.BLUE + " Advance.");
+            System.out.println(FontColors.WHITE + "\n  'E' -" + FontColors.PURPLE + " Look your stats.");
+            System.out.println(FontColors.WHITE + "\n  'R' -" + FontColors.CYAN + " Inventory.");
+            System.out.println(FontColors.WHITE + "\n  'Q' -" + FontColors.RED + " Quit game.");
 
             System.out.println();
             System.out.println(FontColors.RESET + "Enter option: ");
@@ -34,27 +34,19 @@ public class Player
                 case "W":
                     System.out.println(FontColors.GREEN + "\nYou move forward.");
                 
-                    int randomOption = random.nextInt(5); // 0,1,2,3,4
+                    int randomOption = random.nextInt(2); // 0,1
                     switch (randomOption) 
                     {
                         case 0:
-                            events.generateEvent(poti);
+                            events.generateEvent();
                             break;
                         case 1:
-                            poti.generatePotions();
-                            break;
-                        case 2:
-                            coin.foundCoins();
-                            break;
-                        case 3:
-                            villager.foundVillager(clase, coin, poti);
-                        case 4:
                             System.out.println("\nNothing happens. You keep advancing.\n");
                             break;
                     }
                     break;
                 case "E":
-                    clase.showStats();
+                    player.showStats();
                     break;
                 case "R":
                     poti.showPotions();

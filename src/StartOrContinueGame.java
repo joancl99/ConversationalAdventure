@@ -24,7 +24,7 @@ public class StartOrContinueGame
         } 
         else 
         {
-            System.out.println(FontColors.PURPLE +"\nYou are continuing as: " + playerClass);
+            System.out.println(FontColors.PURPLE +"\nYou are continuing as: " + playerClass.getClassName());
             playerClass.showStats();
         }
 

@@ -33,11 +33,11 @@ public class Potions
             switch (potionAppears) 
             {
                 case 0:
-                    System.out.println(FontColors.GREEN + "\nEvent: You found a healing potion, it heals " + HEALING_POTION + " hp.\n");
+                    System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a healing potion, it heals " + HEALING_POTION + " hp.\n");
                     counterHealPot++;
                     break;
                 case 1:
-                    System.out.println(FontColors.GREEN + "\nEvent: You found a damage increase potion, it gives " + DMG_POTION + " damage.\n");
+                    System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a damage increase potion, it gives " + DMG_POTION + " damage.\n");
                     counterDmgPot++;
                     break;
             }
@@ -52,7 +52,7 @@ public class Potions
     public void showPotions()
     {
         System.out.println(FontColors.CYAN + "\nPotions:");
-        System.out.println(FontColors.PURPLE + "\nHealing Potion: " + FontColors.WHITE + counterHealPot);
+        System.out.println(FontColors.PURPLE + "Healing Potion: " + FontColors.WHITE + counterHealPot);
         System.out.println(FontColors.PURPLE + "Damage Potion: " + FontColors.WHITE + counterDmgPot);
     }
 }

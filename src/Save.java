@@ -5,17 +5,23 @@ public class Save
     private static final String SAVE_FILE = "./saveFile/save.txt";
 
     //Save the player class name in the file.
-    public static void saveClass(Classes clase) {
-        try {
+    public static void saveClass(Classes clase) 
+    {
+        try 
+        {
             File file = new File(SAVE_FILE);
             // Crear la carpeta si no existe
-            if (file.getParentFile() != null) {
+            if (file.getParentFile() != null) 
+            {
                 file.getParentFile().mkdirs();
             }
-            try (FileWriter writer = new FileWriter(file)) {
+            try (FileWriter writer = new FileWriter(file)) 
+            {
                 writer.write(clase.name());
             }
-        } catch (IOException e) {
+        } 
+        catch (IOException e) 
+        {
             System.out.println("Error saving class.");
         }
     }
@@ -24,6 +30,7 @@ public class Save
     public static Classes loadSavedClass() 
     {
         File file = new File(SAVE_FILE);
+        
         if (!file.exists()) 
         {
             return null;
@@ -45,6 +52,7 @@ public class Save
     public static void resetSave() 
     {
         File file = new File(SAVE_FILE);
+
         if (file.exists()) 
         {
             file.delete();

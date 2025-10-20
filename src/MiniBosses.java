@@ -19,11 +19,6 @@ enum MiniBosses implements EnemyType
         this.name = name;
     }
 
-    public String getEnemyName() 
-    { 
-        return this.name(); 
-    }
-
     public int getEnemyHP() 
     { 
         return enemyHp; 
@@ -40,7 +35,7 @@ enum MiniBosses implements EnemyType
         return enemyAttackSpeed; 
     }
 
-    public String getMiniBossName()
+    public String getEnemyName()
     {
         return name;
     }

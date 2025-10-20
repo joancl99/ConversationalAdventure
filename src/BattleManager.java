@@ -26,25 +26,28 @@ public class BattleManager
         }
     }
     
-    public void enemyAppears(Classes player, EnemyType enemyFound, Potions poti)
+    public void enemyAppears(Classes player, EnemyType enemyFound, Potions poti, Coins coin)
     {
         if (winCounter < 5) 
         {
             Enemies[] enemies = Enemies.values();
             enemyFound = enemies[rand.nextInt(enemies.length)];
+            System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "An enemy appears! It's a mysterious creature!");
+            System.out.println(FontColors.RED +"\nIt's a "+ FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + ":");  
         } 
         else if (winCounter >= 5 && winCounter < 10) 
         {
             MiniBosses[] minibosses = MiniBosses.values();
             enemyFound = minibosses[rand.nextInt(minibosses.length)];
+            System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "A Mini Boss appears! It's a mysterious creature!");
+            System.out.println(FontColors.RED +"\nIt's a " + FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + ":");  
         } 
         else if (winCounter >= 10)
         {
             enemyFound = FinalBoss.LETHALDEMIGOD;
+            System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "The Final Boss appears!: The " + FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + " is here!: ");
         }
 
-        System.out.println(FontColors.RED + "\nEvent: An enemy appears! It's a mysterious creature.");
-        System.out.println(FontColors.RED +"\nIt's a " + enemyFound);  
         System.out.println(FontColors.RED +"\nHP: " + FontColors.WHITE + enemyFound.getEnemyHP());
         System.out.println(FontColors.RED +"Attack: "  + FontColors.WHITE +  enemyFound.getEnemyAttack());
         System.out.println(FontColors.RED +"Attack Speed: "  + FontColors.WHITE +  enemyFound.getEnemyAttackSpeed());
@@ -58,7 +61,7 @@ public class BattleManager
             if (input.equalsIgnoreCase("Y"))
             {
                 System.out.println(FontColors.GREEN + "\nYou're going to fight.");
-                Battle(player, enemyFound, poti);
+                Battle(player, enemyFound, poti, coin);
                 break;
             }
             else if (input.equalsIgnoreCase("N"))
@@ -78,12 +81,10 @@ public class BattleManager
         }
     }
 
-    public void Battle(Classes player, EnemyType enemy, Potions poti) 
+    public void Battle(Classes player, EnemyType enemy, Potions poti, Coins coin) 
     {
         int enemyHP = enemy.getEnemyHP(); 
         boolean combatEnded = false;
-
-        System.out.println("\nA battle is about to begin!:");
 
         while (player.getHP() > 0 && enemyHP > 0 && !combatEnded) 
         {
@@ -145,9 +146,10 @@ public class BattleManager
         }
         else if (enemyHP <= 0) 
         {
-            System.out.println(FontColors.GREEN + "\nYou have won! You won 5 coins.");
+            System.out.println(FontColors.GREEN + "\nYou have won! You won " + FontColors.WHITE + "5" + FontColors.GREEN + " coins.");
             winCounter++;
-            System.out.println("Current wins: " + winCounter + " (Press ENTER).");
+            coin.amountOfCoins += 5;
+            System.out.println(FontColors.YELLOW + "Current wins: " + FontColors.WHITE + winCounter + FontColors.GREEN + " (Press ENTER).");
             scanner.nextLine();
         }
     }

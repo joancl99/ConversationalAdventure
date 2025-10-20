@@ -6,11 +6,13 @@ public class Villager
     private Random rand = new Random();
     private static Set<ItemType> itemsComprados = new HashSet<>();
 
-    public Villager() {
+    public Villager() 
+    {
         scanner = new Scanner(System.in);
     }
 
-    public void foundVillager(Classes player, Coins coin, Potions poti) {
+    public void foundVillager(Classes player, Coins coin, Potions poti) 
+    {
         int chance = rand.nextInt(100);
         
         if (chance < 80) 
@@ -22,11 +24,16 @@ public class Villager
         {
             System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a Villager! He can sell you some items.\n");
 
-            if (coin.getCoins() <= 60) {
-            bronzeShop(player, coin, poti);
-            } else if (coin.getCoins() <= 200) {
+            if (coin.getCoins() <= 60) 
+            {
+                bronzeShop(player, coin, poti);
+            } 
+            else if (coin.getCoins() <= 200) 
+            {
                 silverShop(player, coin, poti);
-            } else {
+            } 
+            else 
+            {
                 goldenShop(player, coin, poti);
             }
         }
@@ -55,15 +62,15 @@ public class Villager
         {
             List<ItemType> itemsDisponibles = new ArrayList<>();
             System.out.println(FontColors.YELLOW + "\nVillager's " + shopName + " Shop:" + FontColors.WHITE);
-            System.out.println("1. Healing Potion - " + poti.getPotionPrice() + " coins (+100 HP)");
-            System.out.println("2. Damage Potion - " + poti.getPotionPrice() + " coins (+50 Attack)");
+            System.out.println(FontColors.WHITE + "\n1. " + FontColors.GREEN + "Healing Potion - " + FontColors.WHITE + poti.getPotionPrice() + " coins (+100 HP)");
+            System.out.println(FontColors.WHITE + "2. " + FontColors.GREEN + "Damage Potion - " + FontColors.WHITE + poti.getPotionPrice() + " coins (+50 Attack)");
 
             int option = 3;
             for (ItemType item : shopItems) 
             {
                 if (!itemsComprados.contains(item)) 
                 {
-                    System.out.println(option + ". " + item.getItemName() + " - " + item.getItemPrice() + " coins");
+                    System.out.println(FontColors.WHITE + option + ". " + FontColors.GREEN + item.getItemName() + " - " + FontColors.WHITE + item.getItemPrice() + " coins (+" + item.getItemHP() + " HP / +" + item.getItemAttack() + " Attack / +" + item.getItemAttack() + " Attack Speed.)");
                     itemsDisponibles.add(item);
                     option++;
                 }
@@ -74,7 +81,7 @@ public class Villager
                 System.out.println("No special items available. Only potions left.");
             }
 
-            System.out.println("Select item to buy or 0 to leave:");
+            System.out.println(FontColors.YELLOW + "\nSelect item to buy or enter " + FontColors.WHITE +  "'0'" + FontColors.YELLOW + " to leave:" + FontColors.RESET);
             String input = scanner.nextLine();
 
             switch (input) 
@@ -95,14 +102,14 @@ public class Villager
         }
     }
 
-    private void handleItemPurchase(String input, List<ItemType> itemsDisponibles, Classes player, Potions poti, Coins coin) 
+    private void handleItemPurchase(String input, List<ItemType> itemsAvailable, Classes player, Potions poti, Coins coin) 
     {
         try 
         {
             int index = Integer.parseInt(input) - 3;
-            if (index >= 0 && index < itemsDisponibles.size()) 
+            if (index >= 0 && index < itemsAvailable.size()) 
             {
-                buyItem(player, itemsDisponibles.get(index), poti, coin);
+                buyItem(player, itemsAvailable.get(index), poti, coin);
             } 
             else 
             {
@@ -126,12 +133,12 @@ public class Villager
         if (potiType.equalsIgnoreCase("heal")) 
         {
             poti.counterHealPot++;
-            System.out.println("You bought a Healing Potion for " + poti.getPotionPrice() + " coins.");
+            System.out.println(FontColors.YELLOW + "You bought a Healing Potion for " + FontColors.WHITE + poti.getPotionPrice() + FontColors.YELLOW + " coins.");
         } 
         else if (potiType.equalsIgnoreCase("damage")) 
         {
             poti.counterDmgPot++;
-            System.out.println("You bought a Damage Potion for " + poti.getPotionPrice() + " coins.");
+            System.out.println(FontColors.YELLOW + "You bought a Damage Potion for " + FontColors.WHITE + poti.getPotionPrice() + FontColors.YELLOW + " coins.");
         }
 
         coin.removeCoins(poti.getPotionPrice());
@@ -145,11 +152,11 @@ public class Villager
             return;
         }
 
-        System.out.println("Amazing, you bought the " + item.getItemName() + " for " + item.getItemPrice() + " coins.");
+        System.out.println(FontColors.YELLOW + "Amazing, you bought the " + FontColors.BOLD + FontColors.WHITE + item.getItemName() + FontColors.RESET + FontColors.YELLOW + " for " + FontColors.WHITE + item.getItemPrice() + FontColors.YELLOW + " coins.");
         player.setHP(player.getHP() + item.getItemHP());
         player.setAttack(player.getAttack() + item.getItemAttack());
         coin.removeCoins(item.getItemPrice());
         itemsComprados.add(item);
-        System.out.println(FontColors.GREEN + "Your new stats: HP " + player.getHP() + ", Damage " + player.getAttack());
+        System.out.println(FontColors.GREEN + "Your new stats: HP " + FontColors.WHITE + player.getHP() + FontColors.GREEN + ", Damage " + FontColors.WHITE + player.getAttack());
     }
 }
