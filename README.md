@@ -70,6 +70,8 @@ This section explains the basic mechanics of the game.
    - Each shop always has healing potions and damage increase potions. The difference is that the other items in higher-tier shops are better and more expensive.
    - If you don’t have enough coins, you will need to leave the shop.
 
+---
+
 # Battle Mechanics
 First of all, you should know that the game is designed to let players discover different events and is not very difficult, as it is just a technical demo leading up to the final boss.
 The final boss is a bit more challenging, because it is the final fight.
