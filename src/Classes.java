@@ -1,6 +1,6 @@
 enum Classes
 {
-    WARRIOR (100, 75, 4.5, "Warrior"),
+    WARRIOR (200, 75, 4.5, "Warrior"),
     MAGE (75, 100, 6.5, "Mage"),
     ROGUE (50, 150, 8, "Rogue");
 
