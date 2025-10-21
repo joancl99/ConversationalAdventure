@@ -27,7 +27,7 @@ public class Chest
             
             if (chestChance < 60) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a chest! It haves 1 healing potion and 5 coins.\n");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a normal chest! It haves 1 healing potion and 5 coins.\n");
                 poti.counterHealPot++;
                 coin.amountOfCoins += 5;
             } 

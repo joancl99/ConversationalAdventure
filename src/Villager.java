@@ -28,7 +28,7 @@ public class Villager
             {
                 bronzeShop(player, coin, poti);
             } 
-            else if (coin.getCoins() <= 200) 
+            else if (coin.getCoins() > 60 && coin.getCoins() <= 200) 
             {
                 silverShop(player, coin, poti);
             } 

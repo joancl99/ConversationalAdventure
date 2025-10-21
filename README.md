@@ -15,7 +15,7 @@ Developed in Java, this project was created to practice object-oriented programm
 ---
 
 # Features
-- Random events like treasures, villagers, and items.
+- Random events like finding potions and coins, discovering treasures that contain potions and coins, or encountering the villager's shop where you can buy potions and items.
 - Turn-based battles with enemies.
 - Final boss fight.
 - Console-based text interface.
@@ -24,36 +24,71 @@ Developed in Java, this project was created to practice object-oriented programm
 ---
 
 # Battle Mechanics
-First of all, you should know that the game is designed to be easy, since it is just a technical demo to reach the final boss.  
+First of all, you should know that the game is designed to let players discover different events and is not very difficult, as it is just a technical demo leading up to the final boss.
 The final boss is a bit more challenging, because it is the final fight.
 
 About the battle, the game uses a turn-based combat system where the attack speed determines which character acts first. Each battle follows these rules:
 
 1. **Turn Order:**  
-   - The character with higher speed attacks first.  
-   - After the first attack, turns alternate between the player and the enemy.
+   - The character with the higher attack speed hits first.
+   - After the first attack, turns alternate between the player and the enemy. 
+   - If both have the same attack speed, the first attacker is chosen randomly in each turn.
 
 2. **Player Actions:**  
-   - On your turn, you can choose to **attack**, **use a potion**, **run away**, or **look at your stats** if you don’t remember them.
+   - On your turn, you can choose to **attack**, **look your potions**, **use a potion**, **run away**, or **look at your stats** if you don’t remember them.
    - When you choose to **run away** during a battle, you have a **65% chance to escape successfully**, or a **35% chance to fail and lose your turn**.
-   - Using a potion consumes your turn, so you cannot attack in the same round.  
+   - Look your potions don't consumes a turn.
+   - Using a potion consumes your turn, so you cannot attack in the same round, and also if you don't have a potion, it consumes a turn, because you can previously look if you have one.  
    - Looking at your stats doesn't consume a turn.
    - Strategic use of potions is key to surviving tougher enemies and bosses.
 
-3. **Potion Effects:**  
-   - **Healing Potion:** Restores 100 HP.  
-   - **Damage Potion:** Adds 50 attack points for the current turn.  
-   - There is no attack speed potion, keeping turn order fair and predictable.
+3. **Coins / Potion & Chests:**  
+   **Coins**:
+      - There are 4 types of coins: the **Coin** (gives 5 coins), the **Bronze Coin** (10 coins), the **Silver Coin** (25 coins), and the **Golden Coin** (50 coins).
+      - **Coins** are useful for buying items and potions in the Villager Shop.
+      - You also earn 5 coins when you defeat an enemy.
+      - Coins can also appear in different chests.
 
-4. **Enemy Progression:**  
+   **Potions**:
+      - **Healing Potion:** Restores 100 HP.  
+      - **Damage Potion:** Adds 50 attack points. 
+      - There is no attack speed potion, keeping turn order fair and predictable.
+      - You can randomly find potions as you advance in the adventure.
+      - Potions can also be purchased in the Villager Shop.
+      - Potions can also appear in different chests.
+
+   **Chests**:
+      - There are 4 types of **Chests**:
+         - **Normal Chest**: 1 healing potion and 5 coins.
+         - **Silver Chest**: 2 healing potions, 1 damage potion, and 15 coins.
+         - **Golden Chest**: 2 healing potions, 2 damage potions, and 30 coins.
+         - **Platinum Chest**: 4 healing potions, 4 damage potions, and 75 coins.
+
+   **Note**
+      - Each findable coin or chest has different drop chances. High-value items, like golden coins or platinum chests, are harder to find than normal chests or regular coins, which are the easiest to obtain.
+
+
+4. **Villager Store / Items:**
+   - In the **Villager Store**, you can choose to buy potions or **Items**.
+   - You can always buy a potion if you have the required coins (15).
+   - The **Shop’s Items** are unique and special; you can only buy the same item once, and it will upgrade your stats.
+   - There are 3 types of shops:
+      - **Bronze Shop**: appears when you have between 0 and 60 coins.
+      - **Silver Shop**: appears when you have between 60 and 200 coins.
+      - **Golden Shop**: appears when you have more than 200 coins.
+   - Each shop always has healing potions and damage increase potions. The difference is that the other items in higher-tier shops are better and more expensive.
+   - If you don’t have enough coins, you will need to leave the shop.
+
+5. **Enemy Progression:**  
    - Initially, battles are against normal enemies.  
-   - After defeating **5 normal enemies**, subsequent enemies become **minibosses**.  
-   - After defeating **10 total enemies**, the **final boss** appears.  
+   - After defeating **10 normal enemies**, subsequent enemies become **Minibosses**.  
+   - After defeating **20 total enemies**, the **Final Boss** appears.
+   - To beat the different **Minibosses** and the **Final Boss**, you will need to buy items and collect or buy potions.
 
-5. **Winning and Losing:**  
-   - Winning a battle allows you to advance and face the next enemy.  
+6. **Winning and Losing:**  
+   - Winning a battle allows you to advance to the next enemy and earn 5 coins.
    - Losing a battle ends the game, so managing your health and potion usage is crucial.  
-   - The final boss is significantly stronger, making the use of potions and strategy essential for victory.
+   - The **Final Boss** is significantly stronger, making the use of potions and strategy essential for victory.
 
 ---
 

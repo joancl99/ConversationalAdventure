@@ -28,21 +28,21 @@ public class BattleManager
     
     public void enemyAppears(Classes player, EnemyType enemyFound, Potions poti, Coins coin)
     {
-        if (winCounter < 5) 
+        if (winCounter < 10) 
         {
             Enemies[] enemies = Enemies.values();
             enemyFound = enemies[rand.nextInt(enemies.length)];
-            System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "An enemy appears! It's a mysterious creature!");
+            System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "An Enemy appears! It's a mysterious creature!");
             System.out.println(FontColors.RED +"\nIt's a "+ FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + ":");  
         } 
-        else if (winCounter >= 5 && winCounter < 10) 
+        else if (winCounter >= 10 && winCounter < 20) 
         {
             MiniBosses[] minibosses = MiniBosses.values();
             enemyFound = minibosses[rand.nextInt(minibosses.length)];
-            System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "A Mini Boss appears! It's a mysterious creature!");
+            System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "A Big Enemy appears! It's a mysterious creature!");
             System.out.println(FontColors.RED +"\nIt's a " + FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + ":");  
         } 
-        else if (winCounter >= 10)
+        else if (winCounter >= 20)
         {
             enemyFound = FinalBoss.LETHALDEMIGOD;
             System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "The Final Boss appears!: The " + FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + " is here!: ");
@@ -162,7 +162,7 @@ public class BattleManager
         while (!actionTaken && !combatEnded) 
         {
             System.out.println(FontColors.WHITE + "\nIt's your turn!");
-            System.out.println("Press 'Z' to attack, 'X' to use a potion, 'E' to show your stats, 'R' to look your inventory or 'C' to try to escape:");
+            System.out.println("Press 'Z' to attack, 'R' to check your potions, 'X' to select the potion you want to use (if you have one), 'E' to show your stats or 'C' to try to escape:");
             String input = scanner.nextLine().trim();
 
             if (input.equalsIgnoreCase("Z")) 
@@ -179,12 +179,14 @@ public class BattleManager
                 if (poti.counterHealPot <= 0 && poti.counterDmgPot <= 0) 
                 {
                     System.out.println(FontColors.RED + "You don't have any potion!");
-                    continue;
+                    System.out.println(FontColors.RED + "You were distracted looking for a potion and now it's the enemy's turn!");
+                    potionChosen = true;
+                    actionTaken = true;
                 }
 
                 while (!potionChosen)
                 {
-                    System.out.println("Which potion do you want to use?: Healing potion (1) or damage increase potion (2): ");
+                    System.out.println("Which potion do you want to use?: Healing potion (Press '1') or damage increase potion (Press '2'): ");
                     String potionChoice = scanner.nextLine().trim();
 
                     if (potionChoice.equals("1"))
@@ -227,7 +229,7 @@ public class BattleManager
                     }
                     else
                     {
-                        System.out.println("Invalid input, please enter (1) or (2).");
+                        System.out.println("Invalid input, please enter '1' or '2'.");
                     }
                 }
             } 
