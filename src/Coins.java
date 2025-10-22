@@ -30,7 +30,7 @@ public class Coins
     {
         int chanceCoin = rand.nextInt(100);
 
-        if (chanceCoin < 90)
+        if (chanceCoin < 60)
         {
             System.out.println("\nNothing happens. You keep advancing.\n");
         }
@@ -38,12 +38,12 @@ public class Coins
         {
             int coinChance = rand.nextInt(100);
 
-            if (coinChance < 60) 
+            if (coinChance < 40) 
             {
                 System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a coin! +" + COIN +" coin added.\n");
                 amountOfCoins += COIN;
             } 
-            else if (coinChance < 85) 
+            else if (coinChance < 70) 
             {
                 System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a bronze coin! +" + BRONZE_COIN +" coin added.\n");
                 amountOfCoins += BRONZE_COIN;

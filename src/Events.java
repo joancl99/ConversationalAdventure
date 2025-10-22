@@ -32,7 +32,7 @@ public class Events
         } 
         else 
         {
-            int event = rand.nextInt(5); // 0 o 1
+            int event = rand.nextInt(5);
 
             switch (event) 
             {

@@ -80,7 +80,6 @@ About the battle, the game uses a turn-based combat system where the attack spee
 
 1. **Turn Order:**  
    - The character with the higher attack speed hits first.
-   - After the first attack, turns alternate between the player and the enemy. 
    - If both have the same attack speed, the first attacker is chosen randomly in each turn.
 
 2. **Player Actions:**  

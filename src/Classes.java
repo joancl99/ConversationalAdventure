@@ -42,6 +42,11 @@ enum Classes
         return attackSpeed;
     }
 
+    public void setAttackSpeed(double attackSpeed)
+    {
+        this.attackSpeed = attackSpeed;
+    }
+
     public String getClassName()
     {
         return name;

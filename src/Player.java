@@ -17,6 +17,8 @@ public class Player
 
         Events events = new Events(enemyManager, player, chest, poti, coin, villager);
 
+        GameLore lore = new GameLore();
+
         while (true) 
         {
             System.out.println(FontColors.BLUE + "\nWhat would you like to do?");
@@ -41,7 +43,7 @@ public class Player
                             events.generateEvent();
                             break;
                         case 1:
-                            System.out.println("\nNothing happens. You keep advancing.\n");
+                            lore.showLore();
                             break;
                     }
                     break;

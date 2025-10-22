@@ -22,13 +22,13 @@ public class Potions
     {
         int chancePotion = rand.nextInt(100);
 
-        if (chancePotion < 75)
+        if (chancePotion < 60)
         {
             System.out.println("\nNothing happens. You keep advancing.\n");
         }
         else 
         {
-            int potionAppears = rand.nextInt(2); // 0 o 1
+            int potionAppears = rand.nextInt(2);
 
             switch (potionAppears) 
             {
