@@ -11,7 +11,7 @@ public class Player
     }
 
 
-    public void playerMovement(Classes player, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager)
+    public void playerMovement(Classes player, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager, Inventory inventory)
     {
         Random random = new Random();
 
@@ -43,7 +43,7 @@ public class Player
                             events.generateEvent();
                             break;
                         case 1:
-                            lore.showLore();
+                            lore.showLore(player, coin, poti);
                             break;
                     }
                     break;
@@ -51,8 +51,7 @@ public class Player
                     player.showStats();
                     break;
                 case "R":
-                    poti.showPotions();
-                    coin.showCoins();
+                    inventory.objectsInInventory();
                     break;
                 case "Q":
                     System.out.println(FontColors.RED + "\nYou stopped your adventure.\n");

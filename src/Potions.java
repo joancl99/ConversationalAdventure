@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Potions 
 {
@@ -11,9 +12,12 @@ public class Potions
     protected final int pricePotions = 15;
 
     private Random rand = new Random();
+    private Scanner scanner;
 
     public Potions(int counterHealPot, int counterDmgPot) 
     {
+        scanner = new Scanner(System.in);
+
         this.counterHealPot = counterHealPot;
         this.counterDmgPot = counterDmgPot;
     }
@@ -34,10 +38,14 @@ public class Potions
             {
                 case 0:
                     System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a healing potion, it heals " + HEALING_POTION + " hp.\n");
+                    System.out.println(FontColors.GREEN + "You take the healing potion. (Press ENTER)");
+                    scanner.nextLine();
                     counterHealPot++;
                     break;
                 case 1:
                     System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a damage increase potion, it gives " + DMG_POTION + " damage.\n");
+                    System.out.println(FontColors.GREEN + "You take the damage potion. (Press ENTER)");
+                    scanner.nextLine();
                     counterDmgPot++;
                     break;
             }

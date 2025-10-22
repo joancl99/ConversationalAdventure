@@ -4,7 +4,7 @@ public class Villager
 {
     private Scanner scanner;
     private Random rand = new Random();
-    private static Set<ItemType> itemsComprados = new HashSet<>();
+    private static Set<ItemType> itemsBuyed = new HashSet<>();
 
     public Villager() 
     {
@@ -68,7 +68,7 @@ public class Villager
             int option = 3;
             for (ItemType item : shopItems) 
             {
-                if (!itemsComprados.contains(item)) 
+                if (!itemsBuyed.contains(item)) 
                 {
                     System.out.println(FontColors.WHITE + option + ". " + FontColors.GREEN + item.getItemName() + " - " + FontColors.WHITE + item.getItemPrice() + " coins (+" + item.getItemHP() + " HP / +" + item.getItemAttack() + " Attack / +" + item.getItemAttackSpeed() + " Attack Speed).");
                     itemsDisponibles.add(item);
@@ -122,7 +122,7 @@ public class Villager
         } 
         catch (NumberFormatException e) 
         {
-            System.out.println(FontColors.RED + "\nInvalid input");
+            System.out.println(FontColors.RED + "\nInvalid input.");
         }
     }
 
@@ -161,7 +161,22 @@ public class Villager
         player.setAttack(player.getAttack() + item.getItemAttack());
         player.setAttackSpeed(player.getAttackSpeed() + item.getItemAttackSpeed());
         coin.removeCoins(item.getItemPrice());
-        itemsComprados.add(item);
+        itemsBuyed.add(item);
         System.out.println(FontColors.GREEN + "\nYour new stats: HP: " + FontColors.WHITE + player.getHP() + FontColors.GREEN + ", Attack: " + FontColors.WHITE + player.getAttack() + FontColors.GREEN + ", Attack Speed: " + FontColors.WHITE + player.getAttackSpeed());
+    }
+
+    public void showItemsBought()
+    {
+        if (itemsBuyed.isEmpty()) 
+        {
+            return;
+        }
+
+        System.out.println(FontColors.CYAN + "\nItems you've bought:");
+
+        for (ItemType item : itemsBuyed) 
+        {
+            System.out.println(FontColors.PURPLE + item.getItemName()  + ":" + FontColors.WHITE + "(HP: " + item.getItemHP() + ", Attack: " + item.getItemAttack() + ", Attack Speed: " + item.getItemAttackSpeed() + ")");
+        }
     }
 }

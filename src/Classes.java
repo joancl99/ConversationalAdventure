@@ -8,6 +8,7 @@ enum Classes
     private int attack;
     private double attackSpeed;
     private final String name;
+    private final int maxHp;
 
     Classes (int hp, int attack, double attackSpeed, String name)
     {
@@ -15,6 +16,7 @@ enum Classes
         this.attack = attack;
         this.attackSpeed = attackSpeed;
         this.name = name;
+        this.maxHp = hp;
     }
 
     public int getHP()
@@ -58,5 +60,11 @@ enum Classes
         System.out.println(FontColors.PURPLE + "\nHP: " + FontColors.WHITE + hp);
         System.out.println(FontColors.PURPLE + "Attack: " + FontColors.WHITE + attack);
         System.out.println(FontColors.PURPLE + "Attack Speed: " + FontColors.WHITE + attackSpeed);
+    }
+
+    public void restoreHp() 
+    {
+        this.hp = this.maxHp;
+        System.out.println(FontColors.GREEN + name + "'s HP has been fully restored to " + maxHp + "!");
     }
 }

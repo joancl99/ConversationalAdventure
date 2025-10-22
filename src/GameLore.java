@@ -1,98 +1,164 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class GameLore 
 {
     private Random random = new Random();
+    private Scanner scanner;
 
-    public void showLore() 
+    public GameLore() 
     {
-        int randomOption = random.nextInt(8);
+        scanner = new Scanner(System.in);
+    }
+
+    public void showLore(Classes player, Coins coin, Potions poti) 
+    {
+        int randomOption = random.nextInt(28);
 
         switch (randomOption) 
         {
             case 0:
-                System.out.println("\nChatty Frog: Well, well… a human! Don't tell me you came here to steal my shiny rocks!\n" +
-                                   "Chatty Frog: I must warn you… the forest beyond is full of sneaky creatures. Some are friendly, some… less so.\n" +
-                                   "Chatty Frog: You look brave… or foolish. Sometimes I can't tell the difference.\n" +
-                                   "Chatty Frog: Ah! That's a rare herb you're carrying. Be careful, it might taste like fire if misused.\n" +
-                                   "Chatty Frog: I can see magic in your eyes. Don't let it go to waste!\n" +
-                                   "Chatty Frog: The mountains to the east hide more than just caves… I've seen shadows moving there.\n" +
-                                   "Chatty Frog: I like humans with courage. They are more interesting than sheep, anyway.\n" +
-                                   "Chatty Frog: If you need advice, listen carefully… not everything I say is true, but all of it is entertaining.\n" +
-                                   "Chatty Frog: I once tried to make a potion using moonlight and snail shells… disastrous. Don't ask.\n" +
-                                   "Chatty Frog: The rivers here can be tricky. Swim only where the stones glow.\n" +
-                                   "Chatty Frog: Sometimes I pretend to sleep just to see who dares walk past me.\n" +
-                                   "Chatty Frog: Beware the old ruins. I hear whispers at night, and not all of them are friendly.\n" +
-                                   "Chatty Frog: If you find a glowing feather, take it. But don't touch the claws… they bite!\n" +
-                                   "Chatty Frog: I love riddles. Answer one correctly and I might show you a hidden path.\n" +
-                                   "Chatty Frog: Humans talk too much. If you want to survive, sometimes silence is the best shield.");
+                System.out.println(FontColors.YELLOW + "\nMagician Frog:" + FontColors.GREEN + " You look like you've had a rough journey. You want to take a break, traveler?\n");
+                System.out.println(FontColors.YELLOW + "Enter 'Y' to take a rest or 'N' to stay on your path.\n");
+                String option = scanner.nextLine().trim();
+
+                while (true)
+                {   
+                    if (option.equalsIgnoreCase("Y"))
+                    {
+                        System.out.println(FontColors.GREEN + "You take a rest at the Froggie's house.");
+                        System.out.println(FontColors.GREEN + "You feel completely refreshed! All your HP has been restored. (Press ENTER)");
+                        scanner.nextLine();
+                        player.restoreHp();
+                        break;
+                    }
+                    else if (option.equalsIgnoreCase("N"))
+                    {
+                        System.out.println(FontColors.GREEN + "You stay on your path. (Press ENTER)");
+                        scanner.nextLine();
+                        break;
+                    }
+                }
+                player.restoreHp();
                 break;
             case 1:
-                System.out.println("\nFarmer: It looks like there are so many monsters around here lately. Be careful on your travels!\n" +
-                                   "Farmer: The harvest has been poor this year... I fear it's not just bad weather.\n" +
-                                   "Farmer: If you see any strange footprints, mark them. I fear something is hunting our livestock.\n" +
-                                   "Farmer: The crops have been failing... maybe it's the magic in the air, or maybe someone is cursed.\n" +
-                                   "Farmer: I heard the forest to the east is haunted. Few who go there return.\n" +
-                                   "Farmer: My goat went missing last night. I swear I heard growls near the barn.\n" +
-                                   "Farmer: If you're strong, maybe you can help me protect the farm from the creatures.\n" +
-                                   "Farmer: Beware of the river at night. Some say monsters lurk beneath the water.");
+                System.out.println(FontColors.YELLOW + "\nFarmer:" + FontColors.GREEN + " It looks like there are so many monsters around here. Be careful on your travels!\n");
                 break;
             case 2:
-                System.out.println("\nMerchant: Greetings, traveler! Are you looking for potions or weapons today?\n" +
-                                   "Merchant: I hear the northern woods are dangerous. Monsters roam freely there.\n" +
-                                   "Merchant: My prices are fair, but I only trade with those who prove themselves.\n" +
-                                   "Merchant: Rare ingredients are harder to find since the monsters appeared.\n" +
-                                   "Merchant: A brave adventurer might fetch a handsome price for dragon scales.\n" +
-                                   "Merchant: Keep an eye on your purse. Bandits follow travelers near the city gates.\n" +
-                                   "Merchant: I've heard rumors of a hidden cave filled with treasure, but few dare enter.\n" +
-                                   "Merchant: Come back often. New wares arrive every week… if they survive the journey.\n" +
-                                   "Merchant: Magic scrolls are my specialty, but they are costly and fragile.\n" +
-                                   "Merchant: If you hear someone calling your name at night, don't answer. It's probably a trick.");
+                System.out.println(FontColors.YELLOW + "\nMerchant:" + FontColors.GREEN + " Greetings, traveler! Are you looking for potions or weapons today? you do'n found the " + FontColors.WHITE + FontColors.BOLD + "Villager's Shop " + FontColors.RESET + FontColors.GREEN + "yet?\n");
                 break;
             case 3:
-                System.out.println("\nTraveler: I've been on the road for weeks. Monsters have made the path treacherous.\n" +
-                                   "Traveler: If you want to survive, stick to the high roads during the day.\n" +
-                                   "Traveler: Beware the abandoned village to the west. It's said to be cursed.\n" +
-                                   "Traveler: I've seen creatures with eyes like burning coals. Avoid them at all costs.\n" +
-                                   "Traveler: A companion makes survival easier. Don't travel alone if you can help it.\n" +
-                                   "Traveler: Strange lights appear in the forest sometimes… and vanish without a trace.\n" +
-                                   "Traveler: I found an old ruin yesterday. Something inside whispered my name.\n" +
-                                   "Traveler: Watch out for bandits as well. They hide behind the trees, waiting for the careless.\n" +
-                                   "Traveler: Some say the mountains are home to giants, but I've never seen one… not yet.\n" +
-                                   "Traveler: Keep your weapons close. Even a small creature can be deadly if surprised.");
+                System.out.println(FontColors.YELLOW + "\nTraveler:" + FontColors.GREEN + " Gold can't save you from what lurks in the dark, but maybe can help you\n");
+                System.out.println("The Traveler gives you 20 coins! (Press ENTER)");
+                scanner.nextLine();
+                coin.amountOfCoins += 20;
                 break;
             case 4:
-                System.out.println("\nCity Guard: Halt! What business do you have in the city at this hour?\n" +
-                                   "Guard: Monsters have been spotted near the walls. Keep your sword ready.\n" +
-                                   "Guard: The roads are dangerous. Travel in groups if you value your life.\n" +
-                                   "Guard: Report any suspicious activity immediately. The safety of the city depends on it.\n" +
-                                   "Guard: Bandits often use the forest paths to ambush travelers.\n" +
-                                   "Guard: If you see a child wandering alone, bring them to the town hall.\n" +
-                                   "Guard: Strange shadows have been spotted near the gates. Don't approach them.\n" +
-                                   "Guard: Keep your armor in good condition. You never know when trouble will strike.\n" +
-                                   "Guard: I've heard rumors of spies in the city. Trust no one completely.\n" +
-                                   "Guard: Night watch is the hardest duty. Many never see the sunrise.");
+                System.out.println(FontColors.YELLOW + "\nCity Guard:" + FontColors.GREEN + " You look so weak! You maybe need an upgrade.\n");
+                System.out.println("The City Guard gives you a damage increase potion! (Press ENTER)");
+                scanner.nextLine();
+                poti.counterDmgPot++;
                 break;
             case 5:
-                System.out.println("\nSage: The balance of magic is shifting. Do not meddle recklessly.\n" +
-                                   "Sage: Seek the old library. Knowledge is your greatest weapon against the darkness.\n" +
-                                   "Sage: Many heroes have fallen because of pride. Learn patience and observe your enemy.\n" +
-                                   "Sage: The spirits of the forest speak to those who listen carefully.\n" +
-                                   "Sage: Do not trust every charm or talisman. Some are cursed by dark magic.\n" +
-                                   "Sage: Time flows differently in the enchanted valleys. Be cautious of your steps.\n" +
-                                   "Sage: I have studied the stars. Their patterns reveal hidden dangers.\n" +
-                                   "Sage: A hero's true strength lies not in their sword, but in their mind.\n" +
-                                   "Sage: Beware of illusions. What seems real may be a trap from another plane.\n" +
-                                   "Sage: If you find an ancient relic, handle it with care. It may carry both blessing and curse.");
-                break;
+                System.out.println(FontColors.YELLOW + "\nMysterious Sage:" + FontColors.GREEN + " I prepared a magic drink that may be useful for you...\n");
+                System.out.println(FontColors.GREEN + "Enter 'Y' to drink or 'N' to go away.\n");
+                String drinkOption = scanner.nextLine().trim();
+
+                while (true)
+                {   
+                    if (drinkOption.equalsIgnoreCase("Y"))
+                    {
+                        System.out.println("You drinked the mysterious drink.");
+                        System.out.println("It was a trap! The Mysterious Sage was a terrible witch!");
+                        System.out.println(FontColors.RED + "You lost 20 HP! (Press ENTER)");
+                        scanner.nextLine();
+                        player.setHP(player.getHP() - 20);
+                        break;
+                    }
+                    else if (drinkOption.equalsIgnoreCase("N"))
+                    {
+                        System.out.println(FontColors.GREEN + "You run away from this crazy Sage. (Press ENTER)");
+                        scanner.nextLine();
+                        break;
+                    }
+                }
             case 6:
-                System.out.println("\nYou found a Note: Insert lore here...");
+                System.out.println(FontColors.GREEN + "\nYou found a " + FontColors.WHITE + FontColors.BOLD + 
+                           "Note:" + FontColors.RESET + FontColors.GREEN + " In this magic world, people whisper about a diabolic beast capable of destroying anyone who faces it...");
+                System.out.println("(Press ENTER)\n");
+                scanner.nextLine();
                 break;
             case 7:
-                System.out.println("\nYou found a Diary: Insert lore here...");
+                System.out.println(FontColors.GREEN + "\nYou found a page of a " + FontColors.WHITE + FontColors.BOLD + 
+                           "Diary:" + FontColors.RESET + FontColors.GREEN + " I heard travelers talking in fear about a diabolic beast that destroys everyone who faces it...");
+                System.out.println("(Press ENTER)\n");
+                scanner.nextLine();
                 break;
-            default:
-                System.out.println("\nNo lore available at this time.");
+            case 8:
+                System.out.println(FontColors.GREEN + "\nYou found a page of a " + FontColors.WHITE + FontColors.BOLD + 
+                           "Diary:" + FontColors.RESET + FontColors.GREEN + " I saw a hunter burned to ashes... It was't a normal Dragon's fire. It was something worse.\n");
+                System.out.println("(Press ENTER)\n");
+                scanner.nextLine();
+                break;
+            case 9:
+                System.out.println(FontColors.GREEN + "\nYou see a dog running toward you. It has something in its mouth... it's a " + FontColors.WHITE + FontColors.BOLD + "healing potion!\n"  + FontColors.RESET);
+                System.out.println(FontColors.GREEN + "You take the healing potion from the dog! (Press ENTER)");
+                scanner.nextLine();
+                poti.counterHealPot++;
+                break;
+            case 10:
+                System.out.println(FontColors.GREEN + "\nAll is calm, or so it seems...\n");
+                break;
+            case 11:
+                System.out.println(FontColors.GREEN + "\nThe wind whispers... and you believe something is watching you.\n");
+                break;
+            case 12:
+                System.out.println(FontColors.GREEN + "\nSilence... too much silence.\n");
+                break;
+            case 13:
+                System.out.println(FontColors.GREEN + "\nYou notice footprints that aren't yours.\n");
+                break;
+            case 14:
+                System.out.println(FontColors.GREEN + "\nAll seems peaceful... perhaps too peaceful.\n");
+                break;
+            case 15:
+                System.out.println(FontColors.GREEN + "\nYou feel as if someone—or something—is following you.\n");
+                break;
+            case 16:
+                System.out.println(FontColors.GREEN + "\nA cold breeze sends chills down your spine.\n");
+                break;
+            case 17:
+                System.out.println(FontColors.GREEN + "\nBirds are singing somewhere in the distance.\n");
+                break;
+            case 18:
+                System.out.println(FontColors.GREEN + "\nA sudden silence fills the forest.\n");
+                break;
+            case 19:
+                System.out.println(FontColors.GREEN + "\nYou stop for a moment, enjoying the silence of nature.\n");
+                break;
+            case 20:
+                System.out.println(FontColors.GREEN + "\nYou hear a river flowing gently nearby.\n");
+                break;
+            case 21:
+                System.out.println(FontColors.GREEN + "\nThe forest is so dense... It feels relaxing here.\n");
+                break;
+            case 22:
+                System.out.println(FontColors.GREEN + "\nIn the distance, mountains rise majestically, their peaks touching the clouds.\n");
+                break;
+            case 23:
+                System.out.println(FontColors.GREEN + "\nIt's freezing here... Maybe you should have brought a jacket.\n");
+                break;
+            case 24:
+                System.out.println(FontColors.GREEN + "\nA butterfly lands on your sword. Don't get any ideas, it's not enchanted.\n");
+                break;
+            case 25:
+                System.out.println(FontColors.GREEN + "\nThe path looks dangerous, but hey, you look even more dangerous...\n");
+                break;
+            case 26:
+                System.out.println(FontColors.GREEN + "\nYou take a deep breath of fresh air… and immediately sneeze.\n");
+                break;
+            case 27:
+                System.out.println(FontColors.GREEN + "\nWait, that tree looks familiar... Am I going in circles?\n");
                 break;
         }
     }

@@ -10,11 +10,13 @@ public class StartOrContinueGame
 
         Potions poti = new Potions(0, 0);
 
-        Coins coin = new Coins(5);
+        Coins coin = new Coins(0);
 
         Chest chest = new Chest(poti, coin);
 
         Villager villager = new Villager();
+
+        Inventory inventory = new Inventory(poti, coin, villager);
         
 
         if (playerClass == null) 
@@ -28,6 +30,6 @@ public class StartOrContinueGame
             playerClass.showStats();
         }
 
-        player.playerMovement(playerClass, enemyManager, poti, coin, chest, villager);
+        player.playerMovement(playerClass, enemyManager, poti, coin, chest, villager, inventory);
     }
 }

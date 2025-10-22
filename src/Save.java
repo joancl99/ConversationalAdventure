@@ -48,7 +48,7 @@ public class Save
         }
     }
 
-    //Delete the save file (optional)
+    //Delete the save file
     public static void resetSave() 
     {
         File file = new File(SAVE_FILE);

@@ -105,7 +105,7 @@ public void Battle(Classes player, EnemyType enemy, Potions poti, Coins coin)
         {
             playerFirst = rand.nextBoolean();
             System.out.println(FontColors.YELLOW + 
-                "\nBoth have the same attack speed! Who goes first will be decided randomly... (Press ENTER).");
+                "\nBoth have the same attack speed! Who goes first will be decided randomly... (Press ENTER)");
             scanner.nextLine().trim();
         }
 
@@ -138,7 +138,7 @@ public void Battle(Classes player, EnemyType enemy, Potions poti, Coins coin)
     // Fin del combate
     if (player.getHP() <= 0) 
     {
-        System.out.println(FontColors.RED + "\nYou were defeated... (Press ENTER).");
+        System.out.println(FontColors.RED + "\nYou were defeated... (Press ENTER)");
         scanner.nextLine();
         System.out.println("The game will now close.");
         System.exit(0);

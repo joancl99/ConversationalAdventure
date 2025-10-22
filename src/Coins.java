@@ -1,7 +1,9 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Coins 
 {
+    private Scanner scanner;
     protected static final int COIN = 5;
     protected static final int BRONZE_COIN = 10;
     protected static final int SILVER_COIN = 25;
@@ -13,6 +15,8 @@ public class Coins
 
     public Coins(int amountOfCoins)
     {
+        scanner = new Scanner(System.in);
+        
         this.amountOfCoins = amountOfCoins;
     }
 
@@ -41,21 +45,29 @@ public class Coins
             if (coinChance < 40) 
             {
                 System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a coin! +" + COIN +" coin added.\n");
+                System.out.println(FontColors.GREEN + "You take the coin. (Press ENTER)");
+                scanner.nextLine();
                 amountOfCoins += COIN;
             } 
             else if (coinChance < 70) 
             {
                 System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a bronze coin! +" + BRONZE_COIN +" coin added.\n");
+                System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
+                scanner.nextLine();
                 amountOfCoins += BRONZE_COIN;
             } 
             else if (coinChance < 95) 
             {
                 System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Wow! You found a silver coin! +" + SILVER_COIN +" coin added.\n");
+                System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
+                scanner.nextLine();
                 amountOfCoins += SILVER_COIN;
             } 
             else 
             {
                 System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a gold coin! +" + GOLD_COIN +" coin added.\n");
+                System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
+                scanner.nextLine();
                 amountOfCoins += GOLD_COIN;
             }
         }
