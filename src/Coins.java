@@ -44,28 +44,28 @@ public class Coins
 
             if (coinChance < 40) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a coin! +" + COIN +" coin added.\n");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a coin! +" + COIN +" coin added.");
                 System.out.println(FontColors.GREEN + "You take the coin. (Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += COIN;
             } 
             else if (coinChance < 70) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a bronze coin! +" + BRONZE_COIN +" coin added.\n");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a bronze coin! +" + BRONZE_COIN +" coin added.");
                 System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += BRONZE_COIN;
             } 
             else if (coinChance < 95) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Wow! You found a silver coin! +" + SILVER_COIN +" coin added.\n");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Wow! You found a silver coin! +" + SILVER_COIN +" coin added.");
                 System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += SILVER_COIN;
             } 
             else 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a gold coin! +" + GOLD_COIN +" coin added.\n");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a gold coin! +" + GOLD_COIN +" coin added.");
                 System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += GOLD_COIN;
