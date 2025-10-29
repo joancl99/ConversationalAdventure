@@ -39,7 +39,7 @@ public class GameManager
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Invalid option. Try again.");
+                    System.out.println(FontColors.RED + "Invalid option. Try again.");
             }
         }
     }

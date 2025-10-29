@@ -23,7 +23,7 @@ public class Player
         {
             System.out.println(FontColors.BLUE + "\nWhat would you like to do?");
             System.out.println(FontColors.WHITE + "\n  'W' -" + FontColors.BLUE + " Advance.");
-            System.out.println(FontColors.WHITE + "\n  'E' -" + FontColors.PURPLE + " Look your stats.");
+            System.out.println(FontColors.WHITE + "\n  'E' -" + FontColors.PURPLE + " Player Stats.");
             System.out.println(FontColors.WHITE + "\n  'R' -" + FontColors.CYAN + " Inventory.");
             System.out.println(FontColors.WHITE + "\n  'Q' -" + FontColors.RED + " Quit game.");
 
@@ -76,7 +76,7 @@ public class Player
         } 
         catch (IllegalArgumentException e) 
         {
-            System.out.println("Invalid class. Try again with a valid class.");
+            System.out.println(FontColors.RED + "Invalid class. Try again with a valid class.");
             return chooseClass();
         }
     }

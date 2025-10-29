@@ -19,28 +19,29 @@ public class GameLore
         {
             case 0:
                 System.out.println(FontColors.YELLOW + "\nMagician Frog:" + FontColors.GREEN + " You look like you've had a rough journey. You want to take a break, traveler?");
-                System.out.println(FontColors.YELLOW + "Enter 'Y' to take a rest or 'N' to stay on your path.");
+                System.out.println(FontColors.GREEN + "Enter 'Y' to take a rest or 'N' to stay on your path.");
                 String option = scanner.nextLine().trim();
 
                 while (true)
                 {   
                     if (option.equalsIgnoreCase("Y"))
                     {
-                        System.out.println(FontColors.GREEN + "You take a rest at the Froggie's house.");
-                        System.out.println(FontColors.GREEN + "You feel completely refreshed! All your HP has been restored. (Press ENTER)");
+                        System.out.println(FontColors.GREEN + "\nYou take a rest at the Froggie's house.");
+                        System.out.println(FontColors.YELLOW + "\nYou feel completely refreshed! All your HP has been restored. (Press ENTER)");
                         scanner.nextLine();
                         player.restoreHp();
                         break;
                     }
                     else if (option.equalsIgnoreCase("N"))
                     {
-                        System.out.println(FontColors.GREEN + "You stay on your path. (Press ENTER)");
+                        System.out.println(FontColors.GREEN + "\nYou stay on your path. (Press ENTER)");
                         scanner.nextLine();
                         break;
                     }
                     else
                     {
-                        
+                        System.out.println(FontColors.RED + "\nInvalid input. Please enter 'Y' or 'N'.");
+                        option = scanner.nextLine();
                     }
                 }
                 break;
@@ -51,7 +52,7 @@ public class GameLore
                 System.out.println(FontColors.YELLOW + "\nMerchant:" + FontColors.GREEN + " Greetings, traveler! Are you looking for potions or weapons today? you do'n found the " + FontColors.WHITE + FontColors.BOLD + "Villager's Shop " + FontColors.RESET + FontColors.GREEN + "yet?\n");
                 break;
             case 3:
-                System.out.println(FontColors.YELLOW + "\nTraveler:" + FontColors.GREEN + " Gold can't save you from what lurks in the dark, but maybe can help you");
+                System.out.println(FontColors.YELLOW + "\nTraveler:" + FontColors.GREEN + " Gold can't save you from what lurks in the dark, but maybe can help you.");
                 System.out.println("The Traveler gives you 20 coins! (Press ENTER)");
                 scanner.nextLine();
                 coin.amountOfCoins += 20;
@@ -71,9 +72,9 @@ public class GameLore
                 {   
                     if (drinkOption.equalsIgnoreCase("Y"))
                     {
-                        System.out.println("You drinked the mysterious drink.");
-                        System.out.println("It was a trap! The Mysterious Sage was a terrible witch!");
-                        System.out.println(FontColors.RED + "You lost 20 HP! (Press ENTER)");
+                        System.out.println("\nYou drinked the mysterious drink.");
+                        System.out.println(FontColors.RED + "\nIt was a trap! The Mysterious Sage was a terrible witch!");
+                        System.out.println(FontColors.RED + "\nYou lost 20 HP! (Press ENTER)");
                         scanner.nextLine();
                         player.setHP(player.getHP() - 20);
                         break;
@@ -86,7 +87,8 @@ public class GameLore
                     }
                     else
                     {
-
+                        System.out.println(FontColors.RED + "\nInvalid input. Please enter 'Y' or 'N'.");
+                        drinkOption = scanner.nextLine();
                     }
                 }
                 break;
