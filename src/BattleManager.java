@@ -43,7 +43,7 @@ public class BattleManager
             System.out.println(FontColors.RED + "You don't have any potion!");
             System.out.println(FontColors.RED + "You were distracted... the enemy attacks!");
             doEnemyTurn(player, enemyFound);
-            return true; // enmy attacks
+            return true; // enemy attacks
         }
 
         while (!potionChosen)
@@ -55,17 +55,36 @@ public class BattleManager
             {
                 if (poti.counterHealPot <= 0)
                 {
-                    System.out.println(FontColors.RED + "You don't have healing potions!");
+                    System.out.println(FontColors.RED + "\nYou don't have healing potions!");
                     System.out.println(FontColors.RED + "You were distracted... the enemy attacks!");
                     doEnemyTurn(player, enemyFound);
                     enemyAttacked = true;
                 }
                 else
                 {
-                    System.out.println(FontColors.GREEN + "\nYou drink a healing potion and restore HP!");
-                    player.setHP(player.getHP() + Potions.HEALING_POTION);
+                    System.out.println(FontColors.GREEN + "\nYou gonna use a healing potion!");
+
+                    if (player.getHP() >= player.maxHp)
+                    {   
+                        System.out.println(FontColors.RED + "You cannot use a healing potion, you are already full HP!\n" + FontColors.RESET);
+                        continue;
+                    }
+                    else
+                    {
+                        int hpBeforeHealing = player.getHP();
+                        player.setHP(player.getHP() + Potions.HEALING_POTION);
+
+                        // Adjusts if it exceeds the maximum
+                        if (player.getHP() > player.maxHp)
+                        player.setHP(player.maxHp);
+
+                        int restoredHp = player.getHP() - hpBeforeHealing;
+                        System.out.println(FontColors.GREEN + "You restored " + FontColors.WHITE + restoredHp + FontColors.GREEN +" HP.");
+
+                        poti.counterHealPot--;
+                    }
+
                     System.out.println(FontColors.GREEN + "Current HP: " + FontColors.WHITE + player.getHP());
-                    poti.counterHealPot--;
                     doEnemyTurn(player, enemyFound);
                     enemyAttacked = true;
                 }
@@ -75,7 +94,7 @@ public class BattleManager
             {
                 if (poti.counterDmgPot <= 0)
                 {
-                    System.out.println(FontColors.RED + "You don't have damage potions!");
+                    System.out.println(FontColors.RED + "\nYou don't have damage potions!");
                     System.out.println(FontColors.RED + "You were distracted... the enemy attacks!");
                     doEnemyTurn(player, enemyFound);
                     enemyAttacked = true;

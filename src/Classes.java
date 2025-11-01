@@ -1,14 +1,14 @@
 enum Classes
 {
     WARRIOR (200, 75, 4.5, "Warrior"),
-    MAGE (75, 10000, 60.5, "Mage"),
+    MAGE (75, 100, 6.5, "Mage"),
     ROGUE (50, 150, 8, "Rogue");
 
     private int hp;
+    protected int maxHp;
     private int attack;
     private double attackSpeed;
     private final String name;
-    private final int maxHp;
 
     Classes (int hp, int attack, double attackSpeed, String name)
     {
@@ -27,6 +27,16 @@ enum Classes
     public void setHP(int hp) 
     {
         this.hp = hp;
+    }
+
+    public int getMaxHp()
+    {
+        return maxHp;
+    }
+
+    public void setMaxHp(int maxHp)
+    {
+        this.maxHp = maxHp;
     }
 
     public int getAttack()
@@ -57,7 +67,7 @@ enum Classes
     public void showStats()
     {
         System.out.println(FontColors.CYAN + "\nStats of the " + name + ":");
-        System.out.println(FontColors.PURPLE + "\nHP: " + FontColors.WHITE + hp);
+        System.out.println(FontColors.PURPLE + "\nHP: " + FontColors.WHITE + hp + FontColors.PURPLE + " / " + FontColors.WHITE + maxHp);
         System.out.println(FontColors.PURPLE + "Attack: " + FontColors.WHITE + attack);
         System.out.println(FontColors.PURPLE + "Attack Speed: " + FontColors.WHITE + attackSpeed);
     }

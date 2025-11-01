@@ -157,12 +157,22 @@ public class Villager
         }
 
         System.out.println(FontColors.YELLOW + "\nAmazing, you bought the " + FontColors.BOLD + FontColors.WHITE + item.getItemName() + FontColors.RESET + FontColors.YELLOW + " for " + FontColors.WHITE + item.getItemPrice() + FontColors.YELLOW + " coins.");
-        player.setHP(player.getHP() + item.getItemHP());
+
+        // Aumenta estadísticas base
         player.setAttack(player.getAttack() + item.getItemAttack());
         player.setAttackSpeed(player.getAttackSpeed() + item.getItemAttackSpeed());
+
+        // Aumenta el máximo HP
+        player.setMaxHp(player.getMaxHp() + item.getItemHP());
+
+        // Cura hasta el nuevo máximo
+        player.setHP(Math.min(player.getHP() + item.getItemHP(), player.getMaxHp()));
+
+        // Quita el dinero y registra la compra
         coin.removeCoins(item.getItemPrice());
         itemsBuyed.add(item);
-        System.out.println(FontColors.GREEN + "\nYour new stats: HP: " + FontColors.WHITE + player.getHP() + FontColors.GREEN + ", Attack: " + FontColors.WHITE + player.getAttack() + FontColors.GREEN + ", Attack Speed: " + FontColors.WHITE + player.getAttackSpeed());
+
+        System.out.println(FontColors.GREEN + "\nYour new stats: " + "HP: " + FontColors.WHITE + player.getHP() + FontColors.GREEN + "/" + FontColors.WHITE + player.getMaxHp() + FontColors.GREEN + ", Attack: " + FontColors.WHITE + player.getAttack() + FontColors.GREEN + ", Attack Speed: " + FontColors.WHITE + player.getAttackSpeed());
     }
 
     public void showItemsBought()
