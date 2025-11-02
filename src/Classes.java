@@ -2,7 +2,7 @@ enum Classes
 {
     WARRIOR (200, 75, 4.5, "Warrior"),
     MAGE (75, 100, 6.5, "Mage"),
-    ROGUE (50, 150, 8, "Rogue");
+    ROGUE (50, 150, 8.5, "Rogue");
 
     private int hp;
     protected int maxHp;

@@ -22,7 +22,6 @@ enum MiniBosses implements EnemyType
     public int getEnemyHP() 
     { 
         return enemyHp; 
-    
     }
 
     public int getEnemyAttack() 

@@ -29,7 +29,7 @@ This section explains the basic mechanics of the game.
    - You can select from 3 types of characters:
       - **Warrior**: The tanky character, with high HP (200), lower damage (75), and normal speed (4.5). Designed to be a solid tank.
       - **Mage**: The versatile character, with moderate HP (75), good damage (100), and good speed (6.5). Designed for flexible play: fast enough to survive and deal consistent damage.
-      - **Rogue**: The fastest character, with low HP (50), high damage (150), and very high speed (8). Designed to quickly defeat enemies, but can be defeated in one hit if attacked.
+      - **Rogue**: The fastest character, with low HP (50), high damage (150), and very high speed (8.5). Designed to quickly defeat enemies, but can be defeated in one hit if attacked.
 
 2. **Battle** 
    - Battles are turn-based and feature different types of enemies. This will be explained in more detail in the next paragraph.

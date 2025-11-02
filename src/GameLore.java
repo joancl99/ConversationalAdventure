@@ -27,14 +27,14 @@ public class GameLore
                     if (option.equalsIgnoreCase("Y"))
                     {
                         System.out.println(FontColors.GREEN + "\nYou take a rest at the Froggie's house.");
-                        System.out.println(FontColors.YELLOW + "\nYou feel completely refreshed! All your HP has been restored. (Press ENTER)");
+                        System.out.println(FontColors.YELLOW + "\nYou feel completely refreshed! All your HP has been restored. " + FontColors.WHITE + "(Press ENTER)");
                         scanner.nextLine();
                         player.restoreHp();
                         break;
                     }
                     else if (option.equalsIgnoreCase("N"))
                     {
-                        System.out.println(FontColors.GREEN + "\nYou stay on your path. (Press ENTER)");
+                        System.out.println(FontColors.GREEN + "\nYou stay on your path. " + FontColors.WHITE + "(Press ENTER)");
                         scanner.nextLine();
                         break;
                     }
@@ -53,13 +53,13 @@ public class GameLore
                 break;
             case 3:
                 System.out.println(FontColors.YELLOW + "\nTraveler:" + FontColors.GREEN + " Gold can't save you from what lurks in the dark, but maybe can help you.");
-                System.out.println("The Traveler gives you 20 coins! (Press ENTER)");
+                System.out.println("The Traveler gives you 20 coins! " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 coin.amountOfCoins += 20;
                 break;
             case 4:
                 System.out.println(FontColors.YELLOW + "\nCity Guard:" + FontColors.GREEN + " You look so weak! You maybe need an upgrade.");
-                System.out.println("The City Guard gives you a damage increase potion! (Press ENTER)");
+                System.out.println("The City Guard gives you a damage increase potion! " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 poti.counterDmgPot++;
                 break;
@@ -74,14 +74,14 @@ public class GameLore
                     {
                         System.out.println("\nYou drinked the mysterious drink.");
                         System.out.println(FontColors.RED + "\nIt was a trap! The Mysterious Sage was a terrible witch!");
-                        System.out.println(FontColors.RED + "\nYou lost 20 HP! (Press ENTER)");
+                        System.out.println(FontColors.RED + "\nYou lost 20 HP! " + FontColors.WHITE + "(Press ENTER)");
                         scanner.nextLine();
                         player.setHP(player.getHP() - 20);
                         break;
                     }
                     else if (drinkOption.equalsIgnoreCase("N"))
                     {
-                        System.out.println(FontColors.GREEN + "You run away from this crazy Sage. (Press ENTER)");
+                        System.out.println(FontColors.GREEN + "You run away from this crazy Sage. " + FontColors.WHITE + "(Press ENTER)");
                         scanner.nextLine();
                         break;
                     }
@@ -95,24 +95,24 @@ public class GameLore
             case 6:
                 System.out.println(FontColors.GREEN + "\nYou found a " + FontColors.WHITE + FontColors.BOLD + 
                            "Note:" + FontColors.RESET + FontColors.GREEN + " In this magic world, people whisper about a diabolic beast capable of destroying anyone who faces it...");
-                System.out.println("(Press ENTER)");
+                System.out.println(FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 break;
             case 7:
                 System.out.println(FontColors.GREEN + "\nYou found a page of a " + FontColors.WHITE + FontColors.BOLD + 
                            "Diary:" + FontColors.RESET + FontColors.GREEN + " I heard travelers talking in fear about a diabolic beast that destroys everyone who faces it...");
-                System.out.println("(Press ENTER)");
+                System.out.println(FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 break;
             case 8:
                 System.out.println(FontColors.GREEN + "\nYou found a page of a " + FontColors.WHITE + FontColors.BOLD + 
                            "Diary:" + FontColors.RESET + FontColors.GREEN + " I saw a hunter burned to ashes... It was't a normal Dragon's fire. It was something worse.\n");
-                System.out.println("(Press ENTER)");
+                System.out.println(FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 break;
             case 9:
                 System.out.println(FontColors.GREEN + "\nYou see a dog running toward you. It has something in its mouth... it's a " + FontColors.WHITE + FontColors.BOLD + "healing potion!\n"  + FontColors.RESET +
-                FontColors.GREEN + "You take the healing potion from the dog! (Press ENTER)");
+                FontColors.GREEN + "You take the healing potion from the dog! " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 poti.counterHealPot++;
                 break;
@@ -132,7 +132,7 @@ public class GameLore
                 System.out.println(FontColors.GREEN + "\nAll seems peaceful... perhaps too peaceful.\n");
                 break;
             case 15:
-                System.out.println(FontColors.GREEN + "\nYou feel as if someone—or something—is following you.\n");
+                System.out.println(FontColors.GREEN + "\nYou feel as if someone or something is following you.\n");
                 break;
             case 16:
                 System.out.println(FontColors.GREEN + "\nA cold breeze sends chills down your spine.\n");

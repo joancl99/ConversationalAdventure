@@ -122,21 +122,21 @@ public class BattleManager
     
     public void enemyAppears(Classes player, EnemyType enemyFound, Potions poti, Coins coin)
     {
-        if (winCounter < 1) 
+        if (winCounter < 10) 
         {
             Enemies[] enemies = Enemies.values();
             enemyFound = enemies[rand.nextInt(enemies.length)];
             System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "An Enemy appears! It's a mysterious creature!");
             System.out.println(FontColors.RED +"\nIt's the "+ FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + ":");  
         } 
-        else if (winCounter >= 1 && winCounter < 2) 
+        else if (winCounter >= 10 && winCounter < 20) 
         {
             MiniBosses[] minibosses = MiniBosses.values();
             enemyFound = minibosses[rand.nextInt(minibosses.length)];
             System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "A Big Enemy appears! It's a mysterious creature!");
             System.out.println(FontColors.RED +"\nIt's the " + FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + ":");  
         } 
-        else if (winCounter >= 2)
+        else if (winCounter >= 20)
         {
             enemyFound = FinalBoss.LETHALDEMIGOD;
             System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.RED + "The Final Boss appears!: The " + FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.RED + " is here!: ");
@@ -180,7 +180,7 @@ public class BattleManager
         int enemyHP = enemyFound.getEnemyHP(); 
         boolean combatEnded = false;
 
-        System.out.println(FontColors.YELLOW + "\nThe battle begins! Prepare yourself... (Press ENTER)");
+        System.out.println(FontColors.YELLOW + "\nThe battle begins! Prepare yourself... " + FontColors.WHITE + "(Press ENTER)");
         scanner.nextLine();
 
         while (player.getHP() > 0 && enemyHP > 0 && !combatEnded) 
@@ -198,7 +198,7 @@ public class BattleManager
             else 
             {
                 playerFirst = rand.nextBoolean();
-                System.out.println(FontColors.YELLOW + "\nBoth have the same attack speed! Who goes first will be decided randomly... (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nBoth have the same attack speed! Who goes first will be decided randomly... " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
             }
 
@@ -248,7 +248,7 @@ public class BattleManager
             System.out.println(FontColors.GREEN + "You received " + FontColors.WHITE + "5" + FontColors.GREEN + " coins.");
             winCounter++;
             coin.amountOfCoins += 5;
-            System.out.println(FontColors.YELLOW + "\nCurrent wins: " + FontColors.WHITE + winCounter + FontColors.GREEN + " (Press ENTER).");
+            System.out.println(FontColors.YELLOW + "\nCurrent wins: " + FontColors.WHITE + winCounter + FontColors.WHITE + " (Press ENTER).");
             scanner.nextLine();
         }
     }

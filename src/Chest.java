@@ -31,16 +31,16 @@ public class Chest
             
             if (chestChance < 40) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a normal chest! It has 1 healing potion and 5 coins.");
-                System.out.println(FontColors.GREEN + "You take the items of the chest. (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a" + FontColors.WHITE + FontColors.BOLD + " Normal Chest" + FontColors.RESET + FontColors.GREEN + "! It has" + FontColors.WHITE + " 1" + FontColors.GREEN + " healing potion and " + FontColors.WHITE + "5"  + FontColors.GREEN + " coins.");
+                System.out.println(FontColors.GREEN + "\nYou take the items of the chest. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 poti.counterHealPot++;
                 coin.amountOfCoins += 5;
             } 
             else if (chestChance < 70) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a silver chest! It has 2 healing potions, 1 damage increase potion and 15 coins.");
-                System.out.println(FontColors.GREEN + "You take the items of the chest. (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a" + FontColors.BLUE + FontColors.BOLD + " Silver Chest" + FontColors.RESET + FontColors.GREEN + "! It has" + FontColors.WHITE + " 2"  + FontColors.GREEN + " healing potions, " + FontColors.WHITE + "1 "  + FontColors.GREEN + "damage increase potion and " + FontColors.WHITE + "15" + FontColors.GREEN + " coins.");
+                System.out.println(FontColors.GREEN + "\nYou take the items of the chest. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 poti.counterHealPot += 2;
                 poti.counterDmgPot += 1;
@@ -48,8 +48,8 @@ public class Chest
             } 
             else if (chestChance < 95) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a golden chest! It has 2 healing potions, 2 damage increase potions and 30 coins.");
-                System.out.println(FontColors.GREEN + "You take the items of the chest. (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a" + FontColors.YELLOW + FontColors.BOLD + " Golden Chest" + FontColors.RESET + FontColors.GREEN + "! It has" + FontColors.WHITE + " 2"  + FontColors.GREEN + " healing potions, " + FontColors.WHITE + "2 "  + FontColors.GREEN + "damage increase potion and " + FontColors.WHITE + "30" + FontColors.GREEN + " coins.");
+                System.out.println(FontColors.GREEN + "\nYou take the items of the chest. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 poti.counterHealPot += 2;
                 poti.counterDmgPot += 2;
@@ -57,8 +57,8 @@ public class Chest
             } 
             else 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Incredible! You found a platinum chest! It has 4 healing potions, 4 damage increase potions and 75 coins.");
-                System.out.println(FontColors.GREEN + "You take the items of the chest. (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Incredible! You found a" + FontColors.CYAN + FontColors.BOLD + " Platinum Chest" + FontColors.RESET + FontColors.GREEN + "! It has" + FontColors.WHITE + " 4"  + FontColors.GREEN + " healing potions, " + FontColors.WHITE + "4 "  + FontColors.GREEN + "damage increase potion and " + FontColors.WHITE + "75" + FontColors.GREEN + " coins.");
+                System.out.println(FontColors.GREEN + "\nYou take the items of the chest. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 poti.counterHealPot += 4;
                 poti.counterDmgPot += 4;

@@ -32,7 +32,7 @@ public class Villager
             {
                 silverShop(player, coin, poti);
             } 
-            else 
+            else if (coin.getCoins() > 200)
             {
                 goldenShop(player, coin, poti);
             }

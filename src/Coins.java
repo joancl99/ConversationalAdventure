@@ -44,29 +44,29 @@ public class Coins
 
             if (coinChance < 40) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a coin! +" + COIN +" coin added.");
-                System.out.println(FontColors.GREEN + "You take the coin. (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a " + FontColors.WHITE + FontColors.BOLD + "Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + COIN + FontColors.GREEN + " coins added.");
+                System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += COIN;
             } 
             else if (coinChance < 70) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a bronze coin! +" + BRONZE_COIN +" coin added.");
-                System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a " + FontColors.BLUE + FontColors.BOLD + "Bronze Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + BRONZE_COIN + FontColors.GREEN + " coins added.");
+                System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += BRONZE_COIN;
             } 
             else if (coinChance < 95) 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Wow! You found a silver coin! +" + SILVER_COIN +" coin added.");
-                System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + " Wow! You found a " + FontColors.YELLOW + FontColors.BOLD + "Silver Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + SILVER_COIN + FontColors.GREEN + " coins added.");
+                System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += SILVER_COIN;
             } 
             else 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a gold coin! +" + GOLD_COIN +" coin added.");
-                System.out.println(FontColors.GREEN + "You take the coins. (Press ENTER)");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a " + FontColors.CYAN + FontColors.BOLD + "GOLD Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + GOLD_COIN + FontColors.GREEN + " coins added.");
+                System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += GOLD_COIN;
             }
