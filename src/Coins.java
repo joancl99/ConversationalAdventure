@@ -73,6 +73,16 @@ public class Coins
         }
     }
 
+    public String serialize() {
+    return String.valueOf(amountOfCoins);
+}
+
+public void deserialize(String data) {
+    if (data != null) {
+        amountOfCoins = Integer.parseInt(data);
+    }
+}
+
     public void showCoins()
     {
         System.out.println(FontColors.CYAN + "\nMoney:");

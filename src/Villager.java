@@ -189,4 +189,30 @@ public class Villager
             System.out.println(FontColors.PURPLE + item.getItemName()  + ":" + FontColors.WHITE + "(HP: " + item.getItemHP() + ", Attack: " + item.getItemAttack() + ", Attack Speed: " + item.getItemAttackSpeed() + ")");
         }
     }
+    // Convierte los items comprados en un String para guardarlo
+    public String serializeItems() 
+    {
+        StringBuilder sb = new StringBuilder();
+        for (ItemType item : itemsBuyed) 
+        {
+            sb.append(item.getItemName()).append(";");
+        }
+        if (sb.length() > 0) sb.setLength(sb.length() - 1); // Quitar último ";"
+        return sb.toString();
+    }
+
+    // Reconstruye los items comprados desde un String guardado
+    public void deserializeItems(String data) 
+    {
+        itemsBuyed.clear();
+        if (data != null && !data.isEmpty()) 
+        {
+            String[] parts = data.split(";");
+            for (String name : parts) 
+            {
+                ItemType item = ItemsRegistry.getItemByName(name); // Necesitas un ItemsRegistry con todos los ItemType
+                if (item != null) itemsBuyed.add(item);
+            }
+        }
+    }
 }

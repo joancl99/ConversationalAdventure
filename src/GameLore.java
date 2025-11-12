@@ -77,6 +77,16 @@ public class GameLore
                         System.out.println(FontColors.RED + "\nYou lost 20 HP! " + FontColors.WHITE + "(Press ENTER)");
                         scanner.nextLine();
                         player.setHP(player.getHP() - 20);
+
+                        if (player.getHP() <= 0) 
+                        {
+                            System.out.println(FontColors.RED + "\nYou were defeated... (Press ENTER)");
+                            scanner.nextLine();
+                            Save.resetSave();
+                            System.out.println("\nThe game will now close.\n");
+                            System.exit(0);
+                        }
+
                         break;
                     }
                     else if (drinkOption.equalsIgnoreCase("N"))

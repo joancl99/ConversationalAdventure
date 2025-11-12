@@ -52,6 +52,18 @@ public class Potions
         }
     }
 
+    public String serialize() {
+    return counterHealPot + "," + counterDmgPot;
+    }
+
+    public void deserialize(String data) {
+    if (data != null && data.contains(",")) {
+        String[] parts = data.split(",");
+        counterHealPot = Integer.parseInt(parts[0]);
+        counterDmgPot = Integer.parseInt(parts[1]);
+    }
+    }
+
     public int getPotionPrice()
     {
         return pricePotions;

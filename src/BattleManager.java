@@ -232,7 +232,8 @@ public class BattleManager
         {
             System.out.println(FontColors.RED + "\nYou were defeated... (Press ENTER)");
             scanner.nextLine();
-            System.out.println("The game will now close.");
+            Save.resetSave();
+            System.out.println("\nThe game will now close.\n");
             System.exit(0);
         }
         else if (enemyFound == FinalBoss.LETHALDEMIGOD && enemyHP <= 0) 

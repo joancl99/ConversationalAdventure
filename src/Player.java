@@ -64,43 +64,53 @@ public class Player
 
     public Classes chooseClass() 
     {
-        System.out.println(FontColors.GREEN + "\nHi! Welcome to RiverLand, the magical world where you will encounter all kinds of challenges.");
-        System.out.println("\nHere, you will find plenty to do: face dangerous enemies, meet friendly people, deal with those who are not so friendly and discover different secrets.");
-        System.out.println("Embark on your adventure, defeat your foes, and uncover all the hidden secrets of this land!");
-        System.out.println("\nFirst of all, you need to tell your name. What's your name? : " + FontColors.RESET);
+        System.out.println(FontColors.GREEN + "\nHi! " + FontColors.WHITE + "Welcome to " + FontColors.YELLOW + "RiverLand" + FontColors.WHITE + ", the magical world where you will encounter all kinds of " + FontColors.RED + "challenges" + FontColors.WHITE + ".");
+        System.out.println(FontColors.WHITE + "\nHere, you will find plenty to do: face " + FontColors.RED + "dangerous enemies" + FontColors.WHITE + ", meet " + FontColors.GREEN + "friendly people" + FontColors.WHITE + ", deal with those who are not so friendly and discover different " + FontColors.YELLOW + "secrets" + FontColors.WHITE + ".");
+        System.out.println(FontColors.WHITE + "Embark on your " + FontColors.YELLOW + "adventure" + FontColors.WHITE + ", defeat your " + FontColors.RED + "foes" + FontColors.WHITE + ", and uncover all the hidden " + FontColors.YELLOW + "secrets" + FontColors.WHITE + " of this land!");
+        System.out.println(FontColors.WHITE + "\nFirst of all, you need to tell your name. What's your " + FontColors.CYAN + FontColors.BOLD + "name" + FontColors.RESET + FontColors.WHITE + "?: " + FontColors.RESET);  
         String nameInput = scanner.nextLine();
         
         while (true)
         {
-            System.out.println(FontColors.GREEN + "Fantastic! Then your name is " + FontColors.WHITE + FontColors.BOLD + nameInput + FontColors.RESET + FontColors.GREEN + "? " + FontColors.WHITE + "(Enter 'Y' or 'N').");
+            System.out.println(FontColors.WHITE + "Fantastic! Then your name is " + FontColors.CYAN + FontColors.BOLD + nameInput + FontColors.RESET + FontColors.WHITE + "? " + FontColors.GREEN + "(Enter 'Y' or 'N').");
             String option = scanner.nextLine();
 
             if (option.equalsIgnoreCase("Y"))
             {
-                System.out.println(FontColors.GREEN + "That's a good name " + FontColors.WHITE + FontColors.BOLD + nameInput + ".");
+                System.out.println(FontColors.WHITE + "\nThat's a good name " + FontColors.CYAN + FontColors.BOLD + nameInput + FontColors.WHITE + ".");
                 break;
             }
             else if (option.equalsIgnoreCase("N"))
             {
-                System.out.println(FontColors.GREEN + "Then, what's your name?" + FontColors.RESET);
+                System.out.println(FontColors.WHITE + "\nThen, what's your name?" + FontColors.RESET);
                 nameInput = scanner.nextLine();
                 continue;
             }
             else
             {
-                System.out.println(FontColors.RED + "\nInvalid input. Please enter 'Y' or 'N'.");
+                System.out.println(FontColors.RED + "\nInvalid input. Please enter 'Y' or 'N'.\n");
             }
         }
 
-        System.out.println(FontColors.RESET + FontColors.GREEN + "Now that I know your name, you must choose a class.");
-        System.out.println(FontColors.GREEN + "You need to select between the Warrior, Mage, or Rogue class. Each class has different stats based on HP, Damage, and Attack Speed.");
-        System.out.println(FontColors.GREEN + "These three classes are very different from one another.");
-        System.out.println(FontColors.GREEN + "The Warrior is designed for a brave hero who can take a lot of hits thanks to high HP (200), but sacrifices some Damage (75) and Attack Speed (4.5) in exchange for survivability.");
-        System.out.println(FontColors.GREEN + "The Mage is a tactical and versatile class, with moderate HP (75), solid Damage (100), and decent Attack Speed (6.5), allowing them to survive while dealing consistent damage.");
-        System.out.println(FontColors.GREEN + "The Rogue is for high-risk, high-reward players. They are very fragile and can be killed in a single hit by most enemies due to their low HP (50), but make up for it with very high Damage (150) and extreme Attack Speed (8.5), perfect for quick eliminations.");
+        System.out.println(FontColors.RESET + FontColors.WHITE + "\nNow that I know your name, you must choose a class. " + FontColors.GREEN + "(Press ENTER)");
+        scanner.nextLine();
 
+        System.out.println(FontColors.WHITE + "You need to select between the " + FontColors.YELLOW + "Warrior" + FontColors.WHITE + ", the " + FontColors.BLUE + "Mage" + FontColors.WHITE + ", or the " + FontColors.PURPLE + "Rogue " + FontColors.WHITE + "class. Each class has different stats based on " + FontColors.YELLOW + "HP" + FontColors.WHITE + ", " + FontColors.YELLOW + "Damage" + FontColors.WHITE + ", and " + FontColors.YELLOW + "Attack Speed" + FontColors.WHITE + ". " + FontColors.GREEN + "(Press ENTER)");
+        scanner.nextLine();
 
-        System.out.println(FontColors.GREEN + "Now that you know all of this, which class do you want to choose: WARRIOR, MAGE, or ROGUE? Type it: ");
+        System.out.println(FontColors.WHITE + "These three classes are very different from one another. " + FontColors.GREEN + "(Press ENTER)");
+        scanner.nextLine();
+
+        System.out.println(FontColors.WHITE + "The " + FontColors.YELLOW + "Warrior " + FontColors.WHITE + "is designed for a brave hero who can take a lot of hits thanks to high " + FontColors.YELLOW + "HP " + FontColors.WHITE + "(" + FontColors.CYAN + "200" + FontColors.WHITE + "), but sacrifices some " + FontColors.YELLOW + "Damage " + FontColors.WHITE + "(" + FontColors.CYAN + "75" + FontColors.WHITE + ") and " + FontColors.YELLOW + "Attack Speed " + FontColors.WHITE + "(" + FontColors.CYAN + "4.5" + FontColors.WHITE + ") in exchange for survivability. " + FontColors.GREEN + "(Press ENTER)");
+        scanner.nextLine();
+        
+        System.out.println(FontColors.WHITE + "The " + FontColors.BLUE + "Mage " + FontColors.WHITE + "is a tactical and versatile class, with moderate " + FontColors.YELLOW + "HP " + FontColors.WHITE + "(" + FontColors.CYAN + "75" + FontColors.WHITE + "), solid " + FontColors.YELLOW + "Damage " + FontColors.WHITE + "(" + FontColors.CYAN + "100" + FontColors.WHITE + "), and decent " + FontColors.YELLOW + "Attack Speed " + FontColors.WHITE + "(" + FontColors.CYAN + "6.5" + FontColors.WHITE + "), allowing them to survive while dealing consistent damage. " + FontColors.GREEN + "(Press ENTER)");
+        scanner.nextLine();
+
+        System.out.println(FontColors.WHITE + "The " + FontColors.PURPLE + "Rogue " + FontColors.WHITE + "is for high-risk, high-reward players. They can be killed in a single hit by most enemies due to their low " + FontColors.YELLOW + "HP " + FontColors.WHITE + "(" + FontColors.CYAN + "50" + FontColors.WHITE + "), but make up for it with very high " + FontColors.YELLOW + "Damage " + FontColors.WHITE + "(" + FontColors.CYAN + "150" + FontColors.WHITE + ") and extreme " + FontColors.YELLOW + "Attack Speed " + FontColors.WHITE + "(" + FontColors.CYAN + "8.5" + FontColors.WHITE + "), perfect for quick eliminations. " + FontColors.GREEN + "(Press ENTER)");
+        scanner.nextLine();
+
+        System.out.println(FontColors.WHITE + "Now that you know all of this, which class do you want to choose: " + FontColors.YELLOW + "WARRIOR" + FontColors.WHITE + "," + FontColors.BLUE + " MAGE" + FontColors.WHITE + ", or " + FontColors.PURPLE + "ROGUE" + FontColors.WHITE + "? Type it: " + FontColors.WHITE);
         String input = scanner.nextLine().toUpperCase();
 
         try 
