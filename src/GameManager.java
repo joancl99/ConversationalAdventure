@@ -32,7 +32,7 @@ public class GameManager
                     return;
                 case "2":
                     Save.resetSave();
-                    System.out.println("Save deleted successfully.");
+                    System.out.println("\nSave deleted successfully.");
                     break;
                 case "3":
                     System.out.println("Goodbye!");

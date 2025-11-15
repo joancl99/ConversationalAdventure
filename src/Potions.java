@@ -37,14 +37,14 @@ public class Potions
             switch (potionAppears) 
             {
                 case 0:
-                    System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a healing potion, it heals " +FontColors.WHITE + HEALING_POTION + " hp.");
-                    System.out.println(FontColors.GREEN + "You take the healing potion. (Press ENTER)");
+                    System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a " + FontColors.WHITE + FontColors.BOLD + "healing potion" + FontColors.RESET + FontColors.GREEN + ", it heals " + FontColors.WHITE + HEALING_POTION + " hp.");
+                    System.out.println(FontColors.GREEN + "You take the healing potion." + FontColors.WHITE + "(Press ENTER)");
                     scanner.nextLine();
                     counterHealPot++;
                     break;
                 case 1:
-                    System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a damage increase potion, it gives " + DMG_POTION + " damage.");
-                    System.out.println(FontColors.GREEN + "You take the damage potion. (Press ENTER)");
+                    System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a " + FontColors.WHITE + FontColors.BOLD + "damage increase potion" + FontColors.RESET + FontColors.GREEN + ", it gives " + DMG_POTION + " damage.");
+                    System.out.println(FontColors.GREEN + "You take the damage potion." + FontColors.WHITE + "(Press ENTER)");
                     scanner.nextLine();
                     counterDmgPot++;
                     break;
@@ -52,16 +52,19 @@ public class Potions
         }
     }
 
-    public String serialize() {
-    return counterHealPot + "," + counterDmgPot;
+    public String serialize() 
+    {
+        return counterHealPot + "," + counterDmgPot;
     }
 
-    public void deserialize(String data) {
-    if (data != null && data.contains(",")) {
-        String[] parts = data.split(",");
-        counterHealPot = Integer.parseInt(parts[0]);
-        counterDmgPot = Integer.parseInt(parts[1]);
-    }
+    public void deserialize(String data) 
+    {
+        if (data != null && data.contains(",")) 
+        {
+            String[] parts = data.split(",");
+            counterHealPot = Integer.parseInt(parts[0]);
+            counterDmgPot = Integer.parseInt(parts[1]);
+        }
     }
 
     public int getPotionPrice()

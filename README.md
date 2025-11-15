@@ -10,6 +10,7 @@ Developed in Java, this project was created to practice object-oriented programm
 - Work with game loops and control structures.
 - Use Java collections and simple algorithms.
 - Organize a small project from scratch.
+- Learned to use BufferedReader and BufferedWriter for reading from and writing to files efficiently.
 - Manage version control with Git/GitHub.
 
 ---
@@ -54,6 +55,11 @@ This section explains the basic mechanics of the game.
          - **Silver Chest**: 2 healing potions, 1 damage potion, and 15 coins.
          - **Golden Chest**: 2 healing potions, 2 damage potions, and 30 coins.
          - **Platinum Chest**: 4 healing potions, 4 damage potions, and 75 coins.
+
+6. **Save File**:
+      - The game uses BufferedReader and BufferedWriter to efficiently save and load your progress.
+      - This allows you to close the game and continue later without losing your progress.
+      - If you want to start over, simply select "Reset Save" at the beginning of the game.
 
    **Note**
       - Each findable coin or chest has different drop chances. High-value items, like golden coins or platinum chests, are harder to find than normal chests or regular coins, which are the easiest to obtain.
@@ -134,3 +140,4 @@ Main Menu:
 
 2. Run the game with:
     java -jar ConversationalAdventure.jar
+    If you cannot see the colors try to play on **VS Code Terminal** or **Windows Terminal**.

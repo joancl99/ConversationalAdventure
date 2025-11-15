@@ -64,25 +64,25 @@ public class Player
 
     public Classes chooseClass() 
     {
-        System.out.println(FontColors.GREEN + "\nHi! " + FontColors.WHITE + "Welcome to " + FontColors.YELLOW + "RiverLand" + FontColors.WHITE + ", the magical world where you will encounter all kinds of " + FontColors.RED + "challenges" + FontColors.WHITE + ".");
-        System.out.println(FontColors.WHITE + "\nHere, you will find plenty to do: face " + FontColors.RED + "dangerous enemies" + FontColors.WHITE + ", meet " + FontColors.GREEN + "friendly people" + FontColors.WHITE + ", deal with those who are not so friendly and discover different " + FontColors.YELLOW + "secrets" + FontColors.WHITE + ".");
-        System.out.println(FontColors.WHITE + "Embark on your " + FontColors.YELLOW + "adventure" + FontColors.WHITE + ", defeat your " + FontColors.RED + "foes" + FontColors.WHITE + ", and uncover all the hidden " + FontColors.YELLOW + "secrets" + FontColors.WHITE + " of this land!");
-        System.out.println(FontColors.WHITE + "\nFirst of all, you need to tell your name. What's your " + FontColors.CYAN + FontColors.BOLD + "name" + FontColors.RESET + FontColors.WHITE + "?: " + FontColors.RESET);  
+        System.out.println(FontColors.GREEN + "\nHi! Welcome to " + FontColors.YELLOW + "RiverLand" + FontColors.GREEN + ", the magical world where you will encounter all kinds of " + FontColors.RED + "challenges" + FontColors.GREEN + ".");
+        System.out.println(FontColors.GREEN + "\nHere, you will find plenty to do: face " + FontColors.RED + "dangerous enemies" + FontColors.GREEN + ", meet " + FontColors.CYAN + "friendly people" + FontColors.GREEN + ", deal with those who are not so friendly and discover different " + FontColors.YELLOW + "secrets" + FontColors.GREEN + ".");
+        System.out.println(FontColors.GREEN + "Embark on your " + FontColors.YELLOW + "adventure" + FontColors.GREEN + ", defeat your " + FontColors.RED + "foes" + FontColors.GREEN + ", and uncover all the hidden " + FontColors.CYAN + "secrets" + FontColors.GREEN + ", finding the differents" + FontColors.YELLOW + "events " + FontColors.GREEN + " of this land!");
+        System.out.println(FontColors.GREEN + "\nFirst of all, you need to tell your name. What's your " + FontColors.CYAN + FontColors.BOLD + "name" + FontColors.RESET + FontColors.GREEN + "?: " + FontColors.RESET);  
         String nameInput = scanner.nextLine();
         
         while (true)
         {
-            System.out.println(FontColors.WHITE + "Fantastic! Then your name is " + FontColors.CYAN + FontColors.BOLD + nameInput + FontColors.RESET + FontColors.WHITE + "? " + FontColors.GREEN + "(Enter 'Y' or 'N').");
+            System.out.println(FontColors.GREEN + "\nFantastic! Then your name is " + FontColors.CYAN + FontColors.BOLD + nameInput + FontColors.RESET + FontColors.GREEN + "? " + FontColors.WHITE + "(Enter 'Y' or 'N').");
             String option = scanner.nextLine();
 
             if (option.equalsIgnoreCase("Y"))
             {
-                System.out.println(FontColors.WHITE + "\nThat's a good name " + FontColors.CYAN + FontColors.BOLD + nameInput + FontColors.WHITE + ".");
+                System.out.println(FontColors.GREEN + "\nThat's a good name " + FontColors.CYAN + FontColors.BOLD + nameInput + FontColors.GREEN + ".");
                 break;
             }
             else if (option.equalsIgnoreCase("N"))
             {
-                System.out.println(FontColors.WHITE + "\nThen, what's your name?" + FontColors.RESET);
+                System.out.println(FontColors.GREEN + "\nThen, what's your name?" + FontColors.RESET);
                 nameInput = scanner.nextLine();
                 continue;
             }
@@ -92,31 +92,31 @@ public class Player
             }
         }
 
-        System.out.println(FontColors.RESET + FontColors.WHITE + "\nNow that I know your name, you must choose a class. " + FontColors.GREEN + "(Press ENTER)");
+        System.out.println(FontColors.RESET + FontColors.GREEN + "\nNow that I know your name, you must choose a class. " + FontColors.WHITE + "(Press ENTER)");
         scanner.nextLine();
 
-        System.out.println(FontColors.WHITE + "You need to select between the " + FontColors.YELLOW + "Warrior" + FontColors.WHITE + ", the " + FontColors.BLUE + "Mage" + FontColors.WHITE + ", or the " + FontColors.PURPLE + "Rogue " + FontColors.WHITE + "class. Each class has different stats based on " + FontColors.YELLOW + "HP" + FontColors.WHITE + ", " + FontColors.YELLOW + "Damage" + FontColors.WHITE + ", and " + FontColors.YELLOW + "Attack Speed" + FontColors.WHITE + ". " + FontColors.GREEN + "(Press ENTER)");
+        System.out.println(FontColors.GREEN + "You need to select between the " + FontColors.YELLOW + "Warrior" + FontColors.GREEN + ", the " + FontColors.BLUE + "Mage" + FontColors.GREEN + ", or the " + FontColors.PURPLE + "Rogue " + FontColors.GREEN + "class. Each class has different stats based on " + FontColors.YELLOW + "HP" + FontColors.GREEN + ", " + FontColors.YELLOW + "Damage" + FontColors.GREEN + ", and " + FontColors.YELLOW + "Attack Speed" + FontColors.GREEN + ". " + FontColors.WHITE + "(Press ENTER)");
         scanner.nextLine();
 
-        System.out.println(FontColors.WHITE + "These three classes are very different from one another. " + FontColors.GREEN + "(Press ENTER)");
+        System.out.println(FontColors.GREEN + "These three classes are very different from one another. " + FontColors.WHITE + "(Press ENTER)");
         scanner.nextLine();
 
-        System.out.println(FontColors.WHITE + "The " + FontColors.YELLOW + "Warrior " + FontColors.WHITE + "is designed for a brave hero who can take a lot of hits thanks to high " + FontColors.YELLOW + "HP " + FontColors.WHITE + "(" + FontColors.CYAN + "200" + FontColors.WHITE + "), but sacrifices some " + FontColors.YELLOW + "Damage " + FontColors.WHITE + "(" + FontColors.CYAN + "75" + FontColors.WHITE + ") and " + FontColors.YELLOW + "Attack Speed " + FontColors.WHITE + "(" + FontColors.CYAN + "4.5" + FontColors.WHITE + ") in exchange for survivability. " + FontColors.GREEN + "(Press ENTER)");
+        System.out.println(FontColors.GREEN + "The " + FontColors.YELLOW + "Warrior " + FontColors.GREEN + "is designed for a brave hero who can take a lot of hits thanks to high " + FontColors.YELLOW + "HP " + FontColors.GREEN + "(" + FontColors.CYAN + "200" + FontColors.GREEN + "), but sacrifices some " + FontColors.YELLOW + "Damage " + FontColors.GREEN + "(" + FontColors.CYAN + "75" + FontColors.GREEN + ") and " + FontColors.YELLOW + "Attack Speed " + FontColors.GREEN + "(" + FontColors.CYAN + "4.5" + FontColors.GREEN + ") in exchange for survivability. " + FontColors.WHITE + "(Press ENTER)");
         scanner.nextLine();
         
-        System.out.println(FontColors.WHITE + "The " + FontColors.BLUE + "Mage " + FontColors.WHITE + "is a tactical and versatile class, with moderate " + FontColors.YELLOW + "HP " + FontColors.WHITE + "(" + FontColors.CYAN + "75" + FontColors.WHITE + "), solid " + FontColors.YELLOW + "Damage " + FontColors.WHITE + "(" + FontColors.CYAN + "100" + FontColors.WHITE + "), and decent " + FontColors.YELLOW + "Attack Speed " + FontColors.WHITE + "(" + FontColors.CYAN + "6.5" + FontColors.WHITE + "), allowing them to survive while dealing consistent damage. " + FontColors.GREEN + "(Press ENTER)");
+        System.out.println(FontColors.GREEN + "The " + FontColors.BLUE + "Mage " + FontColors.GREEN + "is a tactical and versatile class, with moderate " + FontColors.YELLOW + "HP " + FontColors.GREEN + "(" + FontColors.CYAN + "75" + FontColors.GREEN + "), solid " + FontColors.YELLOW + "Damage " + FontColors.GREEN + "(" + FontColors.CYAN + "100" + FontColors.GREEN + "), and decent " + FontColors.YELLOW + "Attack Speed " + FontColors.GREEN + "(" + FontColors.CYAN + "6.5" + FontColors.GREEN + "), allowing them to survive while dealing consistent damage. " + FontColors.WHITE + "(Press ENTER)");
         scanner.nextLine();
 
-        System.out.println(FontColors.WHITE + "The " + FontColors.PURPLE + "Rogue " + FontColors.WHITE + "is for high-risk, high-reward players. They can be killed in a single hit by most enemies due to their low " + FontColors.YELLOW + "HP " + FontColors.WHITE + "(" + FontColors.CYAN + "50" + FontColors.WHITE + "), but make up for it with very high " + FontColors.YELLOW + "Damage " + FontColors.WHITE + "(" + FontColors.CYAN + "150" + FontColors.WHITE + ") and extreme " + FontColors.YELLOW + "Attack Speed " + FontColors.WHITE + "(" + FontColors.CYAN + "8.5" + FontColors.WHITE + "), perfect for quick eliminations. " + FontColors.GREEN + "(Press ENTER)");
+        System.out.println(FontColors.GREEN + "The " + FontColors.PURPLE + "Rogue " + FontColors.GREEN + "is for high-risk, high-reward players. They can be killed in a single hit by most enemies due to their low " + FontColors.YELLOW + "HP " + FontColors.GREEN + "(" + FontColors.CYAN + "50" + FontColors.GREEN + "), but make up for it with very high " + FontColors.YELLOW + "Damage " + FontColors.GREEN + "(" + FontColors.CYAN + "150" + FontColors.GREEN + ") and extreme " + FontColors.YELLOW + "Attack Speed " + FontColors.GREEN + "(" + FontColors.CYAN + "8.5" + FontColors.GREEN + "), perfect for quick eliminations. " + FontColors.WHITE + "(Press ENTER)");
         scanner.nextLine();
 
-        System.out.println(FontColors.WHITE + "Now that you know all of this, which class do you want to choose: " + FontColors.YELLOW + "WARRIOR" + FontColors.WHITE + "," + FontColors.BLUE + " MAGE" + FontColors.WHITE + ", or " + FontColors.PURPLE + "ROGUE" + FontColors.WHITE + "? Type it: " + FontColors.WHITE);
+        System.out.println(FontColors.GREEN + "Now that you know all of this, which class do you want to choose: " + FontColors.YELLOW + "WARRIOR" + FontColors.GREEN + "," + FontColors.BLUE + " MAGE" + FontColors.GREEN + ", or " + FontColors.PURPLE + "ROGUE" + FontColors.GREEN + "? Type it: " + FontColors.RESET);
         String input = scanner.nextLine().toUpperCase();
 
         try 
         {
             Classes classSelected = Classes.valueOf(input);
-            System.out.println("You have chosen: " + classSelected);
+            System.out.println(FontColors.GREEN + "\nYou have chosen: " + FontColors.YELLOW + classSelected);
             classSelected.showStats();
             return classSelected;
         } 

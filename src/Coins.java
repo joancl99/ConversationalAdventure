@@ -65,7 +65,7 @@ public class Coins
             } 
             else 
             {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a " + FontColors.CYAN + FontColors.BOLD + "GOLD Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + GOLD_COIN + FontColors.GREEN + " coins added.");
+                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a " + FontColors.CYAN + FontColors.BOLD + "Gold Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + GOLD_COIN + FontColors.GREEN + " coins added.");
                 System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 amountOfCoins += GOLD_COIN;

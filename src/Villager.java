@@ -81,7 +81,7 @@ public class Villager
                 System.out.println(FontColors.RED + "No special items available. Only potions left.");
             }
 
-            System.out.println(FontColors.YELLOW + "\nSelect item to buy, press 'C' to look your coins or enter '0'" + FontColors.YELLOW + " to leave:" + FontColors.RESET);
+            System.out.println(FontColors.WHITE + "\nSelect the number of the item to buy, press 'C' to look your coins, 'P' to look your potions or enter '0' to leave:" + FontColors.RESET);
             String input = scanner.nextLine().toUpperCase();
 
             switch (input) 
@@ -97,6 +97,9 @@ public class Villager
                     break;
                 case "C":
                     coin.showCoins();
+                    break;
+                case "P":
+                    poti.showPotions();
                     break;
                 default:
                     handleItemPurchase(input, itemsDisponibles, player, poti, coin);
@@ -158,17 +161,17 @@ public class Villager
 
         System.out.println(FontColors.YELLOW + "\nAmazing, you bought the " + FontColors.BOLD + FontColors.WHITE + item.getItemName() + FontColors.RESET + FontColors.YELLOW + " for " + FontColors.WHITE + item.getItemPrice() + FontColors.YELLOW + " coins.");
 
-        // Aumenta estadísticas base
+        // Upgrade the base stats
         player.setAttack(player.getAttack() + item.getItemAttack());
         player.setAttackSpeed(player.getAttackSpeed() + item.getItemAttackSpeed());
 
-        // Aumenta el máximo HP
+        // Upgrade the maxHP
         player.setMaxHp(player.getMaxHp() + item.getItemHP());
 
-        // Cura hasta el nuevo máximo
+        // Heal to maxHP
         player.setHP(Math.min(player.getHP() + item.getItemHP(), player.getMaxHp()));
 
-        // Quita el dinero y registra la compra
+        // Remove the money and register the purchase.
         coin.removeCoins(item.getItemPrice());
         itemsBuyed.add(item);
 
@@ -189,7 +192,8 @@ public class Villager
             System.out.println(FontColors.PURPLE + item.getItemName()  + ":" + FontColors.WHITE + "(HP: " + item.getItemHP() + ", Attack: " + item.getItemAttack() + ", Attack Speed: " + item.getItemAttackSpeed() + ")");
         }
     }
-    // Convierte los items comprados en un String para guardarlo
+
+    // Converts purchased items into a String for storage
     public String serializeItems() 
     {
         StringBuilder sb = new StringBuilder();
@@ -197,11 +201,11 @@ public class Villager
         {
             sb.append(item.getItemName()).append(";");
         }
-        if (sb.length() > 0) sb.setLength(sb.length() - 1); // Quitar último ";"
+        if (sb.length() > 0) sb.setLength(sb.length() - 1); // take off the last ";"
         return sb.toString();
     }
 
-    // Reconstruye los items comprados desde un String guardado
+    // Reconstructs purchased items from a saved String
     public void deserializeItems(String data) 
     {
         itemsBuyed.clear();
@@ -210,7 +214,7 @@ public class Villager
             String[] parts = data.split(";");
             for (String name : parts) 
             {
-                ItemType item = ItemsRegistry.getItemByName(name); // Necesitas un ItemsRegistry con todos los ItemType
+                ItemType item = ItemsRegistry.getItemByName(name); // You need a ItemRegistry with all the ItemType
                 if (item != null) itemsBuyed.add(item);
             }
         }
