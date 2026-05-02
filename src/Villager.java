@@ -4,7 +4,7 @@ public class Villager
 {
     private Scanner scanner;
     private Random rand = new Random();
-    private static Set<ItemType> itemsBuyed = new HashSet<>();
+    private Set<ItemType> itemsBuyed = new HashSet<>();
 
     public Villager() 
     {
