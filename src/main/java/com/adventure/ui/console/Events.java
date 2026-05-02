@@ -14,17 +14,17 @@ public class Events {
     private final Scanner scanner;
     private final Random rand = new Random();
 
-    private final BattleManager enemyManager;
+    private final ConsoleBattleController battleController;
     private final Player player;
     private final Chest chest;
     private final Potions poti;
     private final Coins coin;
     private final Villager villager;
 
-    public Events(Scanner scanner, BattleManager enemyManager, Player player, Chest chest,
+    public Events(Scanner scanner, ConsoleBattleController battleController, Player player, Chest chest,
                   Potions poti, Coins coin, Villager villager) {
         this.scanner = scanner;
-        this.enemyManager = enemyManager;
+        this.battleController = battleController;
         this.player = player;
         this.chest = chest;
         this.poti = poti;
@@ -40,7 +40,7 @@ public class Events {
 
         switch (rand.nextInt(5)) {
             case 0: return handleChest();
-            case 1: return enemyManager.enemyAppears(player, poti, coin);
+            case 1: return battleController.handleEncounter(player, poti, coin);
             case 2: return handlePotion();
             case 3: return handleCoins();
             case 4: return handleVillager();

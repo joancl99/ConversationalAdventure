@@ -1,8 +1,12 @@
 package com.adventure.ui.console;
 
-import com.adventure.engine.*;
-import com.adventure.model.*;
+import com.adventure.engine.Chest;
+import com.adventure.engine.GameLore;
+import com.adventure.engine.Inventory;
+import com.adventure.engine.Save;
+import com.adventure.engine.Villager;
 import com.adventure.event.*;
+import com.adventure.model.*;
 import com.adventure.util.FontColors;
 import java.util.Random;
 import java.util.Scanner;
@@ -15,10 +19,10 @@ public class PlayerController {
         this.scanner = scanner;
     }
 
-    public GameResult playerMovement(Player player, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager, Inventory inventory) {
+    public GameResult playerMovement(Player player, ConsoleBattleController battleController, Potions poti, Coins coin, Chest chest, Villager villager, Inventory inventory) {
         Random random = new Random();
 
-        Events events = new Events(scanner, enemyManager, player, chest, poti, coin, villager);
+        Events events = new Events(scanner, battleController, player, chest, poti, coin, villager);
         GameLore lore = new GameLore();
 
         while (true) {
