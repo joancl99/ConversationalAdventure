@@ -61,6 +61,10 @@ public class Save {
         }
     }
 
+    public static boolean saveExists() {
+        return new File(SAVE_FILE).exists();
+    }
+
     public static void resetSave() {
         File file = new File(SAVE_FILE);
         if (file.exists()) {
