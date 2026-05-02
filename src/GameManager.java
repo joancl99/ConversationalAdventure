@@ -36,8 +36,7 @@ public class GameManager
                     break;
                 case "3":
                     System.out.println("Goodbye!");
-                    System.exit(0);
-                    break;
+                    return;
                 default:
                     System.out.println(FontColors.RED + "Invalid option. Try again.");
             }

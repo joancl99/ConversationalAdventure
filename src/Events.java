@@ -21,36 +21,36 @@ public class Events
         this.villager = villager;
     }
 
-    public void generateEvent()
+    public GameResult generateEvent()
     {
         int chance = rand.nextInt(100);
 
         if (chance < 10)
         {
             System.out.println("\nNothing happens. You keep advancing.\n");
+            return GameResult.CONTINUE;
         }
-        else
-        {
-            int event = rand.nextInt(5);
 
-            switch (event)
-            {
-                case 0:
-                    chest.foundChest();
-                    break;
-                case 1:
-                    enemyManager.enemyAppears(player, poti, coin);
-                    break;
-                case 2:
-                    poti.generatePotions();
-                    break;
-                case 3:
-                    coin.foundCoins();
-                    break;
-                case 4:
-                    villager.foundVillager(player, coin, poti);
-                    break;
-            }
+        int event = rand.nextInt(5);
+
+        switch (event)
+        {
+            case 0:
+                chest.foundChest();
+                return GameResult.CONTINUE;
+            case 1:
+                return enemyManager.enemyAppears(player, poti, coin);
+            case 2:
+                poti.generatePotions();
+                return GameResult.CONTINUE;
+            case 3:
+                coin.foundCoins();
+                return GameResult.CONTINUE;
+            case 4:
+                villager.foundVillager(player, coin, poti);
+                return GameResult.CONTINUE;
+            default:
+                return GameResult.CONTINUE;
         }
     }
 }

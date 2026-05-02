@@ -120,7 +120,7 @@ public class BattleManager
         return enemyAttacked;
     }
 
-    public void enemyAppears(Player player, Potions poti, Coins coin)
+    public GameResult enemyAppears(Player player, Potions poti, Coins coin)
     {
         EnemyType enemyFound;
 
@@ -157,13 +157,12 @@ public class BattleManager
             if (input.equalsIgnoreCase("Y"))
             {
                 System.out.println(FontColors.GREEN + "\nYou're going to fight.");
-                Battle(player, enemyFound, poti, coin);
-                break;
+                return Battle(player, enemyFound, poti, coin);
             }
             else if (input.equalsIgnoreCase("N"))
             {
                 System.out.println(FontColors.YELLOW + "\nYou have run away.");
-                break;
+                return GameResult.CONTINUE;
             }
             else if (input.equalsIgnoreCase("S"))
             {
@@ -177,7 +176,7 @@ public class BattleManager
         }
     }
 
-    public void Battle(Player player, EnemyType enemyFound, Potions poti, Coins coin)
+    public GameResult Battle(Player player, EnemyType enemyFound, Potions poti, Coins coin)
     {
         int enemyHP = enemyFound.getEnemyHP();
         boolean combatEnded = false;
@@ -233,14 +232,14 @@ public class BattleManager
             scanner.nextLine();
             Save.resetSave();
             System.out.println("\nThe game will now close.\n");
-            System.exit(0);
+            return GameResult.GAME_OVER;
         }
         else if (enemyFound == FinalBoss.LETHALDEMIGOD && enemyHP <= 0)
         {
             System.out.println(FontColors.GREEN + "\nVictory! You have defeated The " + FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.GREEN + ".");
             System.out.println(FontColors.YELLOW + "\nNow the darkness has fallen. Your name will be sung in every corner of this world.");
             System.out.println(FontColors.YELLOW + FontColors.BOLD + "\n\nTHE END\n\n" + FontColors.RESET);
-            System.exit(0);
+            return GameResult.VICTORY;
         }
         else if (enemyHP <= 0)
         {
@@ -251,6 +250,8 @@ public class BattleManager
             System.out.println(FontColors.YELLOW + "\nCurrent wins: " + FontColors.WHITE + winCounter + FontColors.WHITE + " (Press ENTER).");
             scanner.nextLine();
         }
+
+        return GameResult.CONTINUE;
     }
 
     private TurnResult doPlayerTurn(Player player, int enemyHP, Potions poti, EnemyType enemyFound, boolean playerFirst)

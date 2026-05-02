@@ -26,7 +26,8 @@ public class StartOrContinueGame
             inventory.objectsInInventory();
         }
 
-        playerController.playerMovement(player, enemyManager, poti, coin, chest, villager, inventory);
-        Save.save(player, enemyManager.getWinCounter(), inventory);
+        GameResult result = playerController.playerMovement(player, enemyManager, poti, coin, chest, villager, inventory);
+        if (result != GameResult.GAME_OVER)
+            Save.save(player, enemyManager.getWinCounter(), inventory);
     }
 }

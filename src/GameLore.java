@@ -11,7 +11,7 @@ public class GameLore
         scanner = new Scanner(System.in);
     }
 
-    public void showLore(Player player, Coins coin, Potions poti) 
+    public GameResult showLore(Player player, Coins coin, Potions poti) 
     {
         int randomOption = random.nextInt(28);
 
@@ -78,13 +78,13 @@ public class GameLore
                         scanner.nextLine();
                         player.setHP(player.getHP() - 20);
 
-                        if (player.getHP() <= 0) 
+                        if (player.getHP() <= 0)
                         {
                             System.out.println(FontColors.RED + "\nYou were defeated... (Press ENTER)");
                             scanner.nextLine();
                             Save.resetSave();
                             System.out.println("\nThe game will now close.\n");
-                            System.exit(0);
+                            return GameResult.GAME_OVER;
                         }
                         break;
                     }
@@ -180,5 +180,7 @@ public class GameLore
                 System.out.println(FontColors.GREEN + "\nWait, that tree looks familiar... Am I going in circles?\n");
                 break;
         }
+
+        return GameResult.CONTINUE;
     }
 }

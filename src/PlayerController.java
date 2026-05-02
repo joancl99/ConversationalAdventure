@@ -10,7 +10,7 @@ public class PlayerController
         scanner = new Scanner(System.in);
     }
 
-    public void playerMovement(Player player, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager, Inventory inventory)
+    public GameResult playerMovement(Player player, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager, Inventory inventory)
     {
         Random random = new Random();
 
@@ -34,16 +34,13 @@ public class PlayerController
                 case "W":
                     System.out.println(FontColors.GREEN + "\nYou move forward.");
 
-                    int randomOption = random.nextInt(2);
-                    switch (randomOption)
-                    {
-                        case 0:
-                            events.generateEvent();
-                            break;
-                        case 1:
-                            lore.showLore(player, coin, poti);
-                            break;
-                    }
+                    GameResult result = random.nextInt(2) == 0
+                        ? events.generateEvent()
+                        : lore.showLore(player, coin, poti);
+
+                    if (result != GameResult.CONTINUE)
+                        return result;
+
                     break;
                 case "E":
                     player.showStats();
@@ -53,7 +50,7 @@ public class PlayerController
                     break;
                 case "Q":
                     System.out.println(FontColors.RED + "\nYou stopped your adventure.\n");
-                    return;
+                    return GameResult.CONTINUE;
                 default:
                     System.out.println(FontColors.RED + "\nInvalid input. Please enter W, E, R or Q.");
             }
