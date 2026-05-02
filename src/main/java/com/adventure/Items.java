@@ -1,3 +1,5 @@
+package com.adventure;
+
 enum Items implements ItemType
 {
     BRUTAL_THIEF_KNIFE (0, 20, 0, "Brutal Thief's Knife", 25),
@@ -8,7 +10,7 @@ enum Items implements ItemType
 
     HELMET_OF_THE_CURSED_ABYSS (250, 50, 2, "Staff of the Cursed Abyss", 100),
     MALEFIC_FIRE_SWORD (50, 250, 2, "Malefic Fire Sword", 100);
-    
+
     protected final int hp;
     protected final int attack;
     protected final double attackSpeed;
@@ -24,24 +26,24 @@ enum Items implements ItemType
         this.price = price;
     }
 
-    public String getItemName() 
-    { 
-        return name; 
+    public String getItemName()
+    {
+        return name;
     }
 
-    public int getItemHP() 
-    { 
-        return hp; 
+    public int getItemHP()
+    {
+        return hp;
     }
 
-    public int getItemAttack() 
-    { 
-        return attack; 
+    public int getItemAttack()
+    {
+        return attack;
     }
 
-    public double getItemAttackSpeed() 
-    { 
-        return attackSpeed; 
+    public double getItemAttackSpeed()
+    {
+        return attackSpeed;
     }
 
     public int getItemPrice()

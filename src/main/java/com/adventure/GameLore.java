@@ -1,7 +1,9 @@
+package com.adventure;
+
 import java.util.Random;
 import java.util.Scanner;
 
-public class GameLore 
+public class GameLore
 {
     private Random random = new Random();
     private Scanner scanner;
@@ -11,11 +13,11 @@ public class GameLore
         this.scanner = scanner;
     }
 
-    public GameResult showLore(Player player, Coins coin, Potions poti) 
+    public GameResult showLore(Player player, Coins coin, Potions poti)
     {
         int randomOption = random.nextInt(28);
 
-        switch (randomOption) 
+        switch (randomOption)
         {
             case 0:
                 System.out.println(FontColors.YELLOW + "\nMagician Frog:" + FontColors.GREEN + " You look like you've had a rough journey. You want to take a break, traveler?");
@@ -23,7 +25,7 @@ public class GameLore
                 String option = scanner.nextLine().trim();
 
                 while (true)
-                {   
+                {
                     if (option.equalsIgnoreCase("Y"))
                     {
                         System.out.println(FontColors.GREEN + "\nYou take a rest at the Froggie's house.");
@@ -69,7 +71,7 @@ public class GameLore
                 String drinkOption = scanner.nextLine().trim();
 
                 while (true)
-                {   
+                {
                     if (drinkOption.equalsIgnoreCase("Y"))
                     {
                         System.out.println("\nYou drinked the mysterious drink.");
@@ -102,19 +104,19 @@ public class GameLore
                 }
                 break;
             case 6:
-                System.out.println(FontColors.GREEN + "\nYou found a " + FontColors.WHITE + FontColors.BOLD + 
+                System.out.println(FontColors.GREEN + "\nYou found a " + FontColors.WHITE + FontColors.BOLD +
                            "Note:" + FontColors.RESET + FontColors.GREEN + " In this magic world, people whisper about a diabolic beast capable of destroying anyone who faces it...");
                 System.out.println(FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 break;
             case 7:
-                System.out.println(FontColors.GREEN + "\nYou found a page of a " + FontColors.WHITE + FontColors.BOLD + 
+                System.out.println(FontColors.GREEN + "\nYou found a page of a " + FontColors.WHITE + FontColors.BOLD +
                            "Diary:" + FontColors.RESET + FontColors.GREEN + " I heard travelers talking in fear about a diabolic beast that destroys everyone who faces it...");
                 System.out.println(FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 break;
             case 8:
-                System.out.println(FontColors.GREEN + "\nYou found a page of a " + FontColors.WHITE + FontColors.BOLD + 
+                System.out.println(FontColors.GREEN + "\nYou found a page of a " + FontColors.WHITE + FontColors.BOLD +
                            "Diary:" + FontColors.RESET + FontColors.GREEN + " I saw a hunter burned to ashes... It was't a normal Dragon's fire. It was something worse.\n");
                 System.out.println(FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();

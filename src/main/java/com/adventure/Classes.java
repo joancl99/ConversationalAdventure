@@ -1,3 +1,5 @@
+package com.adventure;
+
 enum Classes
 {
     WARRIOR (200, 75, 4.5, "Warrior"),

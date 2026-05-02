@@ -1,3 +1,5 @@
+package com.adventure;
+
 public interface EnemyType
 {
     int getEnemyHP();

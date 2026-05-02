@@ -1,3 +1,5 @@
+package com.adventure;
+
 public enum Enemies implements EnemyType
 {
     GOBLIN(100, 50, 5.5, "Goblin"),
@@ -13,7 +15,7 @@ public enum Enemies implements EnemyType
     private final double enemyAttackSpeed;
     private final String enemyName;
 
-    Enemies(int enemyHp, int enemyAttack, double enemyAttackSpeed, String enemyName) 
+    Enemies(int enemyHp, int enemyAttack, double enemyAttackSpeed, String enemyName)
     {
         this.enemyHp = enemyHp;
         this.enemyAttack = enemyAttack;
@@ -21,19 +23,19 @@ public enum Enemies implements EnemyType
         this.enemyName = enemyName;
     }
 
-    public int getEnemyHP() 
-    { 
-        return enemyHp; 
+    public int getEnemyHP()
+    {
+        return enemyHp;
     }
 
-    public int getEnemyAttack() 
-    { 
-        return enemyAttack; 
+    public int getEnemyAttack()
+    {
+        return enemyAttack;
     }
 
-    public double getEnemyAttackSpeed() 
-    { 
-        return enemyAttackSpeed; 
+    public double getEnemyAttackSpeed()
+    {
+        return enemyAttackSpeed;
     }
 
     public String getEnemyName()

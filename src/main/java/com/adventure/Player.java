@@ -1,3 +1,5 @@
+package com.adventure;
+
 public class Player
 {
     private final Classes playerClass;

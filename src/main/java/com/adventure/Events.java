@@ -1,3 +1,5 @@
+package com.adventure;
+
 import java.util.Random;
 
 public class Events

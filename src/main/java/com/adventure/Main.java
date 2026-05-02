@@ -1,3 +1,5 @@
+package com.adventure;
+
 import java.util.Scanner;
 
 public class Main

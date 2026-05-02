@@ -1,3 +1,5 @@
+package com.adventure;
+
 enum MiniBosses implements EnemyType
 {
     MegaGoblin (200, 80, 7, "Mega Goblin"),
@@ -11,7 +13,7 @@ enum MiniBosses implements EnemyType
     private final double enemyAttackSpeed;
     private final String name;
 
-    MiniBosses(int enemyHp, int enemyAttack, double enemyAttackSpeed, String name) 
+    MiniBosses(int enemyHp, int enemyAttack, double enemyAttackSpeed, String name)
     {
         this.enemyHp = enemyHp;
         this.enemyAttack = enemyAttack;
@@ -19,19 +21,19 @@ enum MiniBosses implements EnemyType
         this.name = name;
     }
 
-    public int getEnemyHP() 
-    { 
-        return enemyHp; 
+    public int getEnemyHP()
+    {
+        return enemyHp;
     }
 
-    public int getEnemyAttack() 
-    { 
-        return enemyAttack; 
+    public int getEnemyAttack()
+    {
+        return enemyAttack;
     }
 
-    public double getEnemyAttackSpeed() 
-    { 
-        return enemyAttackSpeed; 
+    public double getEnemyAttackSpeed()
+    {
+        return enemyAttackSpeed;
     }
 
     public String getEnemyName()

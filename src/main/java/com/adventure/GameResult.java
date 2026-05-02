@@ -1,3 +1,5 @@
+package com.adventure;
+
 public enum GameResult
 {
     CONTINUE,

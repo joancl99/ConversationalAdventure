@@ -1,3 +1,5 @@
+package com.adventure;
+
 import java.io.*;
 
 public class Save
