@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.adventure.ui.fx.WorldController"
+      alignment="CENTER" spacing="20"
+      style="-fx-background-color: #0d1117;">
+
+    <Label text="RIVERLAND"
+           style="-fx-font-size: 36; -fx-font-weight: bold;
+                  -fx-text-fill: #f0c040; -fx-font-family: Georgia;"/>
+
+    <Label fx:id="lblClass"
+           style="-fx-font-size: 18; -fx-text-fill: #e6edf3;"/>
+
+    <Label fx:id="lblStats"
+           style="-fx-font-size: 14; -fx-text-fill: #6e7681;"/>
+
+    <Label text="— World coming soon —"
+           style="-fx-font-size: 14; -fx-text-fill: #30363d; -fx-font-style: italic;"/>
+
+    <Button text="Back to Menu" onAction="#onBackToMenu"
+            prefWidth="160" prefHeight="36"
+            style="-fx-font-size: 13;
+                   -fx-background-color: transparent; -fx-text-fill: #6e7681;
+                   -fx-cursor: hand;
+                   -fx-border-color: #30363d; -fx-border-radius: 6; -fx-border-width: 1;
+                   -fx-background-radius: 6;"/>
+
+</VBox>
