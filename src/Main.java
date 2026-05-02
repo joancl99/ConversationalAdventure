@@ -1,8 +1,12 @@
-public class Main 
+import java.util.Scanner;
+
+public class Main
 {
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
-        GameManager gameManager = new GameManager();
+        Scanner scanner = new Scanner(System.in);
+        GameManager gameManager = new GameManager(scanner);
         gameManager.startGame();
+        scanner.close();
     }
 }

@@ -13,10 +13,9 @@ public class Coins
 
     private Random rand = new Random();
 
-    public Coins(int amountOfCoins)
+    public Coins(int amountOfCoins, Scanner scanner)
     {
-        scanner = new Scanner(System.in);
-        
+        this.scanner = scanner;
         this.amountOfCoins = amountOfCoins;
     }
 

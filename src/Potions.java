@@ -14,9 +14,9 @@ public class Potions
     private Random rand = new Random();
     private Scanner scanner;
 
-    public Potions(int counterHealPot, int counterDmgPot)
+    public Potions(int counterHealPot, int counterDmgPot, Scanner scanner)
     {
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
         this.counterHealPot = counterHealPot;
         this.counterDmgPot = counterDmgPot;
     }

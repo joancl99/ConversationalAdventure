@@ -1,13 +1,22 @@
+import java.util.Scanner;
+
 public class StartOrContinueGame
 {
+    private Scanner scanner;
+
+    public StartOrContinueGame(Scanner scanner)
+    {
+        this.scanner = scanner;
+    }
+
     public void startOrContinue()
     {
-        PlayerController playerController = new PlayerController();
-        BattleManager enemyManager = new BattleManager();
-        Potions poti = new Potions(0, 0);
-        Coins coin = new Coins(0);
-        Chest chest = new Chest(poti, coin);
-        Villager villager = new Villager();
+        PlayerController playerController = new PlayerController(scanner);
+        BattleManager enemyManager = new BattleManager(scanner);
+        Potions poti = new Potions(0, 0, scanner);
+        Coins coin = new Coins(0, scanner);
+        Chest chest = new Chest(poti, coin, scanner);
+        Villager villager = new Villager(scanner);
         Inventory inventory = new Inventory(poti, coin, villager);
 
         Player player = Save.loadSavedPlayer(enemyManager, inventory);

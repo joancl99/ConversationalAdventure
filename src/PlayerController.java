@@ -5,9 +5,9 @@ public class PlayerController
 {
     private Scanner scanner;
 
-    public PlayerController()
+    public PlayerController(Scanner scanner)
     {
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     public GameResult playerMovement(Player player, BattleManager enemyManager, Potions poti, Coins coin, Chest chest, Villager villager, Inventory inventory)
@@ -15,7 +15,7 @@ public class PlayerController
         Random random = new Random();
 
         Events events = new Events(enemyManager, player, chest, poti, coin, villager);
-        GameLore lore = new GameLore();
+        GameLore lore = new GameLore(scanner);
 
         while (true)
         {

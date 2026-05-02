@@ -8,9 +8,9 @@ public class BattleManager
 
     private int winCounter = 0;
 
-    public BattleManager()
+    public BattleManager(Scanner scanner)
     {
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     public int getWinCounter() { return winCounter; }

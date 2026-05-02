@@ -1,19 +1,19 @@
 import java.util.Scanner;
 
-public class GameManager 
+public class GameManager
 {
     private Scanner scanner;
 
-    public GameManager() 
+    public GameManager(Scanner scanner)
     {
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
-    public void startGame() 
+    public void startGame()
     {
         System.out.println(FontColors.YELLOW + FontColors.BOLD + FontColors.UNDERLINE + "\n\nWelcome to this Conversational Adventure:" + FontColors.RESET);
 
-        while (true) 
+        while (true)
         {
             System.out.println(FontColors.CYAN + "\nMain Menu:");
             System.out.println(FontColors.WHITE + "\n1. " + FontColors.GREEN + "Start Game.");
@@ -24,10 +24,10 @@ public class GameManager
             System.out.println(FontColors.RESET + "Enter option: ");
             String input = scanner.nextLine();
 
-            switch (input) 
+            switch (input)
             {
                 case "1":
-                    StartOrContinueGame socg = new StartOrContinueGame();
+                    StartOrContinueGame socg = new StartOrContinueGame(scanner);
                     socg.startOrContinue();
                     return;
                 case "2":

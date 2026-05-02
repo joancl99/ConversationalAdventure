@@ -6,9 +6,9 @@ public class Villager
     private Random rand = new Random();
     private Set<ItemType> itemsBuyed = new HashSet<>();
 
-    public Villager() 
+    public Villager(Scanner scanner)
     {
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     public void foundVillager(Player player, Coins coin, Potions poti) 

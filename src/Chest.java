@@ -9,9 +9,9 @@ public class Chest
 
     private Random rand = new Random();
 
-    public Chest(Potions poti, Coins coin)
+    public Chest(Potions poti, Coins coin, Scanner scanner)
     {
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
         this.poti = poti;
         this.coin = coin;
     }

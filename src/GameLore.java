@@ -6,9 +6,9 @@ public class GameLore
     private Random random = new Random();
     private Scanner scanner;
 
-    public GameLore() 
+    public GameLore(Scanner scanner)
     {
-        scanner = new Scanner(System.in);
+        this.scanner = scanner;
     }
 
     public GameResult showLore(Player player, Coins coin, Potions poti) 
