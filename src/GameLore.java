@@ -53,7 +53,7 @@ public class GameLore
                 break;
             case 3:
                 System.out.println(FontColors.YELLOW + "\nTraveler:" + FontColors.GREEN + " Gold can't save you from what lurks in the dark, but maybe can help you.");
-                System.out.println("The Traveler gives you" + FontColors.WHITE + FontColors.BOLD + "20 coins! " + FontColors.RESET + FontColors.WHITE + "(Press ENTER)");
+                System.out.println("The Traveler gives you " + FontColors.WHITE + FontColors.BOLD + "20 coins! " + FontColors.RESET + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
                 coin.addCoins(20);
                 break;
