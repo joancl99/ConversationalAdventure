@@ -1,12 +1,17 @@
-package com.adventure.engine;
+package com.adventure.ui.console;
 
-import com.adventure.model.*;
+import com.adventure.engine.*;
 import com.adventure.event.*;
+import com.adventure.item.ItemType;
+import com.adventure.model.*;
 import com.adventure.util.FontColors;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Events {
 
+    private final Scanner scanner;
     private final Random rand = new Random();
 
     private final BattleManager enemyManager;
@@ -16,7 +21,9 @@ public class Events {
     private final Coins coin;
     private final Villager villager;
 
-    public Events(BattleManager enemyManager, Player player, Chest chest, Potions poti, Coins coin, Villager villager) {
+    public Events(Scanner scanner, BattleManager enemyManager, Player player, Chest chest,
+                  Potions poti, Coins coin, Villager villager) {
+        this.scanner = scanner;
         this.enemyManager = enemyManager;
         this.player = player;
         this.chest = chest;
@@ -36,11 +43,8 @@ public class Events {
             case 1: return enemyManager.enemyAppears(player, poti, coin);
             case 2: return handlePotion();
             case 3: return handleCoins();
-            case 4:
-                villager.foundVillager(player, coin, poti);
-                return GameResult.CONTINUE;
-            default:
-                return GameResult.CONTINUE;
+            case 4: return handleVillager();
+            default: return GameResult.CONTINUE;
         }
     }
 
@@ -120,5 +124,96 @@ public class Events {
         }
 
         return GameResult.CONTINUE;
+    }
+
+    private GameResult handleVillager() {
+        ShopOffer offer = villager.generateOffer(coin.getCoins());
+
+        if (!offer.appeared()) {
+            System.out.println("\nNothing happens. You keep advancing.\n");
+            return GameResult.CONTINUE;
+        }
+
+        System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a Villager! He can sell you some items.\n");
+
+        ShopOffer.Tier tier = offer.getTier();
+        boolean shopping = true;
+
+        while (shopping) {
+            offer = villager.refreshOffer(tier);
+            List<ItemType> available = offer.getAvailableItems();
+
+            System.out.println(FontColors.YELLOW + "\nVillager's " + offer.getTierName() + " Shop:" + FontColors.WHITE);
+            System.out.println(FontColors.WHITE + "\n1. " + FontColors.GREEN + "Healing Potion - " + FontColors.WHITE + offer.getPotionPrice() + " coins (+100 HP).");
+            System.out.println(FontColors.WHITE + "2. " + FontColors.GREEN + "Damage Potion - "  + FontColors.WHITE + offer.getPotionPrice() + " coins (+50 Attack).");
+
+            int option = 3;
+            for (ItemType item : available) {
+                System.out.println(FontColors.WHITE + option + ". " + FontColors.GREEN + item.getItemName()
+                        + " - " + FontColors.WHITE + item.getItemPrice() + " coins (+"
+                        + item.getItemHP() + " HP / +" + item.getItemAttack()
+                        + " Attack / +" + item.getItemAttackSpeed() + " Attack Speed).");
+                option++;
+            }
+
+            if (available.isEmpty())
+                System.out.println(FontColors.RED + "No special items available. Only potions left.");
+
+            System.out.println(FontColors.WHITE + "\nSelect the number of the item to buy, press 'C' to look your coins, 'P' to look your potions or enter '0' to leave:" + FontColors.RESET);
+            String input = scanner.nextLine().toUpperCase();
+
+            switch (input) {
+                case "1": {
+                    PurchaseResult r = villager.buyPotion("heal", poti, coin);
+                    if (r.isSuccess())
+                        System.out.println(FontColors.GREEN + "\nYou bought a Healing Potion for " + FontColors.WHITE + offer.getPotionPrice() + FontColors.YELLOW + " coins.");
+                    else
+                        System.out.println(FontColors.RED + "\nYou don't have enough coins!");
+                    break;
+                }
+                case "2": {
+                    PurchaseResult r = villager.buyPotion("damage", poti, coin);
+                    if (r.isSuccess())
+                        System.out.println(FontColors.GREEN + "\nYou bought a Damage Potion for " + FontColors.WHITE + offer.getPotionPrice() + FontColors.YELLOW + " coins.");
+                    else
+                        System.out.println(FontColors.RED + "\nYou don't have enough coins!");
+                    break;
+                }
+                case "0":
+                    shopping = false;
+                    break;
+                case "C":
+                    coin.showCoins();
+                    break;
+                case "P":
+                    poti.showPotions();
+                    break;
+                default:
+                    handleItemPurchase(input, available);
+                    break;
+            }
+        }
+
+        return GameResult.CONTINUE;
+    }
+
+    private void handleItemPurchase(String input, List<ItemType> available) {
+        try {
+            int index = Integer.parseInt(input) - 3;
+            if (index >= 0 && index < available.size()) {
+                ItemType item = available.get(index);
+                PurchaseResult r = villager.buyItem(player, item, coin);
+                if (r.isSuccess()) {
+                    System.out.println(FontColors.YELLOW + "\nAmazing, you bought the " + FontColors.BOLD + FontColors.WHITE + item.getItemName() + FontColors.RESET + FontColors.YELLOW + " for " + FontColors.WHITE + item.getItemPrice() + FontColors.YELLOW + " coins.");
+                    System.out.println(FontColors.GREEN + "\nYour new stats: HP: " + FontColors.WHITE + player.getHP() + FontColors.GREEN + "/" + FontColors.WHITE + player.getMaxHp() + FontColors.GREEN + ", Attack: " + FontColors.WHITE + player.getAttack() + FontColors.GREEN + ", Attack Speed: " + FontColors.WHITE + player.getAttackSpeed());
+                } else {
+                    System.out.println(FontColors.RED + "\nYou don't have enough coins!");
+                }
+            } else {
+                System.out.println(FontColors.RED + "\nInvalid choice.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(FontColors.RED + "\nInvalid input.");
+        }
     }
 }

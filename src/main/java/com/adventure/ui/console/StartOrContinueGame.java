@@ -19,7 +19,7 @@ public class StartOrContinueGame {
         Potions poti = new Potions(0, 0);
         Coins coin = new Coins(0);
         Chest chest = new Chest();
-        Villager villager = new Villager(scanner);
+        Villager villager = new Villager();
         Inventory inventory = new Inventory(poti, coin, villager);
 
         Player player = Save.loadSavedPlayer(enemyManager, inventory);
