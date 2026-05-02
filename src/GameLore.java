@@ -11,7 +11,7 @@ public class GameLore
         scanner = new Scanner(System.in);
     }
 
-    public void showLore(Classes player, Coins coin, Potions poti) 
+    public void showLore(Player player, Coins coin, Potions poti) 
     {
         int randomOption = random.nextInt(28);
 

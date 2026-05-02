@@ -11,7 +11,7 @@ public class Villager
         scanner = new Scanner(System.in);
     }
 
-    public void foundVillager(Classes player, Coins coin, Potions poti) 
+    public void foundVillager(Player player, Coins coin, Potions poti) 
     {
         int chance = rand.nextInt(100);
         
@@ -39,22 +39,22 @@ public class Villager
         }
     }
 
-    private void bronzeShop(Classes player, Coins coin, Potions poti) 
+    private void bronzeShop(Player player, Coins coin, Potions poti) 
     {
         shopLoop(player, coin, poti, "Bronze", Arrays.asList(Items.BRUTAL_THIEF_KNIFE, Items.DEAD_MANS_ARMOR));
     }
 
-    private void silverShop(Classes player, Coins coin, Potions poti) 
+    private void silverShop(Player player, Coins coin, Potions poti) 
     {
         shopLoop(player, coin, poti, "Silver", Arrays.asList(Items.HAMMER_OF_PURIFICATION, Items.SORCERER_HEAD));
     }
 
-    private void goldenShop(Classes player, Coins coin, Potions poti) 
+    private void goldenShop(Player player, Coins coin, Potions poti) 
     {
         shopLoop(player, coin, poti, "Golden", Arrays.asList(Items.HELMET_OF_THE_CURSED_ABYSS, Items.MALEFIC_FIRE_SWORD));
     }
 
-    private void shopLoop(Classes player, Coins coin, Potions poti, String shopName, List<ItemType> shopItems) 
+    private void shopLoop(Player player, Coins coin, Potions poti, String shopName, List<ItemType> shopItems) 
     {
         boolean shopping = true;
 
@@ -108,7 +108,7 @@ public class Villager
         }
     }
 
-    private void handleItemPurchase(String input, List<ItemType> itemsAvailable, Classes player, Potions poti, Coins coin) 
+    private void handleItemPurchase(String input, List<ItemType> itemsAvailable, Player player, Potions poti, Coins coin) 
     {
         try 
         {
@@ -151,7 +151,7 @@ public class Villager
         coin.removeCoins(poti.getPotionPrice());
     }
 
-    private void buyItem(Classes player, ItemType item, Potions poti, Coins coin) 
+    private void buyItem(Player player, ItemType item, Potions poti, Coins coin) 
     {
         if (coin.getCoins() < item.getItemPrice()) 
         {

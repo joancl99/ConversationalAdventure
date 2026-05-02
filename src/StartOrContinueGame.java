@@ -1,8 +1,8 @@
-public class StartOrContinueGame 
+public class StartOrContinueGame
 {
-    public void startOrContinue() 
+    public void startOrContinue()
     {
-        Player player = new Player();
+        PlayerController playerController = new PlayerController();
         BattleManager enemyManager = new BattleManager();
         Potions poti = new Potions(0, 0);
         Coins coin = new Coins(0);
@@ -10,24 +10,23 @@ public class StartOrContinueGame
         Villager villager = new Villager();
         Inventory inventory = new Inventory(poti, coin, villager);
 
-        // load class + stats + inventory + winCounter
-        Classes playerClass = Save.loadSavedClass(enemyManager, inventory);
+        Player player = Save.loadSavedPlayer(enemyManager, inventory);
 
-        if (playerClass == null) 
+        if (player == null)
         {
-            playerClass = player.chooseClass();
-            playerClass.restoreHp();
-            Save.save(playerClass, enemyManager.winCounter, inventory);
-        } 
-        else 
+            Classes chosenClass = playerController.chooseClass();
+            player = new Player(chosenClass);
+            Save.save(player, enemyManager.winCounter, inventory);
+        }
+        else
         {
-            System.out.println(FontColors.PURPLE + "\nYou are continuing as: " + FontColors.CYAN + FontColors.BOLD + playerClass.getClassName() + FontColors.RESET);
-            System.out.println(FontColors.PURPLE + "Current HP: " + FontColors.WHITE + playerClass.getHP() + FontColors.PURPLE + "/" + FontColors.WHITE +playerClass.getMaxHp());
-            playerClass.showStats();
-            inventory.objectsInInventory(); // show inventory
+            System.out.println(FontColors.PURPLE + "\nYou are continuing as: " + FontColors.CYAN + FontColors.BOLD + player.getPlayerClass().getClassName() + FontColors.RESET);
+            System.out.println(FontColors.PURPLE + "Current HP: " + FontColors.WHITE + player.getHP() + FontColors.PURPLE + "/" + FontColors.WHITE + player.getMaxHp());
+            player.showStats();
+            inventory.objectsInInventory();
         }
 
-        player.playerMovement(playerClass, enemyManager, poti, coin, chest, villager, inventory);
-        Save.save(playerClass, enemyManager.winCounter, inventory);
+        playerController.playerMovement(player, enemyManager, poti, coin, chest, villager, inventory);
+        Save.save(player, enemyManager.winCounter, inventory);
     }
 }
