@@ -17,7 +17,7 @@ public class PlayerController
         Random random = new Random();
 
         Events events = new Events(enemyManager, player, chest, poti, coin, villager);
-        GameLore lore = new GameLore(scanner);
+        GameLore lore = new GameLore();
 
         while (true)
         {
@@ -38,7 +38,7 @@ public class PlayerController
 
                     GameResult result = random.nextInt(2) == 0
                         ? events.generateEvent()
-                        : lore.showLore(player, coin, poti);
+                        : resolveLoreEvent(lore.generateLore(), player, coin, poti);
 
                     if (result != GameResult.CONTINUE)
                         return result;
@@ -122,6 +122,80 @@ public class PlayerController
             {
                 System.out.println(FontColors.RED + "Invalid class. Please enter WARRIOR, MAGE, or ROGUE.");
             }
+        }
+    }
+
+    // Console adapter for LoreEvent — will be replaced by WorldController (JavaFX)
+    private GameResult resolveLoreEvent(LoreEvent event, Player player, Coins coin, Potions poti)
+    {
+        if (event.getNpcName() != null)
+            System.out.println(FontColors.YELLOW + "\n" + event.getNpcName() + ":" + FontColors.GREEN + " " + event.getMessage());
+        else
+            System.out.println(FontColors.GREEN + "\n" + event.getMessage());
+
+        if (!event.requiresChoice())
+        {
+            System.out.println(FontColors.WHITE + "(Press ENTER)");
+            scanner.nextLine();
+            return applyLoreEffect(event.getEffectOnYes(), player, coin, poti);
+        }
+
+        System.out.println(FontColors.GREEN + "Enter 'Y' or 'N':");
+        while (true)
+        {
+            String choice = scanner.nextLine().trim();
+            if (choice.equalsIgnoreCase("Y"))
+            {
+                System.out.println(FontColors.WHITE + "(Press ENTER)");
+                scanner.nextLine();
+                return applyLoreEffect(event.getEffectOnYes(), player, coin, poti);
+            }
+            else if (choice.equalsIgnoreCase("N"))
+            {
+                System.out.println(FontColors.GREEN + "You continue on your path." + FontColors.WHITE + " (Press ENTER)");
+                scanner.nextLine();
+                return applyLoreEffect(event.getEffectOnNo(), player, coin, poti);
+            }
+            else
+            {
+                System.out.println(FontColors.RED + "Invalid input. Enter 'Y' or 'N'.");
+            }
+        }
+    }
+
+    private GameResult applyLoreEffect(LoreEffect effect, Player player, Coins coin, Potions poti)
+    {
+        switch (effect.getType())
+        {
+            case HEAL_FULL:
+                player.restoreHp();
+                return GameResult.CONTINUE;
+            case COINS:
+                coin.addCoins(effect.getValue());
+                System.out.println(FontColors.GREEN + "+" + effect.getValue() + " coins added!");
+                return GameResult.CONTINUE;
+            case POTION_HEAL:
+                poti.addHealPotion(1);
+                System.out.println(FontColors.GREEN + "Healing potion added to inventory!");
+                return GameResult.CONTINUE;
+            case POTION_DMG:
+                poti.addDamagePotion(1);
+                System.out.println(FontColors.GREEN + "Damage potion added to inventory!");
+                return GameResult.CONTINUE;
+            case DAMAGE:
+                player.setHP(player.getHP() - effect.getValue());
+                System.out.println(FontColors.RED + "You lost " + effect.getValue() + " HP! Current HP: " + Math.max(player.getHP(), 0));
+                if (player.getHP() <= 0)
+                {
+                    System.out.println(FontColors.RED + "\nYou were defeated...");
+                    scanner.nextLine();
+                    Save.resetSave();
+                    System.out.println("\nThe game will now close.\n");
+                    return GameResult.GAME_OVER;
+                }
+                return GameResult.CONTINUE;
+            default:
+                return GameResult.CONTINUE;
         }
     }
 }
