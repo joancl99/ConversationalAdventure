@@ -16,7 +16,7 @@ public class StartOrContinueGame
         {
             Classes chosenClass = playerController.chooseClass();
             player = new Player(chosenClass);
-            Save.save(player, enemyManager.winCounter, inventory);
+            Save.save(player, enemyManager.getWinCounter(), inventory);
         }
         else
         {
@@ -27,6 +27,6 @@ public class StartOrContinueGame
         }
 
         playerController.playerMovement(player, enemyManager, poti, coin, chest, villager, inventory);
-        Save.save(player, enemyManager.winCounter, inventory);
+        Save.save(player, enemyManager.getWinCounter(), inventory);
     }
 }

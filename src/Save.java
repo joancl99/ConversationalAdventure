@@ -53,7 +53,7 @@ public class Save
             if (attackLine != null) player.setAttack(Integer.parseInt(attackLine));
             if (attackSpeedLine != null) player.setAttackSpeed(Double.parseDouble(attackSpeedLine));
             if (winCounterLine != null && battleManager != null)
-                battleManager.winCounter = Integer.parseInt(winCounterLine);
+                battleManager.setWinCounter(Integer.parseInt(winCounterLine));
 
             StringBuilder inventoryData = new StringBuilder();
             String line;

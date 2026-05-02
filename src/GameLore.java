@@ -55,13 +55,13 @@ public class GameLore
                 System.out.println(FontColors.YELLOW + "\nTraveler:" + FontColors.GREEN + " Gold can't save you from what lurks in the dark, but maybe can help you.");
                 System.out.println("The Traveler gives you" + FontColors.WHITE + FontColors.BOLD + "20 coins! " + FontColors.RESET + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
-                coin.amountOfCoins += 20;
+                coin.addCoins(20);
                 break;
             case 4:
                 System.out.println(FontColors.YELLOW + "\nCity Guard:" + FontColors.GREEN + " You look so weak! You maybe need an upgrade.");
                 System.out.println("The City Guard gives you a " + FontColors.WHITE + FontColors.BOLD + "damage increase " + FontColors.RESET + FontColors.GREEN + "potion! " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
-                poti.counterDmgPot++;
+                poti.addDamagePotion(1);
                 break;
             case 5:
                 System.out.println(FontColors.YELLOW + "\nMysterious Sage:" + FontColors.GREEN + " I prepared a magic drink that may be useful for you...");
@@ -123,7 +123,7 @@ public class GameLore
                 System.out.println(FontColors.GREEN + "\nYou see a dog running toward you. It has something in its mouth... it's a " + FontColors.WHITE + FontColors.BOLD + "healing potion" + FontColors.RESET + FontColors.GREEN + "!\n" +
                 FontColors.GREEN + "You take the " + FontColors.WHITE + FontColors.BOLD + "healing potion" + FontColors.RESET + FontColors.GREEN + " from the dog! " + FontColors.WHITE + "(Press ENTER)");
                 scanner.nextLine();
-                poti.counterHealPot++;
+                poti.addHealPotion(1);
                 break;
             case 10:
                 System.out.println(FontColors.GREEN + "\nAll is calm, or so it seems...\n");

@@ -139,12 +139,12 @@ public class Villager
 
         if (potiType.equalsIgnoreCase("heal")) 
         {
-            poti.counterHealPot++;
+            poti.addHealPotion(1);
             System.out.println(FontColors.GREEN + "\nYou bought a Healing Potion for " + FontColors.WHITE + poti.getPotionPrice() + FontColors.YELLOW + " coins.");
         } 
         else if (potiType.equalsIgnoreCase("damage")) 
         {
-            poti.counterDmgPot++;
+            poti.addDamagePotion(1);
             System.out.println(FontColors.GREEN + "\nYou bought a Damage Potion for " + FontColors.WHITE + poti.getPotionPrice() + FontColors.YELLOW + " coins.");
         }
 

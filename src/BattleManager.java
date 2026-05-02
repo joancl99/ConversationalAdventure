@@ -6,12 +6,15 @@ public class BattleManager
     private Scanner scanner;
     private Random rand = new Random();
 
-    protected int winCounter = 0;
+    private int winCounter = 0;
 
     public BattleManager()
     {
         scanner = new Scanner(System.in);
     }
+
+    public int getWinCounter() { return winCounter; }
+    public void setWinCounter(int winCounter) { this.winCounter = winCounter; }
 
     private static class TurnResult
     {
@@ -37,7 +40,7 @@ public class BattleManager
         boolean potionChosen = false;
         boolean enemyAttacked = false;
 
-        if (poti.counterHealPot <= 0 && poti.counterDmgPot <= 0)
+        if (poti.getHealPotions() <= 0 && poti.getDamagePotions() <= 0)
         {
             System.out.println(FontColors.RED + "You don't have any potion!");
             System.out.println(FontColors.RED + "You were distracted... the enemy attacks!");
@@ -52,7 +55,7 @@ public class BattleManager
 
             if (choice.equals("1"))
             {
-                if (poti.counterHealPot <= 0)
+                if (poti.getHealPotions() <= 0)
                 {
                     System.out.println(FontColors.RED + "\nYou don't have healing potions!");
                     System.out.println(FontColors.RED + "You were distracted... the enemy attacks!");
@@ -79,7 +82,7 @@ public class BattleManager
                         int restoredHp = player.getHP() - hpBeforeHealing;
                         System.out.println(FontColors.GREEN + "You restored " + FontColors.WHITE + restoredHp + FontColors.GREEN + " HP.");
 
-                        poti.counterHealPot--;
+                        poti.useHealPotion();
                     }
 
                     System.out.println(FontColors.GREEN + "Current HP: " + FontColors.WHITE + player.getHP());
@@ -90,7 +93,7 @@ public class BattleManager
             }
             else if (choice.equals("2"))
             {
-                if (poti.counterDmgPot <= 0)
+                if (poti.getDamagePotions() <= 0)
                 {
                     System.out.println(FontColors.RED + "\nYou don't have damage potions!");
                     System.out.println(FontColors.RED + "You were distracted... the enemy attacks!");
@@ -102,7 +105,7 @@ public class BattleManager
                     System.out.println(FontColors.GREEN + "\nYou drink a damage potion and feel stronger!");
                     player.setAttack(player.getAttack() + Potions.DMG_POTION);
                     System.out.println(FontColors.GREEN + "Current Attack: " + FontColors.WHITE + player.getAttack());
-                    poti.counterDmgPot--;
+                    poti.useDamagePotion();
                     doEnemyTurn(player, enemyFound);
                     enemyAttacked = true;
                 }
@@ -244,7 +247,7 @@ public class BattleManager
             System.out.println(FontColors.GREEN + "\nVictory! You have defeated the " + FontColors.BOLD + FontColors.WHITE + enemyFound.getEnemyName() + FontColors.RESET + FontColors.GREEN + ".");
             System.out.println(FontColors.GREEN + "You received " + FontColors.WHITE + "5" + FontColors.GREEN + " coins.");
             winCounter++;
-            coin.amountOfCoins += 5;
+            coin.addCoins(5);
             System.out.println(FontColors.YELLOW + "\nCurrent wins: " + FontColors.WHITE + winCounter + FontColors.WHITE + " (Press ENTER).");
             scanner.nextLine();
         }
@@ -266,9 +269,9 @@ public class BattleManager
                 if (player.getAttackSpeed() < enemyFound.getEnemyAttackSpeed())
                 {
                     System.out.println(FontColors.RED + "\nThe enemy attacks first due to higher speed!");
-                    combatEnded = doEnemyTurn(player, enemyFound);
+                    doEnemyTurn(player, enemyFound);
 
-                    if (player.getHP() <= 0 || combatEnded)
+                    if (player.getHP() <= 0)
                     {
                         break;
                     }
@@ -278,8 +281,8 @@ public class BattleManager
                     if (!playerFirst)
                     {
                         System.out.println(FontColors.YELLOW + "\nThe enemy moves first this time! It was a random tie!");
-                        combatEnded = doEnemyTurn(player, enemyFound);
-                        if (player.getHP() <= 0 || combatEnded) break;
+                        doEnemyTurn(player, enemyFound);
+                        if (player.getHP() <= 0) break;
                     }
                     else
                     {
@@ -332,13 +335,11 @@ public class BattleManager
         return new TurnResult(enemyHP, combatEnded);
     }
 
-    private boolean doEnemyTurn(Player player, EnemyType enemyFound)
+    private void doEnemyTurn(Player player, EnemyType enemyFound)
     {
         System.out.println(FontColors.WHITE + "\nEnemy's turn:");
         System.out.println(FontColors.RED + "The enemy attacks you!");
         player.setHP(player.getHP() - enemyFound.getEnemyAttack());
         System.out.println("It deals " + FontColors.WHITE + enemyFound.getEnemyAttack() + FontColors.RED + " HP damage.");
-
-        return false;
     }
 }
