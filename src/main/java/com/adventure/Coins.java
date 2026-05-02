@@ -1,99 +1,47 @@
 package com.adventure;
 
 import java.util.Random;
-import java.util.Scanner;
 
-public class Coins
-{
-    private Scanner scanner;
-    protected static final int COIN = 5;
-    protected static final int BRONZE_COIN = 10;
-    protected static final int SILVER_COIN = 25;
-    protected static final int GOLD_COIN = 50;
+public class Coins {
 
-    private int amountOfCoins = 0;
+    public static final int COIN        = 5;
+    public static final int BRONZE_COIN = 10;
+    public static final int SILVER_COIN = 25;
+    public static final int GOLD_COIN   = 50;
 
-    private Random rand = new Random();
+    private int amountOfCoins;
+    private final Random rand = new Random();
 
-    public Coins(int amountOfCoins, Scanner scanner)
-    {
-        this.scanner = scanner;
+    public Coins(int amountOfCoins) {
         this.amountOfCoins = amountOfCoins;
     }
 
-    public int getCoins()
-    {
-        return amountOfCoins;
+    public int getCoins()               { return amountOfCoins; }
+    public void addCoins(int amount)    { amountOfCoins += amount; }
+    public void removeCoins(int amount) { amountOfCoins -= amount; }
+
+    public CoinEvent foundCoins() {
+        if (rand.nextInt(100) < 60) return CoinEvent.none();
+
+        int roll = rand.nextInt(100);
+        CoinEvent event;
+        if (roll < 40)      event = CoinEvent.coin();
+        else if (roll < 70) event = CoinEvent.bronze();
+        else if (roll < 95) event = CoinEvent.silver();
+        else                event = CoinEvent.gold();
+
+        addCoins(event.getAmount());
+        return event;
     }
 
-    public void addCoins(int amount)
-    {
-        amountOfCoins += amount;
+    public String serialize()          { return String.valueOf(amountOfCoins); }
+
+    public void deserialize(String data) {
+        if (data != null) amountOfCoins = Integer.parseInt(data);
     }
 
-    public void removeCoins(int amount)
-    {
-        amountOfCoins -= amount;
-    }
-
-    public void foundCoins()
-    {
-        int chanceCoin = rand.nextInt(100);
-
-        if (chanceCoin < 60)
-        {
-            System.out.println("\nNothing happens. You keep advancing.\n");
-        }
-        else
-        {
-            int coinChance = rand.nextInt(100);
-
-            if (coinChance < 40)
-            {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a " + FontColors.WHITE + FontColors.BOLD + "Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + COIN + FontColors.GREEN + " coins added.");
-                System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
-                scanner.nextLine();
-                addCoins(COIN);
-            }
-            else if (coinChance < 70)
-            {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a " + FontColors.BLUE + FontColors.BOLD + "Bronze Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + BRONZE_COIN + FontColors.GREEN + " coins added.");
-                System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
-                scanner.nextLine();
-                addCoins(BRONZE_COIN);
-            }
-            else if (coinChance < 95)
-            {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + " Wow! You found a " + FontColors.YELLOW + FontColors.BOLD + "Silver Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + SILVER_COIN + FontColors.GREEN + " coins added.");
-                System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
-                scanner.nextLine();
-                addCoins(SILVER_COIN);
-            }
-            else
-            {
-                System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "Amazing! You found a " + FontColors.CYAN + FontColors.BOLD + "Gold Coin" + FontColors.RESET + FontColors.GREEN + "! + " + FontColors.WHITE + GOLD_COIN + FontColors.GREEN + " coins added.");
-                System.out.println(FontColors.GREEN + "\nYou take the coins. " + FontColors.WHITE + "(Press ENTER)");
-                scanner.nextLine();
-                addCoins(GOLD_COIN);
-            }
-        }
-    }
-
-    public String serialize()
-    {
-        return String.valueOf(amountOfCoins);
-    }
-
-    public void deserialize(String data)
-    {
-        if (data != null)
-        {
-            amountOfCoins = Integer.parseInt(data);
-        }
-    }
-
-    public void showCoins()
-    {
+    // Console helper — GUI reads getters directly
+    public void showCoins() {
         System.out.println(FontColors.CYAN + "\nMoney:");
         System.out.println(FontColors.PURPLE + "Coins: " + FontColors.WHITE + amountOfCoins);
     }

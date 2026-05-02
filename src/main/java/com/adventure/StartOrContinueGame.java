@@ -15,9 +15,9 @@ public class StartOrContinueGame
     {
         PlayerController playerController = new PlayerController(scanner);
         BattleManager enemyManager = new BattleManager(scanner);
-        Potions poti = new Potions(0, 0, scanner);
-        Coins coin = new Coins(0, scanner);
-        Chest chest = new Chest(poti, coin, scanner);
+        Potions poti = new Potions(0, 0);
+        Coins coin = new Coins(0);
+        Chest chest = new Chest();
         Villager villager = new Villager(scanner);
         Inventory inventory = new Inventory(poti, coin, villager);
 

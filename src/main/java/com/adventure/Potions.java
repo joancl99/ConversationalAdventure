@@ -1,91 +1,58 @@
 package com.adventure;
 
 import java.util.Random;
-import java.util.Scanner;
 
-public class Potions
-{
+public class Potions {
+
     public static final int HEALING_POTION = 100;
-    public static final int DMG_POTION = 50;
+    public static final int DMG_POTION     = 50;
+    public static final int PRICE          = 15;
 
     private int counterHealPot;
     private int counterDmgPot;
+    private final Random rand = new Random();
 
-    private final int pricePotions = 15;
-
-    private Random rand = new Random();
-    private Scanner scanner;
-
-    public Potions(int counterHealPot, int counterDmgPot, Scanner scanner)
-    {
-        this.scanner = scanner;
+    public Potions(int counterHealPot, int counterDmgPot) {
         this.counterHealPot = counterHealPot;
-        this.counterDmgPot = counterDmgPot;
+        this.counterDmgPot  = counterDmgPot;
     }
 
-    public int getHealPotions() { return counterHealPot; }
-    public int getDamagePotions() { return counterDmgPot; }
+    public int getHealPotions()            { return counterHealPot; }
+    public int getDamagePotions()          { return counterDmgPot; }
+    public void addHealPotion(int amount)  { counterHealPot += amount; }
+    public void addDamagePotion(int amount){ counterDmgPot  += amount; }
+    public void useHealPotion()            { counterHealPot--; }
+    public void useDamagePotion()          { counterDmgPot--; }
+    public int getPotionPrice()            { return PRICE; }
 
-    public void addHealPotion(int amount) { counterHealPot += amount; }
-    public void addDamagePotion(int amount) { counterDmgPot += amount; }
+    public PotionEvent generatePotions() {
+        if (rand.nextInt(100) < 60) return PotionEvent.none();
 
-    public void useHealPotion() { counterHealPot--; }
-    public void useDamagePotion() { counterDmgPot--; }
-
-    public void generatePotions()
-    {
-        int chancePotion = rand.nextInt(100);
-
-        if (chancePotion < 60)
-        {
-            System.out.println("\nNothing happens. You keep advancing.\n");
-        }
-        else
-        {
-            int potionAppears = rand.nextInt(2);
-
-            switch (potionAppears)
-            {
-                case 0:
-                    System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a " + FontColors.WHITE + FontColors.BOLD + "healing potion" + FontColors.RESET + FontColors.GREEN + ", it heals " + FontColors.WHITE + HEALING_POTION + " hp.");
-                    System.out.println(FontColors.GREEN + "You take the healing potion." + FontColors.WHITE + "(Press ENTER)");
-                    scanner.nextLine();
-                    counterHealPot++;
-                    break;
-                case 1:
-                    System.out.println(FontColors.YELLOW + "\nEvent: " + FontColors.GREEN + "You found a " + FontColors.WHITE + FontColors.BOLD + "damage increase potion" + FontColors.RESET + FontColors.GREEN + ", it gives " + DMG_POTION + " damage.");
-                    System.out.println(FontColors.GREEN + "You take the damage potion." + FontColors.WHITE + "(Press ENTER)");
-                    scanner.nextLine();
-                    counterDmgPot++;
-                    break;
-            }
+        if (rand.nextInt(2) == 0) {
+            counterHealPot++;
+            return PotionEvent.heal();
+        } else {
+            counterDmgPot++;
+            return PotionEvent.damage();
         }
     }
 
-    public int getPotionPrice()
-    {
-        return pricePotions;
-    }
-
-    public void showPotions()
-    {
-        System.out.println(FontColors.CYAN + "\nPotions:");
-        System.out.println(FontColors.PURPLE + "Healing Potion: " + FontColors.WHITE + counterHealPot);
-        System.out.println(FontColors.PURPLE + "Damage Potion: " + FontColors.WHITE + counterDmgPot);
-    }
-
-    public String serialize()
-    {
+    public String serialize() {
         return counterHealPot + "," + counterDmgPot;
     }
 
-    public void deserialize(String data)
-    {
-        if (data != null && data.contains(","))
-        {
+    public void deserialize(String data) {
+        if (data != null && data.contains(",")) {
             String[] parts = data.split(",");
             counterHealPot = Integer.parseInt(parts[0]);
-            counterDmgPot = Integer.parseInt(parts[1]);
+            counterDmgPot  = Integer.parseInt(parts[1]);
         }
+    }
+
+    // Console helper — GUI reads getters directly
+    public void showPotions() {
+        System.out.println(FontColors.CYAN + "\nPotions:");
+        System.out.println(FontColors.PURPLE + "Healing Potion: " + FontColors.WHITE + counterHealPot);
+        System.out.println(FontColors.PURPLE + "Damage Potion: "  + FontColors.WHITE + counterDmgPot);
     }
 }
