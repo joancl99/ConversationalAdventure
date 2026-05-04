@@ -30,7 +30,6 @@ public class Player {
 
     public void restoreHp() {
         this.hp = this.maxHp;
-        System.out.println(FontColors.GREEN + playerClass.getClassName() + "'s HP has been fully restored to " + maxHp + "!");
     }
 
     public void showStats() {
