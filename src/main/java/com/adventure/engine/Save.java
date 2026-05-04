@@ -1,28 +1,43 @@
 package com.adventure.engine;
 
 import com.adventure.model.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Save {
 
-    private static final String SAVE_FILE = "./saveFile/save.txt";
+    private static final String SAVE_FILE = "./saveFile/save.json";
+    private static final Gson   GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static void save(Player player, int winCounter, Inventory inventory) {
+        SaveData data = new SaveData();
+        data.playerClass   = player.getPlayerClass().name();
+        data.hp            = player.getHP();
+        data.maxHp         = player.getMaxHp();
+        data.attack        = player.getAttack();
+        data.attackSpeed   = player.getAttackSpeed();
+        data.winCounter    = winCounter;
+        data.healPotions   = inventory.getPotions().getHealPotions();
+        data.damagePotions = inventory.getPotions().getDamagePotions();
+        data.coins         = inventory.getCoins().getCoins();
+
+        String serializedItems = inventory.getVillager().serializeItems();
+        data.itemsBought = serializedItems.isEmpty()
+                ? new ArrayList<>()
+                : Arrays.asList(serializedItems.split(";"));
+
         try {
             File file = new File(SAVE_FILE);
-            if (file.getParentFile() != null) file.getParentFile().mkdirs();
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                writer.write(player.getPlayerClass().name() + "\n");
-                writer.write(player.getHP() + "\n");
-                writer.write(player.getMaxHp() + "\n");
-                writer.write(player.getAttack() + "\n");
-                writer.write(player.getAttackSpeed() + "\n");
-                writer.write(winCounter + "\n");
-                writer.write(inventory.serialize());
+            file.getParentFile().mkdirs();
+            try (Writer writer = new FileWriter(file)) {
+                GSON.toJson(data, writer);
             }
         } catch (IOException e) {
-            System.out.println("Error saving game: " + e.getMessage());
+            System.err.println("Error saving game: " + e.getMessage());
         }
     }
 
@@ -30,33 +45,30 @@ public class Save {
         File file = new File(SAVE_FILE);
         if (!file.exists()) return null;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String className      = reader.readLine();
-            String hpLine         = reader.readLine();
-            String maxHpLine      = reader.readLine();
-            String attackLine     = reader.readLine();
-            String attackSpeedLine = reader.readLine();
-            String winCounterLine = reader.readLine();
+        try (Reader reader = new FileReader(file)) {
+            SaveData data = GSON.fromJson(reader, SaveData.class);
 
-            Classes playerClass = Classes.valueOf(className);
-            Player player = new Player(playerClass);
+            Player player = new Player(Classes.valueOf(data.playerClass));
+            player.setHP(data.hp);
+            player.setMaxHp(data.maxHp);
+            player.setAttack(data.attack);
+            player.setAttackSpeed(data.attackSpeed);
 
-            if (hpLine != null)          player.setHP(Integer.parseInt(hpLine));
-            if (maxHpLine != null)       player.setMaxHp(Integer.parseInt(maxHpLine));
-            if (attackLine != null)      player.setAttack(Integer.parseInt(attackLine));
-            if (attackSpeedLine != null) player.setAttackSpeed(Double.parseDouble(attackSpeedLine));
-            if (winCounterLine != null && battleManager != null)
-                battleManager.setWinCounter(Integer.parseInt(winCounterLine));
+            if (battleManager != null)
+                battleManager.setWinCounter(data.winCounter);
 
-            StringBuilder inventoryData = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) inventoryData.append(line).append("\n");
-
-            if (inventory != null) inventory.deserialize(inventoryData.toString().trim());
+            if (inventory != null) {
+                inventory.getPotions().deserialize(data.healPotions + "," + data.damagePotions);
+                inventory.getCoins().deserialize(String.valueOf(data.coins));
+                String items = (data.itemsBought == null || data.itemsBought.isEmpty())
+                        ? ""
+                        : String.join(";", data.itemsBought);
+                inventory.getVillager().deserializeItems(items);
+            }
 
             return player;
         } catch (Exception e) {
-            System.out.println("Failed to load save file: " + e.getMessage());
+            System.err.println("Failed to load save: " + e.getMessage());
             return null;
         }
     }
@@ -66,12 +78,21 @@ public class Save {
     }
 
     public static void resetSave() {
-        File file = new File(SAVE_FILE);
-        if (file.exists()) {
-            if (file.delete())
-                System.out.println("\nYour save has been deleted and your progress has been reset.");
-            else
-                System.out.println("Failed to delete save file.");
-        }
+        new File(SAVE_FILE).delete();
+    }
+
+    // ── Save data structure ────────────────────────────────────────────────────
+
+    private static class SaveData {
+        String       playerClass;
+        int          hp;
+        int          maxHp;
+        int          attack;
+        double       attackSpeed;
+        int          winCounter;
+        int          healPotions;
+        int          damagePotions;
+        int          coins;
+        List<String> itemsBought;
     }
 }

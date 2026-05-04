@@ -106,28 +106,28 @@ public class WorldController implements BaseController {
     // ── Battle actions ─────────────────────────────────────────────────────────
     @FXML
     private void onAttack() {
-        // Player strikes
+        // Turn order is recalculated every time the player acts (speeds can change via potions)
+        boolean playerFirst = calcPlayerFirst();
+
+        if (!playerFirst) {
+            // Enemy is faster — strikes before the player
+            log("   " + currentEnemy.getEnemyName() + " moves first!", "#ff7b72");
+            performEnemyAttack();
+            if (player.getHP() <= 0) { handleGameOver(); return; }
+        }
+
+        // Player attacks
         int dmg = player.getAttack();
         currentEnemyHp = battleManager.playerAttacks(player, currentEnemyHp);
         log("⚔  You hit " + currentEnemy.getEnemyName() + " for " + dmg
                 + " damage.  [Enemy HP: " + Math.max(0, currentEnemyHp) + "]", "#e6edf3");
 
-        if (currentEnemyHp <= 0) {
-            handleEnemyDefeated();
-            return;
-        }
+        if (currentEnemyHp <= 0) { handleEnemyDefeated(); return; }
 
-        // Enemy counter-attacks
-        int before = player.getHP();
-        battleManager.enemyAttacks(player, currentEnemy);
-        int taken = before - player.getHP();
-        log("   " + currentEnemy.getEnemyName() + " hits you for " + taken
-                + " damage.  [Your HP: " + player.getHP() + "]", "#ff7b72");
-
-        refreshPlayerCard();
-
-        if (player.getHP() <= 0) {
-            handleGameOver();
+        // Player was faster — enemy counter-attacks after
+        if (playerFirst) {
+            performEnemyAttack();
+            if (player.getHP() <= 0) handleGameOver();
         }
     }
 
@@ -135,10 +135,26 @@ public class WorldController implements BaseController {
     private void onUseHealPotion() {
         PotionUseResult r = battleManager.useHealPotion(player, potions);
         switch (r.getStatus()) {
-            case HEALED        -> log("💊 Heal potion used. Restored " + r.getValue() + " HP.  [HP: " + player.getHP() + "]", "#3fb950");
-            case ALREADY_FULL_HP -> log("Your HP is already full.", "#6e7681");
-            case NO_HEAL_POTIONS -> log("No heal potions left.", "#6e7681");
-            default            -> {}
+            case HEALED -> {
+                log("💊 Heal potion used. Restored " + r.getValue() + " HP.  [HP: " + player.getHP() + "]", "#3fb950");
+                refreshPlayerCard();
+                updateBattlePoitionLabels();
+                // Using a potion costs the turn — enemy attacks
+                performEnemyAttack();
+                if (player.getHP() <= 0) { handleGameOver(); return; }
+            }
+            case ALREADY_FULL_HP -> {
+                // Full HP: no turn wasted, player can choose another action
+                log("Your HP is already full.", "#6e7681");
+                return;
+            }
+            case NO_HEAL_POTIONS -> {
+                // Distracted reaching for a missing potion — enemy attacks
+                log("You reach for a heal potion... but have none! You're distracted.", "#ff7b72");
+                performEnemyAttack();
+                if (player.getHP() <= 0) { handleGameOver(); return; }
+            }
+            default -> {}
         }
         refreshPlayerCard();
         updateBattlePoitionLabels();
@@ -148,12 +164,16 @@ public class WorldController implements BaseController {
     private void onUseDmgPotion() {
         PotionUseResult r = battleManager.useDamagePotion(player, potions);
         switch (r.getStatus()) {
-            case BUFFED            -> log("⚗  Damage potion used! Attack +" + r.getValue() + ".  [ATK: " + player.getAttack() + "]", "#bc8cff");
-            case NO_DAMAGE_POTIONS -> log("No damage potions left.", "#6e7681");
-            default                -> {}
+            case BUFFED -> log("⚗  Damage potion used! Attack +" + r.getValue()
+                    + ".  [ATK: " + player.getAttack() + "]", "#bc8cff");
+            case NO_DAMAGE_POTIONS -> log("You reach for a damage potion... but have none! You're distracted.", "#ff7b72");
+            default -> {}
         }
+        // Whether potion worked or not, using it (or failing to) costs the turn
         refreshPlayerCard();
         updateBattlePoitionLabels();
+        performEnemyAttack();
+        if (player.getHP() <= 0) handleGameOver();
     }
 
     @FXML
@@ -163,12 +183,7 @@ public class WorldController implements BaseController {
             setState(WorldState.EXPLORING);
         } else {
             log("Escape failed! " + currentEnemy.getEnemyName() + " blocks your way.", "#ff7b72");
-            int before = player.getHP();
-            battleManager.enemyAttacks(player, currentEnemy);
-            int taken = before - player.getHP();
-            log("   " + currentEnemy.getEnemyName() + " punishes you for " + taken
-                    + " damage.  [Your HP: " + player.getHP() + "]", "#ff7b72");
-            refreshPlayerCard();
+            performEnemyAttack();
             if (player.getHP() <= 0) handleGameOver();
         }
     }
@@ -209,20 +224,7 @@ public class WorldController implements BaseController {
         log("⚠  A " + currentEnemy.getEnemyName() + " appears!" + tierTag, tierColor);
         log("   HP: " + currentEnemyHp + "  |  ATK: " + currentEnemy.getEnemyAttack()
                 + "  |  SPD: " + currentEnemy.getEnemyAttackSpeed(), "#6e7681");
-
-        boolean playerFirst = battleManager.isPlayerFirst(player, currentEnemy);
-        if (!playerFirst) {
-            log("   " + currentEnemy.getEnemyName() + " moves first!", "#ff7b72");
-            int before = player.getHP();
-            battleManager.enemyAttacks(player, currentEnemy);
-            int taken = before - player.getHP();
-            log("   " + currentEnemy.getEnemyName() + " strikes you for " + taken
-                    + " damage.  [Your HP: " + player.getHP() + "]", "#ff7b72");
-            refreshPlayerCard();
-            if (player.getHP() <= 0) { handleGameOver(); return; }
-        } else {
-            log("   You move first.", "#6e7681");
-        }
+        log("   Choose your action.", "#6e7681");
 
         updateBattlePoitionLabels();
         setState(WorldState.BATTLE);
@@ -302,6 +304,29 @@ public class WorldController implements BaseController {
         if (playerCoins <= 60)  return ShopOffer.Tier.BRONZE;
         if (playerCoins <= 200) return ShopOffer.Tier.SILVER;
         return ShopOffer.Tier.GOLDEN;
+    }
+
+    // ── Battle turn helpers ────────────────────────────────────────────────────
+
+    /** Recalculated every time the player acts — speeds can change mid-combat via damage potions. */
+    private boolean calcPlayerFirst() {
+        double pSpeed = player.getAttackSpeed();
+        double eSpeed = currentEnemy.getEnemyAttackSpeed();
+        if (pSpeed > eSpeed) return true;
+        if (pSpeed < eSpeed) return false;
+        boolean first = rand.nextBoolean();
+        log("   Equal speeds — decided randomly: "
+                + (first ? "you go first." : "enemy goes first."), "#f0c040");
+        return first;
+    }
+
+    private void performEnemyAttack() {
+        int before = player.getHP();
+        battleManager.enemyAttacks(player, currentEnemy);
+        int taken = before - player.getHP();
+        log("   " + currentEnemy.getEnemyName() + " hits you for " + taken
+                + " damage.  [Your HP: " + Math.max(0, player.getHP()) + "]", "#ff7b72");
+        refreshPlayerCard();
     }
 
     // ── Battle outcome helpers ─────────────────────────────────────────────────
