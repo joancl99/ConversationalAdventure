@@ -1,32 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.adventure.ui.fx.WorldController"
-      alignment="CENTER" spacing="20"
-      style="-fx-background-color: #0d1117;">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.adventure.ui.fx.WorldController"
+            style="-fx-background-color: #0d1117;">
 
-    <Label text="RIVERLAND"
-           style="-fx-font-size: 36; -fx-font-weight: bold;
-                  -fx-text-fill: #f0c040; -fx-font-family: Georgia;"/>
+    <!-- ── TOP: header ─────────────────────────────────────────────── -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16"
+              style="-fx-background-color: #161b22;
+                     -fx-border-color: #30363d; -fx-border-width: 0 0 1 0;
+                     -fx-padding: 14 24;">
 
-    <Label fx:id="lblClass"
-           style="-fx-font-size: 18; -fx-text-fill: #e6edf3;"/>
+            <Label text="RIVERLAND"
+                   style="-fx-font-size: 20; -fx-font-weight: bold;
+                          -fx-text-fill: #f0c040; -fx-font-family: Georgia;"/>
 
-    <Label fx:id="lblStats"
-           style="-fx-font-size: 14; -fx-text-fill: #6e7681;"/>
+            <Label text="·"
+                   style="-fx-text-fill: #30363d; -fx-font-size: 18;"/>
 
-    <Label text="— World coming soon —"
-           style="-fx-font-size: 14; -fx-text-fill: #30363d; -fx-font-style: italic;"/>
+            <Label fx:id="lblClassName"
+                   style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #e6edf3;"/>
 
-    <Button text="Back to Menu" onAction="#onBackToMenu"
-            prefWidth="160" prefHeight="36"
-            style="-fx-font-size: 13;
-                   -fx-background-color: transparent; -fx-text-fill: #6e7681;
-                   -fx-cursor: hand;
-                   -fx-border-color: #30363d; -fx-border-radius: 6; -fx-border-width: 1;
-                   -fx-background-radius: 6;"/>
+            <Region HBox.hgrow="ALWAYS"/>
 
-</VBox>
+            <!-- win progress section -->
+            <VBox alignment="CENTER_RIGHT" spacing="3">
+                <Label fx:id="lblProgressText"
+                       style="-fx-font-size: 11; -fx-text-fill: #6e7681;"/>
+                <ProgressBar fx:id="progressWins" prefWidth="160" prefHeight="8"
+                             style="-fx-accent: #f0c040; -fx-background-color: #30363d;
+                                    -fx-background-radius: 4; -fx-border-radius: 4;"/>
+            </VBox>
+
+        </HBox>
+    </top>
+
+    <!-- ── CENTER: player card + event log ─────────────────────────── -->
+    <center>
+        <HBox spacing="0"
+              style="-fx-padding: 20 24 16 24;" HBox.hgrow="ALWAYS">
+
+            <!-- Player card -->
+            <VBox spacing="14" prefWidth="240" minWidth="240"
+                  style="-fx-background-color: #161b22;
+                         -fx-background-radius: 10;
+                         -fx-border-color: #30363d; -fx-border-radius: 10; -fx-border-width: 1;
+                         -fx-padding: 20;">
+
+                <Label fx:id="lblCardClass"
+                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-font-family: Georgia;"/>
+
+                <Separator style="-fx-background-color: #30363d;"/>
+
+                <!-- HP row -->
+                <VBox spacing="5">
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <Label text="HP"
+                               style="-fx-font-size: 11; -fx-text-fill: #6e7681;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label fx:id="lblHp"
+                               style="-fx-font-size: 11; -fx-text-fill: #e6edf3;"/>
+                    </HBox>
+                    <ProgressBar fx:id="progressHp" prefWidth="200" prefHeight="10"
+                                 style="-fx-accent: #cf222e; -fx-background-color: #30363d;
+                                        -fx-background-radius: 5; -fx-border-radius: 5;"/>
+                </VBox>
+
+                <!-- Stats grid -->
+                <VBox spacing="7">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="ATTACK"
+                               style="-fx-font-size: 12; -fx-text-fill: #6e7681;" prefWidth="80"/>
+                        <Label fx:id="lblAttack"
+                               style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #e6edf3;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="SPEED"
+                               style="-fx-font-size: 12; -fx-text-fill: #6e7681;" prefWidth="80"/>
+                        <Label fx:id="lblSpeed"
+                               style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #e6edf3;"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="COINS"
+                               style="-fx-font-size: 12; -fx-text-fill: #6e7681;" prefWidth="80"/>
+                        <Label fx:id="lblCoins"
+                               style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #f0c040;"/>
+                    </HBox>
+                </VBox>
+
+                <Separator style="-fx-background-color: #30363d;"/>
+
+                <!-- Potions -->
+                <VBox spacing="5">
+                    <Label text="INVENTORY"
+                           style="-fx-font-size: 10; -fx-text-fill: #6e7681;"/>
+                    <HBox spacing="10">
+                        <Label fx:id="lblHealPots"
+                               style="-fx-font-size: 12; -fx-text-fill: #3fb950;"/>
+                        <Label fx:id="lblDmgPots"
+                               style="-fx-font-size: 12; -fx-text-fill: #ff7b72;"/>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+
+            <!-- Gap -->
+            <Region prefWidth="16"/>
+
+            <!-- Event log -->
+            <VBox HBox.hgrow="ALWAYS" spacing="0">
+                <Label text="EVENT LOG"
+                       style="-fx-font-size: 10; -fx-text-fill: #6e7681;
+                              -fx-padding: 0 0 8 2;"/>
+                <ScrollPane fx:id="scrollLog" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"
+                            fitToWidth="true" pannable="false"
+                            style="-fx-background-color: #161b22;
+                                   -fx-background: #161b22;
+                                   -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
+                                   -fx-background-radius: 8;">
+                    <VBox fx:id="logBox" spacing="4"
+                          style="-fx-padding: 14; -fx-background-color: #161b22;"/>
+                </ScrollPane>
+            </VBox>
+
+        </HBox>
+    </center>
+
+    <!-- ── BOTTOM: action buttons (swap by state) ───────────────────── -->
+    <bottom>
+        <VBox style="-fx-background-color: #161b22;
+                     -fx-border-color: #30363d; -fx-border-width: 1 0 0 0;
+                     -fx-padding: 16 24;">
+
+            <!-- EXPLORING buttons -->
+            <HBox fx:id="paneExploring" spacing="12" alignment="CENTER_LEFT">
+                <Button text="ADVANCE ▶" onAction="#onAdvance"
+                        prefWidth="150" prefHeight="42"
+                        style="-fx-font-size: 14; -fx-font-weight: bold;
+                               -fx-background-color: #f0c040; -fx-text-fill: #0d1117;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="INVENTORY" onAction="#onInventory"
+                        prefWidth="130" prefHeight="42"
+                        style="-fx-font-size: 13; -fx-font-weight: bold;
+                               -fx-background-color: #1f6feb; -fx-text-fill: #ffffff;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="SAVE &amp; QUIT" onAction="#onSaveQuit"
+                        prefWidth="130" prefHeight="42"
+                        style="-fx-font-size: 13;
+                               -fx-background-color: transparent; -fx-text-fill: #6e7681;
+                               -fx-cursor: hand;
+                               -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
+                               -fx-background-radius: 8;"/>
+            </HBox>
+
+            <!-- BATTLE buttons -->
+            <HBox fx:id="paneBattle" spacing="12" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Button text="⚔ ATTACK" onAction="#onAttack"
+                        prefWidth="140" prefHeight="42"
+                        style="-fx-font-size: 14; -fx-font-weight: bold;
+                               -fx-background-color: #cf222e; -fx-text-fill: #ffffff;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button fx:id="btnHealPotion" onAction="#onUseHealPotion"
+                        prefWidth="160" prefHeight="42"
+                        style="-fx-font-size: 13;
+                               -fx-background-color: #238636; -fx-text-fill: #ffffff;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button fx:id="btnDmgPotion" onAction="#onUseDmgPotion"
+                        prefWidth="160" prefHeight="42"
+                        style="-fx-font-size: 13;
+                               -fx-background-color: #8b2fc9; -fx-text-fill: #ffffff;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="ESCAPE" onAction="#onEscape"
+                        prefWidth="110" prefHeight="42"
+                        style="-fx-font-size: 13;
+                               -fx-background-color: transparent; -fx-text-fill: #6e7681;
+                               -fx-cursor: hand;
+                               -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
+                               -fx-background-radius: 8;"/>
+            </HBox>
+
+            <!-- LORE CHOICE buttons -->
+            <HBox fx:id="paneChoice" spacing="12" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label text="What do you do?"
+                       style="-fx-font-size: 14; -fx-text-fill: #e6edf3; -fx-font-style: italic;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="YES" onAction="#onChoiceYes"
+                        prefWidth="110" prefHeight="42"
+                        style="-fx-font-size: 14; -fx-font-weight: bold;
+                               -fx-background-color: #238636; -fx-text-fill: #ffffff;
+                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+                <Button text="NO" onAction="#onChoiceNo"
+                        prefWidth="110" prefHeight="42"
+                        style="-fx-font-size: 14; -fx-font-weight: bold;
+                               -fx-background-color: transparent; -fx-text-fill: #6e7681;
+                               -fx-cursor: hand;
+                               -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
+                               -fx-background-radius: 8;"/>
+            </HBox>
+
+        </VBox>
+    </bottom>
+
+</BorderPane>

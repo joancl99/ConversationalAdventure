@@ -28,6 +28,10 @@ public class GameSession {
 
     public void newGame(Classes chosenClass) {
         player = new Player(chosenClass);
+        battleManager.setWinCounter(0);
+        potions.deserialize("0,0");
+        coins.deserialize("0");
+        villager.deserializeItems("");
     }
 
     public void save() {

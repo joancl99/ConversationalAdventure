@@ -1,6 +1,7 @@
 package com.adventure.ui.fx;
 
 import com.adventure.event.EnemyEncounter;
+import com.adventure.event.ShopOffer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,6 +25,18 @@ public class SceneManager {
     public void showWorld()     { loadScene("world.fxml"); }
     public void showGameOver()  { loadScene("game-over.fxml"); }
     public void showVictory()   { loadScene("victory.fxml"); }
+
+    public void showShop(ShopOffer offer) {
+        try {
+            FXMLLoader loader = fxmlLoader("shop.fxml");
+            Parent root = loader.load();
+            ShopController controller = loader.getController();
+            controller.initShop(this, session, offer);
+            stage.setScene(new Scene(root, 800, 600));
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load scene: shop.fxml", e);
+        }
+    }
 
     public void showBattle(EnemyEncounter encounter) {
         try {
