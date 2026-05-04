@@ -49,11 +49,13 @@ public class ShopController {
     // ── Potion purchases ───────────────────────────────────────────────────────
     @FXML
     private void onBuyHeal() {
+        int price = potions.getPotionPrice();
         PurchaseResult result = villager.buyPotion("heal", potions, coins);
         if (result.isSuccess()) {
             showFeedback("💊 Heal potion purchased!", "#3fb950");
+            session.addToLog("  💊 Purchased: Heal Potion  (-" + price + " coins)", "#3fb950");
         } else {
-            showFeedback("Not enough coins. Need " + potions.getPotionPrice() + "c.", "#cf222e");
+            showFeedback("Not enough coins. Need " + price + "c.", "#cf222e");
         }
         refreshPotionButtons();
         refreshStatus();
@@ -61,11 +63,13 @@ public class ShopController {
 
     @FXML
     private void onBuyDmg() {
+        int price = potions.getPotionPrice();
         PurchaseResult result = villager.buyPotion("damage", potions, coins);
         if (result.isSuccess()) {
             showFeedback("⚗  Damage potion purchased!", "#bc8cff");
+            session.addToLog("  ⚗  Purchased: Damage Potion  (-" + price + " coins)", "#bc8cff");
         } else {
-            showFeedback("Not enough coins. Need " + potions.getPotionPrice() + "c.", "#cf222e");
+            showFeedback("Not enough coins. Need " + price + "c.", "#cf222e");
         }
         refreshPotionButtons();
         refreshStatus();
@@ -73,6 +77,7 @@ public class ShopController {
 
     @FXML
     private void onLeave() {
+        session.addToLog("  Left the shop.  [Coins remaining: " + coins.getCoins() + "]", "#6e7681");
         sceneManager.showWorld();
     }
 
@@ -169,6 +174,11 @@ public class ShopController {
         PurchaseResult result = villager.buyItem(player, item, coins);
         if (result.isSuccess()) {
             showFeedback("✓ " + item.getItemName() + " purchased! Stats upgraded.", "#3fb950");
+            session.addToLog("  ✓ Purchased: " + item.getItemName()
+                    + "  (-" + item.getItemPrice() + " coins)", "#3fb950");
+            if (item.getItemHP()          != 0) session.addToLog("    HP  +" + item.getItemHP(),          "#3fb950");
+            if (item.getItemAttack()      != 0) session.addToLog("    ATK +" + item.getItemAttack(),      "#ff7b72");
+            if (item.getItemAttackSpeed() != 0) session.addToLog("    SPD +" + item.getItemAttackSpeed(), "#58a6ff");
             refreshItemsSection();
         } else {
             showFeedback("Not enough coins. Need " + item.getItemPrice() + "c.", "#cf222e");
