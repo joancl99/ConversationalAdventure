@@ -78,6 +78,10 @@ public class WorldController implements BaseController {
     // ── Explore actions ────────────────────────────────────────────────────────
     @FXML
     private void onAdvance() {
+        if (!session.getSessionLog().isEmpty()) {
+            session.addSeparatorToLog();
+        }
+        logBox.getChildren().clear();
         int roll = rand.nextInt(100);
         if      (roll < 30)  triggerEnemy();
         else if (roll < 50)  triggerChest();
@@ -85,6 +89,11 @@ public class WorldController implements BaseController {
         else if (roll < 80)  triggerPotions();
         else if (roll < 90)  triggerLore();
         else                 triggerShop();
+    }
+
+    @FXML
+    private void onShowHistory() {
+        sceneManager.showHistory();
     }
 
     @FXML
@@ -438,10 +447,12 @@ public class WorldController implements BaseController {
     }
 
     private void log(String text, String hexColor) {
+        session.addToLog(text, hexColor);
         Label lbl = new Label(text);
         lbl.setWrapText(true);
         lbl.setMaxWidth(Double.MAX_VALUE);
-        lbl.setStyle("-fx-font-size: 13; -fx-text-fill: " + hexColor + ";");
+        lbl.setStyle("-fx-font-size: 13; -fx-text-fill: " + hexColor
+                + "; -fx-padding: 3 6 3 6;");
         lbl.setAlignment(Pos.TOP_LEFT);
         logBox.getChildren().add(lbl);
         scrollLog.layout();

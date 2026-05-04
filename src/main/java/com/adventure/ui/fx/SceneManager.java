@@ -12,6 +12,7 @@ public class SceneManager {
 
     private final Stage stage;
     private final GameSession session;
+    private Scene worldScene;
 
     public SceneManager(Stage stage, GameSession session) {
         this.stage = stage;
@@ -20,11 +21,28 @@ public class SceneManager {
 
     public GameSession getSession() { return session; }
 
-    public void showMainMenu()  { loadScene("main-menu.fxml"); }
+    public void showMainMenu()    { loadScene("main-menu.fxml"); }
     public void showClassSelect() { loadScene("class-select.fxml"); }
-    public void showWorld()     { loadScene("world.fxml"); }
-    public void showGameOver()  { loadScene("game-over.fxml"); }
-    public void showVictory()   { loadScene("victory.fxml"); }
+    public void showGameOver()    { loadScene("game-over.fxml"); }
+    public void showVictory()     { loadScene("victory.fxml"); }
+    public void showHistory()     { loadScene("history.fxml"); }
+
+    public void showWorld() {
+        try {
+            FXMLLoader loader = fxmlLoader("world.fxml");
+            Parent root = loader.load();
+            BaseController controller = loader.getController();
+            if (controller != null) controller.init(this, session);
+            worldScene = new Scene(root, 800, 600);
+            stage.setScene(worldScene);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load scene: world.fxml", e);
+        }
+    }
+
+    public void returnToWorld() {
+        if (worldScene != null) stage.setScene(worldScene);
+    }
 
     public void showShop(ShopOffer offer) {
         try {

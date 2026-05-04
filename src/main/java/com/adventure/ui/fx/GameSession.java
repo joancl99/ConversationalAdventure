@@ -2,6 +2,9 @@ package com.adventure.ui.fx;
 
 import com.adventure.engine.*;
 import com.adventure.model.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GameSession {
 
@@ -12,6 +15,7 @@ public class GameSession {
     private final Chest chest       = new Chest();
     private final Villager villager = new Villager();
     private final Inventory inventory;
+    private final List<LogEntry> sessionLog = new ArrayList<>();
 
     public GameSession() {
         this.inventory = new Inventory(potions, coins, villager);
@@ -32,11 +36,24 @@ public class GameSession {
         potions.deserialize("0,0");
         coins.deserialize("0");
         villager.deserializeItems("");
+        sessionLog.clear();
     }
 
     public void save() {
         if (player != null)
             Save.save(player, battleManager.getWinCounter(), inventory);
+    }
+
+    public void addToLog(String text, String color) {
+        sessionLog.add(new LogEntry(text, color));
+    }
+
+    public void addSeparatorToLog() {
+        sessionLog.add(new LogEntry("", "#30363d", true));
+    }
+
+    public List<LogEntry> getSessionLog() {
+        return Collections.unmodifiableList(sessionLog);
     }
 
     public Player getPlayer()                { return player; }
