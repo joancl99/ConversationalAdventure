@@ -1,0 +1,317 @@
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  RIVERLAND — Illuminated Manuscript theme                        ║
+   ║  Aged vellum, moss-green ink, gold leaf, vermillion capitals.    ║
+   ║  Calm, alive, never harsh on the eye.                            ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+/* ── Palette (lookup colors) ───────────────────────────────────────── */
+.root {
+    /* Vellum / parchment backgrounds — warm cream, never pure white */
+    -vellum-deep:    #d8caa0;
+    -vellum:         #e3d6ad;
+    -vellum-soft:    #ecdfb8;
+
+    /* Inks — dark forest green, gentler than black for long reading */
+    -ink-deep:       #1f3528;
+    -ink:            #2d4a38;
+    -ink-soft:       #5a7160;
+    -ink-faint:      #8b9a8c;
+
+    /* Frames — warm earth browns, like aged book bindings */
+    -frame-deep:     #6b5a3c;
+    -frame:          #8b7a52;
+    -frame-light:    #b09c6e;
+    -frame-faint:    #d4c79c;
+
+    /* Living moss — the alive, calming green */
+    -moss:           #5e8a5e;
+    -moss-bright:    #7aa07a;
+    -moss-deep:      #3d6845;
+    -moss-glow:      rgba(94, 138, 94, 0.22);
+
+    /* Illuminated manuscript palette */
+    -gold-leaf:      #b8884e;
+    -gold-bright:    #d4a55e;
+    -gold-soft:      #9a7042;
+    -gold-glow:      rgba(184, 136, 78, 0.22);
+
+    -vermillion:     #a84030;
+    -vermillion-soft:#7a2e23;
+    -lapis:          #4a6fa5;
+
+    /* Per-class accents */
+    -warrior:        #b8884e;
+    -mage:           #4a6fa5;
+    -rogue:          #8c5a9c;
+
+    -warrior-glow:   rgba(184, 136, 78, 0.30);
+    -mage-glow:      rgba(74, 111, 165, 0.30);
+    -rogue-glow:     rgba(140, 90, 156, 0.30);
+
+    -fx-background-color: radial-gradient(center 50% 42%, radius 80%, -vellum-soft 0%, -vellum 60%, -vellum-deep 100%);
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-size: 14;
+    -fx-text-fill: -ink;
+}
+
+/* ── Typography ────────────────────────────────────────────────────── */
+.title-display {
+    -fx-font-family: "Cinzel", "Trajan Pro", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 78;
+    -fx-text-fill: -gold-leaf;
+    -fx-effect: dropshadow(gaussian, -gold-glow, 24, 0.0, 0, 0);
+}
+.title-section {
+    -fx-font-family: "Cinzel", "Trajan Pro", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 32;
+    -fx-text-fill: -ink-deep;
+}
+.title-subtitle {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 17;
+    -fx-text-fill: -ink-soft;
+}
+
+.text-papiro      { -fx-text-fill: -ink; }
+.text-papiro-soft { -fx-text-fill: -ink-soft; }
+.text-sepia       { -fx-text-fill: -ink-soft; }
+.text-italic      { -fx-font-style: italic; }
+.text-mono {
+    -fx-font-family: "JetBrains Mono", "Consolas", "Courier New", monospace;
+    -fx-text-fill: -ink;
+}
+.text-stat-label {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-size: 10;
+    -fx-text-fill: -ink-soft;
+}
+.text-stat-value {
+    -fx-font-family: "JetBrains Mono", "Consolas", "Courier New", monospace;
+    -fx-font-size: 13;
+    -fx-text-fill: -ink-deep;
+}
+.text-coin-value {
+    -fx-font-family: "JetBrains Mono", "Consolas", "Courier New", monospace;
+    -fx-font-size: 13;
+    -fx-text-fill: -gold-leaf;
+}
+
+/* Class-coloured display labels */
+.text-warrior { -fx-text-fill: -warrior; }
+.text-mage    { -fx-text-fill: -mage; }
+.text-rogue   { -fx-text-fill: -rogue; }
+
+/* ── Buttons ───────────────────────────────────────────────────────── */
+/* Sharp corners, thin coloured borders, never garish solid fills.     */
+
+.btn-primary {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-text-fill: -moss-deep;
+    -fx-background-color: transparent;
+    -fx-border-color: -moss;
+    -fx-border-width: 1.2;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
+    -fx-padding: 14 32;
+    -fx-cursor: hand;
+}
+.btn-primary:hover {
+    -fx-background-color: rgba(94, 138, 94, 0.10);
+    -fx-text-fill: -moss-deep;
+    -fx-border-color: -moss-deep;
+    -fx-effect: dropshadow(gaussian, -moss-glow, 18, 0.0, 0, 0);
+}
+.btn-primary:pressed {
+    -fx-background-color: rgba(94, 138, 94, 0.18);
+}
+
+.btn-secondary {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+    -fx-text-fill: -gold-soft;
+    -fx-background-color: transparent;
+    -fx-border-color: -frame-light;
+    -fx-border-width: 1;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
+    -fx-padding: 14 32;
+    -fx-cursor: hand;
+}
+.btn-secondary:hover {
+    -fx-background-color: rgba(184, 136, 78, 0.10);
+    -fx-text-fill: -gold-leaf;
+    -fx-border-color: -gold-leaf;
+    -fx-effect: dropshadow(gaussian, -gold-glow, 14, 0.0, 0, 0);
+}
+.btn-secondary:pressed {
+    -fx-background-color: rgba(184, 136, 78, 0.18);
+}
+
+.btn-ghost {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 15;
+    -fx-text-fill: -ink-faint;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-padding: 8 18;
+    -fx-cursor: hand;
+}
+.btn-ghost:hover {
+    -fx-text-fill: -vermillion-soft;
+}
+
+.btn-primary:disabled, .btn-secondary:disabled, .btn-ghost:disabled {
+    -fx-opacity: 0.40;
+    -fx-cursor: default;
+}
+
+/* Per-class action buttons (variants of btn-primary with class colour) */
+.btn-warrior, .btn-mage, .btn-rogue {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-background-color: transparent;
+    -fx-border-width: 1.2;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
+    -fx-padding: 14 32;
+    -fx-cursor: hand;
+}
+.btn-warrior { -fx-text-fill: -warrior; -fx-border-color: -warrior; }
+.btn-mage    { -fx-text-fill: -mage;    -fx-border-color: -mage;    }
+.btn-rogue   { -fx-text-fill: -rogue;   -fx-border-color: -rogue;   }
+
+.btn-warrior:hover {
+    -fx-background-color: rgba(184, 136, 78, 0.12);
+    -fx-effect: dropshadow(gaussian, -warrior-glow, 18, 0.0, 0, 0);
+}
+.btn-mage:hover {
+    -fx-background-color: rgba(74, 111, 165, 0.12);
+    -fx-effect: dropshadow(gaussian, -mage-glow, 18, 0.0, 0, 0);
+}
+.btn-rogue:hover {
+    -fx-background-color: rgba(140, 90, 156, 0.12);
+    -fx-effect: dropshadow(gaussian, -rogue-glow, 18, 0.0, 0, 0);
+}
+.btn-warrior:pressed { -fx-background-color: rgba(184, 136, 78, 0.20); }
+.btn-mage:pressed    { -fx-background-color: rgba(74, 111, 165, 0.20); }
+.btn-rogue:pressed   { -fx-background-color: rgba(140, 90, 156, 0.20); }
+
+/* ── Panels ────────────────────────────────────────────────────────── */
+.panel {
+    -fx-background-color: -vellum-soft;
+    -fx-border-color: -frame-light;
+    -fx-border-width: 1;
+    -fx-padding: 22;
+}
+.panel-frame {
+    -fx-background-color: -vellum-soft;
+    -fx-border-color: -gold-leaf;
+    -fx-border-width: 1;
+    -fx-padding: 24;
+}
+
+/* Class-coloured card frames (used in class select) */
+.panel-warrior, .panel-mage, .panel-rogue {
+    -fx-background-color: -vellum-soft;
+    -fx-border-width: 1;
+    -fx-padding: 24;
+}
+.panel-warrior { -fx-border-color: -warrior; }
+.panel-mage    { -fx-border-color: -mage;    }
+.panel-rogue   { -fx-border-color: -rogue;   }
+
+/* Card title — class name in big Cinzel inside class cards */
+.card-title {
+    -fx-font-family: "Cinzel", "Trajan Pro", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+}
+
+/* Card description — narrative italic body inside cards */
+.card-description {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 14;
+    -fx-text-fill: -ink-soft;
+}
+
+/* ── Decorative ────────────────────────────────────────────────────── */
+.divider-ornament {
+    -fx-text-fill: -gold-leaf;
+    -fx-font-size: 22;
+    -fx-font-family: "Cambria", "Georgia", serif;
+}
+.divider-line {
+    -fx-background-color: -frame-light;
+    -fx-pref-height: 1;
+}
+
+/* ── ProgressBar ───────────────────────────────────────────────────── */
+.progress-bar {
+    -fx-background-color: -frame-faint;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 0;
+}
+.progress-bar > .track {
+    -fx-background-color: -frame-faint;
+    -fx-background-radius: 0;
+    -fx-border-color: -frame-light;
+    -fx-border-width: 1;
+}
+.progress-bar > .bar {
+    -fx-background-color: -moss;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+.progress-bar.progress-hp > .bar    { -fx-background-color: -vermillion; }
+.progress-bar.progress-gold > .bar  { -fx-background-color: -gold-leaf; }
+
+/* ── ScrollPane (transparent, no chrome) ───────────────────────────── */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: -frame-light;
+    -fx-border-width: 1;
+    -fx-padding: 0;
+}
+.scroll-pane > .viewport {
+    -fx-background-color: -vellum-soft;
+}
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: -vellum-soft;
+    -fx-pref-width: 8;
+}
+.scroll-pane .scroll-bar .thumb {
+    -fx-background-color: -frame-light;
+    -fx-background-radius: 0;
+}
+.scroll-pane .scroll-bar .thumb:hover {
+    -fx-background-color: -gold-leaf;
+}
+.scroll-pane .scroll-bar .increment-button,
+.scroll-pane .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+.scroll-pane .scroll-bar .increment-arrow,
+.scroll-pane .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+/* ── Separator ─────────────────────────────────────────────────────── */
+.separator .line {
+    -fx-border-color: -frame-light;
+    -fx-border-width: 0 0 1 0;
+}

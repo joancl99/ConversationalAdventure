@@ -4,110 +4,104 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.adventure.ui.fx.ClassSelectController"
-      alignment="CENTER" spacing="28"
-      style="-fx-background-color: #0d1117; -fx-padding: 40;">
+      alignment="CENTER" spacing="0"
+      prefWidth="800" prefHeight="600">
 
-    <!-- Title -->
-    <Label text="Choose Your Class"
-           style="-fx-font-size: 32; -fx-font-weight: bold;
-                  -fx-text-fill: #f0c040; -fx-font-family: Georgia;"/>
-    <Label text="Each class plays differently. Choose wisely."
-           style="-fx-font-size: 14; -fx-text-fill: #6e7681;"/>
+    <Region prefHeight="32" minHeight="32"/>
 
-    <!-- Class cards -->
+    <!-- ── Title ───────────────────────────────────────────────────── -->
+    <VBox alignment="CENTER" spacing="6">
+        <Label text="CHOOSE YOUR CLASS" styleClass="title-section"/>
+        <Label text="the path you choose cannot be unmade" styleClass="title-subtitle"/>
+    </VBox>
+
+    <Region prefHeight="20" minHeight="20"/>
+
+    <!-- ── Ornamental divider: ─── ❦ ─── ───────────────────────────── -->
+    <HBox alignment="CENTER" spacing="14">
+        <Region styleClass="divider-line" prefWidth="60" maxWidth="60"/>
+        <Label text="❦" styleClass="divider-ornament"/>
+        <Region styleClass="divider-line" prefWidth="60" maxWidth="60"/>
+    </HBox>
+
+    <Region prefHeight="26" minHeight="26"/>
+
+    <!-- ── Class cards ─────────────────────────────────────────────── -->
     <HBox alignment="CENTER" spacing="20">
 
         <!-- WARRIOR -->
-        <VBox alignment="CENTER" spacing="14" prefWidth="215"
-              style="-fx-background-color: #161b22; -fx-padding: 28;
-                     -fx-background-radius: 12;
-                     -fx-border-color: #f0c040; -fx-border-radius: 12; -fx-border-width: 1;">
-            <Label text="WARRIOR"
-                   style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #f0c040;"/>
-            <Separator style="-fx-background-color: #30363d;"/>
-            <GridPane hgap="24" vgap="6">
-                <Label text="HP"      style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <Label text="200"     style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <Label text="Attack"  style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <Label text="75"      style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Label text="Speed"   style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <Label text="4.5"     style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <VBox styleClass="panel-warrior" alignment="CENTER" spacing="14" prefWidth="225">
+            <Label text="WARRIOR" styleClass="card-title, text-warrior"/>
+            <Separator/>
+            <GridPane hgap="28" vgap="6">
+                <Label text="HP"     styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="200"    styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="ATTACK" styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="75"     styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="SPEED"  styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label text="4.5"    styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
             </GridPane>
+            <Separator/>
             <Label text="Tank. High HP, steady damage, slower speed."
-                   wrapText="true" prefWidth="160" textAlignment="CENTER"
-                   style="-fx-text-fill: #6e7681; -fx-font-size: 12;"/>
-            <Button text="Select" onAction="#onSelectWarrior"
-                    prefWidth="150" prefHeight="40"
-                    style="-fx-font-size: 14; -fx-font-weight: bold;
-                           -fx-background-color: #f0c040; -fx-text-fill: #0d1117;
-                           -fx-background-radius: 8; -fx-cursor: hand;"/>
+                   styleClass="card-description"
+                   wrapText="true" prefWidth="175" textAlignment="CENTER"/>
+            <Button text="SELECT" onAction="#onSelectWarrior"
+                    styleClass="btn-warrior" prefWidth="160"/>
         </VBox>
 
         <!-- MAGE -->
-        <VBox alignment="CENTER" spacing="14" prefWidth="215"
-              style="-fx-background-color: #161b22; -fx-padding: 28;
-                     -fx-background-radius: 12;
-                     -fx-border-color: #58a6ff; -fx-border-radius: 12; -fx-border-width: 1;">
-            <Label text="MAGE"
-                   style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #58a6ff;"/>
-            <Separator style="-fx-background-color: #30363d;"/>
-            <GridPane hgap="24" vgap="6">
-                <Label text="HP"      style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <Label text="75"      style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <Label text="Attack"  style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <Label text="100"     style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Label text="Speed"   style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <Label text="6.5"     style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <VBox styleClass="panel-mage" alignment="CENTER" spacing="14" prefWidth="225">
+            <Label text="MAGE" styleClass="card-title, text-mage"/>
+            <Separator/>
+            <GridPane hgap="28" vgap="6">
+                <Label text="HP"     styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="75"     styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="ATTACK" styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="100"    styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="SPEED"  styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label text="6.5"    styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
             </GridPane>
+            <Separator/>
             <Label text="Balanced. Good damage, moderate HP and speed."
-                   wrapText="true" prefWidth="160" textAlignment="CENTER"
-                   style="-fx-text-fill: #6e7681; -fx-font-size: 12;"/>
-            <Button text="Select" onAction="#onSelectMage"
-                    prefWidth="150" prefHeight="40"
-                    style="-fx-font-size: 14; -fx-font-weight: bold;
-                           -fx-background-color: #58a6ff; -fx-text-fill: #0d1117;
-                           -fx-background-radius: 8; -fx-cursor: hand;"/>
+                   styleClass="card-description"
+                   wrapText="true" prefWidth="175" textAlignment="CENTER"/>
+            <Button text="SELECT" onAction="#onSelectMage"
+                    styleClass="btn-mage" prefWidth="160"/>
         </VBox>
 
         <!-- ROGUE -->
-        <VBox alignment="CENTER" spacing="14" prefWidth="215"
-              style="-fx-background-color: #161b22; -fx-padding: 28;
-                     -fx-background-radius: 12;
-                     -fx-border-color: #bc8cff; -fx-border-radius: 12; -fx-border-width: 1;">
-            <Label text="ROGUE"
-                   style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #bc8cff;"/>
-            <Separator style="-fx-background-color: #30363d;"/>
-            <GridPane hgap="24" vgap="6">
-                <Label text="HP"      style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <Label text="50"      style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <Label text="Attack"  style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <Label text="150"     style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Label text="Speed"   style="-fx-text-fill: #6e7681; -fx-font-size: 13;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <Label text="8.5"     style="-fx-text-fill: #e6edf3; -fx-font-size: 13;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <VBox styleClass="panel-rogue" alignment="CENTER" spacing="14" prefWidth="225">
+            <Label text="ROGUE" styleClass="card-title, text-rogue"/>
+            <Separator/>
+            <GridPane hgap="28" vgap="6">
+                <Label text="HP"     styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="50"     styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="ATTACK" styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="150"    styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="SPEED"  styleClass="text-stat-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label text="8.5"    styleClass="text-stat-value" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
             </GridPane>
+            <Separator/>
             <Label text="Glass cannon. Extreme speed and damage, very low HP."
-                   wrapText="true" prefWidth="160" textAlignment="CENTER"
-                   style="-fx-text-fill: #6e7681; -fx-font-size: 12;"/>
-            <Button text="Select" onAction="#onSelectRogue"
-                    prefWidth="150" prefHeight="40"
-                    style="-fx-font-size: 14; -fx-font-weight: bold;
-                           -fx-background-color: #bc8cff; -fx-text-fill: #0d1117;
-                           -fx-background-radius: 8; -fx-cursor: hand;"/>
+                   styleClass="card-description"
+                   wrapText="true" prefWidth="175" textAlignment="CENTER"/>
+            <Button text="SELECT" onAction="#onSelectRogue"
+                    styleClass="btn-rogue" prefWidth="160"/>
         </VBox>
 
     </HBox>
 
-    <!-- Back -->
-    <Button text="Back to Menu" onAction="#onBack"
-            prefWidth="160" prefHeight="36"
-            style="-fx-font-size: 13;
-                   -fx-background-color: transparent; -fx-text-fill: #6e7681;
-                   -fx-cursor: hand;
-                   -fx-border-color: #30363d; -fx-border-radius: 6; -fx-border-width: 1;
-                   -fx-background-radius: 6;"/>
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <!-- ── Back ────────────────────────────────────────────────────── -->
+    <Button text="← back to the threshold" onAction="#onBack"
+            styleClass="btn-ghost"/>
+
+    <Region prefHeight="20" minHeight="20"/>
 
 </VBox>

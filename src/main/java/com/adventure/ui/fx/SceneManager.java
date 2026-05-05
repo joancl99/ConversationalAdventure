@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public class SceneManager {
 
+    private static final String THEME_CSS = "/com/adventure/ui/fx/styles/theme.css";
+
     private final Stage stage;
     private final GameSession session;
     private Scene worldScene;
@@ -32,7 +34,7 @@ public class SceneManager {
             Parent root = loader.load();
             BaseController controller = loader.getController();
             if (controller != null) controller.init(this, session);
-            worldScene = new Scene(root, 800, 600);
+            worldScene = buildScene(root);
             stage.setScene(worldScene);
         } catch (IOException e) {
             throw new RuntimeException("Failed to load scene: world.fxml", e);
@@ -49,7 +51,7 @@ public class SceneManager {
             Parent root = loader.load();
             ShopController controller = loader.getController();
             controller.initShop(this, session, offer);
-            stage.setScene(new Scene(root, 800, 600));
+            stage.setScene(buildScene(root));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load scene: shop.fxml", e);
         }
@@ -61,10 +63,17 @@ public class SceneManager {
             Parent root = loader.load();
             BaseController controller = loader.getController();
             if (controller != null) controller.init(this, session);
-            stage.setScene(new Scene(root, 800, 600));
+            stage.setScene(buildScene(root));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load scene: " + fxmlFile, e);
         }
+    }
+
+    private Scene buildScene(Parent root) {
+        Scene scene = new Scene(root, 800, 600);
+        var themeUrl = SceneManager.class.getResource(THEME_CSS);
+        if (themeUrl != null) scene.getStylesheets().add(themeUrl.toExternalForm());
+        return scene;
     }
 
     private FXMLLoader fxmlLoader(String fxmlFile) {

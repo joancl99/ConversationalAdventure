@@ -1,59 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.adventure.ui.fx.MainMenuController"
-      alignment="CENTER"
-      prefWidth="800" prefHeight="600"
-      style="-fx-background-color: #0d1117;">
+      alignment="CENTER" spacing="0"
+      prefWidth="800" prefHeight="600">
 
     <Region VBox.vgrow="ALWAYS"/>
 
-    <VBox alignment="CENTER" spacing="10">
-        <Label text="RIVERLAND"
-               style="-fx-font-size: 62;
-                      -fx-font-weight: bold;
-                      -fx-text-fill: #f0c040;
-                      -fx-font-family: 'Georgia';"/>
-        <Label text="A Text Adventure"
-               style="-fx-font-size: 16;
-                      -fx-text-fill: #6e7681;
-                      -fx-font-style: italic;"/>
+    <!-- ── Title block ─────────────────────────────────────────────── -->
+    <VBox alignment="CENTER" spacing="6">
+        <Label text="RIVERLAND" styleClass="title-display"/>
+        <Label text="a chronicle of the river lands" styleClass="title-subtitle"/>
+    </VBox>
+
+    <Region prefHeight="34" minHeight="34"/>
+
+    <!-- ── Ornamental divider: ─── ❦ ─── ───────────────────────────── -->
+    <HBox alignment="CENTER" spacing="16">
+        <Region styleClass="divider-line" prefWidth="80" maxWidth="80"/>
+        <Label text="❦" styleClass="divider-ornament"/>
+        <Region styleClass="divider-line" prefWidth="80" maxWidth="80"/>
+    </HBox>
+
+    <Region prefHeight="38" minHeight="38"/>
+
+    <!-- ── Action stack ────────────────────────────────────────────── -->
+    <VBox alignment="CENTER" spacing="14">
+        <Button fx:id="btnNewGame"  text="NEW GAME"  onAction="#onNewGame"
+                styleClass="btn-primary"   prefWidth="240"/>
+        <Button fx:id="btnContinue" text="CONTINUE"  onAction="#onContinue"
+                styleClass="btn-secondary" prefWidth="240"/>
+        <Button fx:id="btnExit"     text="depart"    onAction="#onExit"
+                styleClass="btn-ghost"/>
     </VBox>
 
     <Region VBox.vgrow="ALWAYS"/>
 
-    <VBox alignment="CENTER" spacing="14"
-          style="-fx-padding: 0 0 90 0;">
-        <Button fx:id="btnNewGame" text="New Game" onAction="#onNewGame"
-                prefWidth="240" prefHeight="50"
-                style="-fx-font-size: 16;
-                       -fx-font-weight: bold;
-                       -fx-background-color: #238636;
-                       -fx-text-fill: white;
-                       -fx-background-radius: 8;
-                       -fx-cursor: hand;"/>
-        <Button fx:id="btnContinue" text="Continue" onAction="#onContinue"
-                prefWidth="240" prefHeight="50"
-                style="-fx-font-size: 16;
-                       -fx-font-weight: bold;
-                       -fx-background-color: #1f6feb;
-                       -fx-text-fill: white;
-                       -fx-background-radius: 8;
-                       -fx-cursor: hand;"/>
-        <Button fx:id="btnExit" text="Exit" onAction="#onExit"
-                prefWidth="240" prefHeight="50"
-                style="-fx-font-size: 16;
-                       -fx-background-color: #161b22;
-                       -fx-text-fill: #8b949e;
-                       -fx-background-radius: 8;
-                       -fx-cursor: hand;
-                       -fx-border-color: #30363d;
-                       -fx-border-radius: 8;
-                       -fx-border-width: 1;"/>
-    </VBox>
+    <!-- ── Footer mark ─────────────────────────────────────────────── -->
+    <Label text="⁂   writ in moss &amp; gold leaf   ⁂"
+           styleClass="title-subtitle"
+           style="-fx-font-size: 12; -fx-padding: 0 0 18 0;"/>
 
 </VBox>
