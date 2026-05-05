@@ -10,12 +10,10 @@ public class GameOverController implements BaseController {
     @FXML private Label lblClass;
 
     private SceneManager sceneManager;
-    private GameSession  session;
 
     @Override
     public void init(SceneManager sceneManager, GameSession session) {
         this.sceneManager = sceneManager;
-        this.session      = session;
 
         int wins = session.getBattleManager().getWinCounter();
         lblWins.setText("You fell after " + wins + (wins == 1 ? " victory." : " victories."));
