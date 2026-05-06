@@ -12,6 +12,17 @@ import java.util.Random;
 
 public class WorldController implements BaseController {
 
+    // Aliases for LogPalette so call sites stay short.
+    private static final String LOG_NORMAL = LogPalette.NORMAL;
+    private static final String LOG_SOFT   = LogPalette.SOFT;
+    private static final String LOG_RULE   = LogPalette.RULE;
+    private static final String LOG_HEAL   = LogPalette.HEAL;
+    private static final String LOG_DAMAGE = LogPalette.DAMAGE;
+    private static final String LOG_FATAL  = LogPalette.FATAL;
+    private static final String LOG_GOLD   = LogPalette.GOLD;
+    private static final String LOG_BUFF   = LogPalette.BUFF;
+    private static final String LOG_LORE   = LogPalette.LORE;
+
     // ── FXML bindings ──────────────────────────────────────────────────────────
     @FXML private Label       lblClassName;
     @FXML private Label       lblCardClass;
@@ -71,8 +82,8 @@ public class WorldController implements BaseController {
         refreshPlayerCard();
         refreshWinProgress();
         setState(WorldState.EXPLORING);
-        log("▶ You enter the world as a " + player.getPlayerClass().getClassName() + ".", "#6e7681");
-        log("Press ADVANCE to move forward.", "#6e7681");
+        log("▶ You enter the world as a " + player.getPlayerClass().getClassName() + ".", LOG_SOFT);
+        log("Press ADVANCE to move forward.", LOG_SOFT);
     }
 
     // ── Explore actions ────────────────────────────────────────────────────────
@@ -98,17 +109,17 @@ public class WorldController implements BaseController {
 
     @FXML
     private void onInventory() {
-        log("── Inventory ──────────────────────────────", "#30363d");
-        log("  Heal potions  : " + potions.getHealPotions(), "#3fb950");
-        log("  Damage potions: " + potions.getDamagePotions(), "#ff7b72");
-        log("  Coins         : " + coins.getCoins(), "#f0c040");
-        log("───────────────────────────────────────────", "#30363d");
+        log("── Inventory ──────────────────────────────", LOG_RULE);
+        log("  Heal potions  : " + potions.getHealPotions(), LOG_HEAL);
+        log("  Damage potions: " + potions.getDamagePotions(), LOG_BUFF);
+        log("  Coins         : " + coins.getCoins(), LOG_GOLD);
+        log("───────────────────────────────────────────", LOG_RULE);
     }
 
     @FXML
     private void onSaveQuit() {
         session.save();
-        log("Game saved.", "#6e7681");
+        log("Game saved.", LOG_SOFT);
         sceneManager.showMainMenu();
     }
 
@@ -120,7 +131,7 @@ public class WorldController implements BaseController {
 
         if (!playerFirst) {
             // Enemy is faster — strikes before the player
-            log("   " + currentEnemy.getEnemyName() + " moves first!", "#ff7b72");
+            log("   " + currentEnemy.getEnemyName() + " moves first!", LOG_DAMAGE);
             performEnemyAttack();
             if (player.getHP() <= 0) { handleGameOver(); return; }
         }
@@ -129,7 +140,7 @@ public class WorldController implements BaseController {
         int dmg = player.getAttack();
         currentEnemyHp = battleManager.playerAttacks(player, currentEnemyHp);
         log("⚔  You hit " + currentEnemy.getEnemyName() + " for " + dmg
-                + " damage.  [Enemy HP: " + Math.max(0, currentEnemyHp) + "]", "#e6edf3");
+                + " damage.  [Enemy HP: " + Math.max(0, currentEnemyHp) + "]", LOG_NORMAL);
 
         if (currentEnemyHp <= 0) { handleEnemyDefeated(); return; }
 
@@ -145,7 +156,7 @@ public class WorldController implements BaseController {
         PotionUseResult r = battleManager.useHealPotion(player, potions);
         switch (r.getStatus()) {
             case HEALED -> {
-                log("💊 Heal potion used. Restored " + r.getValue() + " HP.  [HP: " + player.getHP() + "]", "#3fb950");
+                log("💊 Heal potion used. Restored " + r.getValue() + " HP.  [HP: " + player.getHP() + "]", LOG_HEAL);
                 refreshPlayerCard();
                 updateBattlePoitionLabels();
                 // Using a potion costs the turn — enemy attacks
@@ -154,12 +165,12 @@ public class WorldController implements BaseController {
             }
             case ALREADY_FULL_HP -> {
                 // Full HP: no turn wasted, player can choose another action
-                log("Your HP is already full.", "#6e7681");
+                log("Your HP is already full.", LOG_SOFT);
                 return;
             }
             case NO_HEAL_POTIONS -> {
                 // Distracted reaching for a missing potion — enemy attacks
-                log("You reach for a heal potion... but have none! You're distracted.", "#ff7b72");
+                log("You reach for a heal potion... but have none! You're distracted.", LOG_DAMAGE);
                 performEnemyAttack();
                 if (player.getHP() <= 0) { handleGameOver(); return; }
             }
@@ -174,8 +185,8 @@ public class WorldController implements BaseController {
         PotionUseResult r = battleManager.useDamagePotion(player, potions);
         switch (r.getStatus()) {
             case BUFFED -> log("⚗  Damage potion used! Attack +" + r.getValue()
-                    + ".  [ATK: " + player.getAttack() + "]", "#bc8cff");
-            case NO_DAMAGE_POTIONS -> log("You reach for a damage potion... but have none! You're distracted.", "#ff7b72");
+                    + ".  [ATK: " + player.getAttack() + "]", LOG_BUFF);
+            case NO_DAMAGE_POTIONS -> log("You reach for a damage potion... but have none! You're distracted.", LOG_DAMAGE);
             default -> {}
         }
         // Whether potion worked or not, using it (or failing to) costs the turn
@@ -188,10 +199,10 @@ public class WorldController implements BaseController {
     @FXML
     private void onEscape() {
         if (battleManager.tryEscape()) {
-            log("You managed to escape!", "#6e7681");
+            log("You managed to escape!", LOG_SOFT);
             setState(WorldState.EXPLORING);
         } else {
-            log("Escape failed! " + currentEnemy.getEnemyName() + " blocks your way.", "#ff7b72");
+            log("Escape failed! " + currentEnemy.getEnemyName() + " blocks your way.", LOG_DAMAGE);
             performEnemyAttack();
             if (player.getHP() <= 0) handleGameOver();
         }
@@ -224,16 +235,16 @@ public class WorldController implements BaseController {
             default         -> "";
         };
         String tierColor = switch (encounter.getTier()) {
-            case MINI_BOSS  -> "#bc8cff";
-            case FINAL_BOSS -> "#cf222e";
-            default         -> "#ff7b72";
+            case MINI_BOSS  -> LOG_BUFF;
+            case FINAL_BOSS -> LOG_FATAL;
+            default         -> LOG_DAMAGE;
         };
 
-        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "#30363d");
+        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", LOG_RULE);
         log("⚠  A " + currentEnemy.getEnemyName() + " appears!" + tierTag, tierColor);
         log("   HP: " + currentEnemyHp + "  |  ATK: " + currentEnemy.getEnemyAttack()
-                + "  |  SPD: " + currentEnemy.getEnemyAttackSpeed(), "#6e7681");
-        log("   Choose your action.", "#6e7681");
+                + "  |  SPD: " + currentEnemy.getEnemyAttackSpeed(), LOG_SOFT);
+        log("   Choose your action.", LOG_SOFT);
 
         updateBattlePoitionLabels();
         setState(WorldState.BATTLE);
@@ -242,24 +253,24 @@ public class WorldController implements BaseController {
     private void triggerChest() {
         ChestResult chest = session.getChest().foundChest();
         if (chest.getTier() == ChestResult.Tier.NONE) {
-            log("You search the area... nothing here.", "#6e7681");
+            log("You search the area... nothing here.", LOG_SOFT);
             return;
         }
         String tierName = chest.getTier().name().charAt(0)
                 + chest.getTier().name().substring(1).toLowerCase();
-        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "#30363d");
-        log("📦 You found a " + tierName + " Chest!", "#f0c040");
+        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", LOG_RULE);
+        log("📦 You found a " + tierName + " Chest!", LOG_GOLD);
         if (chest.getHealPotions() > 0) {
             potions.addHealPotion(chest.getHealPotions());
-            log("   +" + chest.getHealPotions() + " heal potion(s)", "#3fb950");
+            log("   +" + chest.getHealPotions() + " heal potion(s)", LOG_HEAL);
         }
         if (chest.getDamagePotions() > 0) {
             potions.addDamagePotion(chest.getDamagePotions());
-            log("   +" + chest.getDamagePotions() + " damage potion(s)", "#bc8cff");
+            log("   +" + chest.getDamagePotions() + " damage potion(s)", LOG_BUFF);
         }
         if (chest.getCoins() > 0) {
             coins.addCoins(chest.getCoins());
-            log("   +" + chest.getCoins() + " coins", "#f0c040");
+            log("   +" + chest.getCoins() + " coins", LOG_GOLD);
         }
         refreshPlayerCard();
     }
@@ -267,31 +278,31 @@ public class WorldController implements BaseController {
     private void triggerCoins() {
         CoinEvent event = coins.foundCoins();
         if (event.getTier() == CoinEvent.Tier.NONE) {
-            log("You find some loose dirt. Nothing useful.", "#6e7681");
+            log("You find some loose dirt. Nothing useful.", LOG_SOFT);
             return;
         }
-        log("🪙 You found " + event.getAmount() + " coins!", "#f0c040");
+        log("🪙 You found " + event.getAmount() + " coins!", LOG_GOLD);
         refreshPlayerCard();
     }
 
     private void triggerPotions() {
         PotionEvent event = potions.generatePotions();
         switch (event.getType()) {
-            case HEAL   -> { log("💊 You found a heal potion!", "#3fb950"); refreshPlayerCard(); }
-            case DAMAGE -> { log("⚗  You found a damage potion!", "#bc8cff"); refreshPlayerCard(); }
-            case NONE   -> log("You search your surroundings... nothing here.", "#6e7681");
+            case HEAL   -> { log("💊 You found a heal potion!", LOG_HEAL); refreshPlayerCard(); }
+            case DAMAGE -> { log("⚗  You found a damage potion!", LOG_BUFF); refreshPlayerCard(); }
+            case NONE   -> log("You search your surroundings... nothing here.", LOG_SOFT);
         }
     }
 
     private void triggerLore() {
         LoreEvent lore = gameLore.generateLore();
-        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "#30363d");
+        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", LOG_RULE);
 
         String speaker = lore.getNpcName() != null
                 ? "📜 " + lore.getNpcName() + " says:"
                 : "📜";
-        log(speaker, "#58a6ff");
-        log("   \"" + lore.getMessage() + "\"", "#e6edf3");
+        log(speaker, LOG_LORE);
+        log("   \"" + lore.getMessage() + "\"", LOG_NORMAL);
 
         if (lore.requiresChoice()) {
             pendingLore = lore;
@@ -304,8 +315,8 @@ public class WorldController implements BaseController {
     private void triggerShop() {
         ShopOffer.Tier tier  = tierForCoins(coins.getCoins());
         ShopOffer      offer = session.getVillager().refreshOffer(tier);
-        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "#30363d");
-        log("🛒 A " + offer.getTierName() + " Merchant appears! Entering shop...", "#f0c040");
+        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", LOG_RULE);
+        log("🛒 A " + offer.getTierName() + " Merchant appears! Entering shop...", LOG_GOLD);
         sceneManager.showShop(offer);
     }
 
@@ -325,7 +336,7 @@ public class WorldController implements BaseController {
         if (pSpeed < eSpeed) return false;
         boolean first = rand.nextBoolean();
         log("   Equal speeds — decided randomly: "
-                + (first ? "you go first." : "enemy goes first."), "#f0c040");
+                + (first ? "you go first." : "enemy goes first."), LOG_GOLD);
         return first;
     }
 
@@ -334,7 +345,7 @@ public class WorldController implements BaseController {
         battleManager.enemyAttacks(player, currentEnemy);
         int taken = before - player.getHP();
         log("   " + currentEnemy.getEnemyName() + " hits you for " + taken
-                + " damage.  [Your HP: " + Math.max(0, player.getHP()) + "]", "#ff7b72");
+                + " damage.  [Your HP: " + Math.max(0, player.getHP()) + "]", LOG_DAMAGE);
         refreshPlayerCard();
     }
 
@@ -343,14 +354,14 @@ public class WorldController implements BaseController {
         battleManager.onEnemyDefeated(coins);
         refreshWinProgress();
         log("✓  " + currentEnemy.getEnemyName() + " defeated!  [Wins: "
-                + battleManager.getWinCounter() + "]", "#3fb950");
-        log("   +5 coins rewarded.", "#f0c040");
+                + battleManager.getWinCounter() + "]", LOG_HEAL);
+        log("   +5 coins rewarded.", LOG_GOLD);
         refreshPlayerCard();
 
         if (battleManager.getWinCounter() >= 20) {
-            log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "#f0c040");
-            log("🏆 VICTORY! You have defeated the Final Boss!", "#f0c040");
-            log("   Navigating to Victory screen...", "#6e7681");
+            log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", LOG_GOLD);
+            log("🏆 VICTORY! You have defeated the Final Boss!", LOG_GOLD);
+            log("   Navigating to Victory screen...", LOG_SOFT);
             setState(WorldState.EXPLORING);
             sceneManager.showVictory();
             return;
@@ -359,8 +370,8 @@ public class WorldController implements BaseController {
     }
 
     private void handleGameOver() {
-        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", "#cf222e");
-        log("☠  You have been defeated...", "#cf222e");
+        log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", LOG_FATAL);
+        log("☠  You have been defeated...", LOG_FATAL);
         setState(WorldState.EXPLORING);
         sceneManager.showGameOver();
     }
@@ -370,27 +381,27 @@ public class WorldController implements BaseController {
         switch (effect.getType()) {
             case HEAL_FULL  -> {
                 player.restoreHp();
-                log("   You feel fully restored.", "#3fb950");
+                log("   You feel fully restored.", LOG_HEAL);
                 refreshPlayerCard();
             }
             case COINS      -> {
                 coins.addCoins(effect.getValue());
-                log("   +" + effect.getValue() + " coins.", "#f0c040");
+                log("   +" + effect.getValue() + " coins.", LOG_GOLD);
                 refreshPlayerCard();
             }
             case POTION_HEAL -> {
                 potions.addHealPotion(1);
-                log("   +1 heal potion.", "#3fb950");
+                log("   +1 heal potion.", LOG_HEAL);
                 refreshPlayerCard();
             }
             case POTION_DMG  -> {
                 potions.addDamagePotion(1);
-                log("   +1 damage potion.", "#bc8cff");
+                log("   +1 damage potion.", LOG_BUFF);
                 refreshPlayerCard();
             }
             case DAMAGE      -> {
                 player.setHP(Math.max(1, player.getHP() - effect.getValue()));
-                log("   You take " + effect.getValue() + " damage.  [HP: " + player.getHP() + "]", "#ff7b72");
+                log("   You take " + effect.getValue() + " damage.  [HP: " + player.getHP() + "]", LOG_DAMAGE);
                 refreshPlayerCard();
             }
             case NONE -> {}
@@ -409,15 +420,14 @@ public class WorldController implements BaseController {
     }
 
     private void refreshPlayerCard() {
-        String className  = player.getPlayerClass().getClassName();
-        String classColor = classColor(player.getPlayerClass());
+        Classes cls = player.getPlayerClass();
+        String className   = cls.getClassName();
+        String classStyle  = "text-" + cls.name().toLowerCase();
 
+        applyClassStyle(lblClassName, classStyle);
+        applyClassStyle(lblCardClass, classStyle);
         lblClassName.setText(className);
-        lblClassName.setStyle("-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: " + classColor + ";");
-
         lblCardClass.setText(className);
-        lblCardClass.setStyle("-fx-font-size: 22; -fx-font-weight: bold; -fx-font-family: Georgia;"
-                + " -fx-text-fill: " + classColor + ";");
 
         lblHp.setText(player.getHP() + " / " + player.getMaxHp());
         lblAttack.setText(String.valueOf(player.getAttack()));
@@ -428,6 +438,11 @@ public class WorldController implements BaseController {
 
         double hpFraction = (double) player.getHP() / player.getMaxHp();
         progressHp.setProgress(Math.max(0.0, hpFraction));
+    }
+
+    private static void applyClassStyle(Label lbl, String classStyle) {
+        lbl.getStyleClass().removeAll("text-warrior", "text-mage", "text-rogue");
+        lbl.getStyleClass().add(classStyle);
     }
 
     private void refreshWinProgress() {
@@ -451,19 +466,11 @@ public class WorldController implements BaseController {
         Label lbl = new Label(text);
         lbl.setWrapText(true);
         lbl.setMaxWidth(Double.MAX_VALUE);
-        lbl.setStyle("-fx-font-size: 13; -fx-text-fill: " + hexColor
-                + "; -fx-padding: 3 6 3 6;");
+        lbl.getStyleClass().add("log-entry");
+        lbl.setStyle("-fx-text-fill: " + hexColor + ";");
         lbl.setAlignment(Pos.TOP_LEFT);
         logBox.getChildren().add(lbl);
         scrollLog.layout();
         scrollLog.setVvalue(1.0);
-    }
-
-    private String classColor(Classes cls) {
-        return switch (cls) {
-            case WARRIOR -> "#f0c040";
-            case MAGE    -> "#58a6ff";
-            case ROGUE   -> "#bc8cff";
-        };
     }
 }

@@ -1,54 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.adventure.ui.fx.VictoryController"
-      alignment="CENTER" spacing="0"
-      style="-fx-background-color: #0d1117;">
+      alignment="CENTER" spacing="0">
 
     <Region VBox.vgrow="ALWAYS"/>
 
-    <!-- Victory icon -->
-    <Label text="★"
-           style="-fx-font-size: 72; -fx-text-fill: #f0c040;
-                  -fx-effect: dropshadow(gaussian, #f0c040, 24, 0.5, 0, 0);"/>
+    <!-- Illuminated star ornament with gold halo -->
+    <Label fx:id="ornament" text="✦" styleClass="ornament-illumination"/>
 
-    <!-- Title -->
-    <Label text="VICTORY"
-           style="-fx-font-size: 56; -fx-font-weight: bold; -fx-font-family: Georgia;
-                  -fx-text-fill: #f0c040;
-                  -fx-effect: dropshadow(gaussian, #a07800, 14, 0.4, 0, 0);
-                  -fx-padding: 8 0 0 0;"/>
+    <Region prefHeight="10"/>
 
-    <Label text="RIVERLAND is saved."
-           style="-fx-font-size: 16; -fx-font-style: italic; -fx-text-fill: #9a8560;
-                  -fx-padding: 10 0 0 0;"/>
+    <!-- Title: VICTORIA — Cinzel display, gold-leaf, glow inherited from .title-display -->
+    <Label fx:id="title" text="VICTORIA" styleClass="title-display"/>
 
-    <!-- Divider -->
-    <HBox alignment="CENTER" style="-fx-padding: 20 0 20 0;">
-        <Separator prefWidth="280" style="-fx-background-color: #30363d;"/>
+    <Region prefHeight="14"/>
+
+    <Label fx:id="subtitle" text="RIVERLAND endures." styleClass="text-acclaim"/>
+
+    <Region prefHeight="32"/>
+
+    <!-- ─── ❦ ─── celebratory ornament -->
+    <HBox fx:id="divider" alignment="CENTER" spacing="14">
+        <Region styleClass="divider-line" prefWidth="80" maxWidth="80"/>
+        <Label  text="❦" styleClass="divider-ornament"/>
+        <Region styleClass="divider-line" prefWidth="80" maxWidth="80"/>
     </HBox>
 
-    <!-- Stats -->
-    <Label fx:id="lblClass"
-           style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+    <Region prefHeight="28"/>
 
-    <Label fx:id="lblWins"
-           style="-fx-font-size: 14; -fx-text-fill: #6e7681; -fx-padding: 6 0 0 0;"/>
+    <!-- The hero, framed like an illuminated capital -->
+    <VBox fx:id="stats" alignment="CENTER" spacing="14" maxWidth="460" styleClass="panel-frame">
+        <Label fx:id="lblClass" styleClass="title-honour"/>
+        <Label fx:id="lblWins"  styleClass="text-honour"/>
+    </VBox>
 
-    <Region prefHeight="36"/>
+    <Region prefHeight="44"/>
 
-    <!-- Button -->
-    <Button text="BACK TO MENU" onAction="#onBackToMenu"
-            prefWidth="200" prefHeight="46"
-            style="-fx-font-size: 14; -fx-font-weight: bold;
-                   -fx-background-color: #f0c040; -fx-text-fill: #0d1117;
-                   -fx-background-radius: 8; -fx-cursor: hand;"/>
+    <VBox fx:id="actions" alignment="CENTER">
+        <Button text="← back to the threshold" onAction="#onBackToMenu" prefWidth="280" styleClass="btn-secondary"/>
+    </VBox>
 
     <Region VBox.vgrow="ALWAYS"/>
 

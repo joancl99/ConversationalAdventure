@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -11,35 +12,23 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.adventure.ui.fx.WorldController"
-            style="-fx-background-color: #0d1117;">
+            fx:controller="com.adventure.ui.fx.WorldController">
 
     <!-- ── TOP: header ─────────────────────────────────────────────── -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="16"
-              style="-fx-background-color: #161b22;
-                     -fx-border-color: #30363d; -fx-border-width: 0 0 1 0;
-                     -fx-padding: 14 24;">
+        <HBox alignment="CENTER_LEFT" spacing="14" styleClass="world-header">
 
-            <Label text="RIVERLAND"
-                   style="-fx-font-size: 20; -fx-font-weight: bold;
-                          -fx-text-fill: #f0c040; -fx-font-family: Georgia;"/>
+            <Label text="RIVERLAND" styleClass="title-wordmark"/>
 
-            <Label text="·"
-                   style="-fx-text-fill: #30363d; -fx-font-size: 18;"/>
+            <Label text="·" styleClass="text-divider-dot"/>
 
-            <Label fx:id="lblClassName"
-                   style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #e6edf3;"/>
+            <Label fx:id="lblClassName" styleClass="text-class-name"/>
 
             <Region HBox.hgrow="ALWAYS"/>
 
-            <!-- win progress section -->
-            <VBox alignment="CENTER_RIGHT" spacing="3">
-                <Label fx:id="lblProgressText"
-                       style="-fx-font-size: 11; -fx-text-fill: #6e7681;"/>
-                <ProgressBar fx:id="progressWins" prefWidth="160" prefHeight="8"
-                             style="-fx-accent: #f0c040; -fx-background-color: #30363d;
-                                    -fx-background-radius: 4; -fx-border-radius: 4;"/>
+            <VBox alignment="CENTER_RIGHT" spacing="5">
+                <Label fx:id="lblProgressText" styleClass="text-progress-label"/>
+                <ProgressBar fx:id="progressWins" prefWidth="180" prefHeight="6"/>
             </VBox>
 
         </HBox>
@@ -47,89 +36,67 @@
 
     <!-- ── CENTER: player card + event log ─────────────────────────── -->
     <center>
-        <HBox spacing="0"
-              style="-fx-padding: 20 24 16 24;" HBox.hgrow="ALWAYS">
+        <HBox spacing="20" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="22" right="28" bottom="14" left="28"/>
+            </padding>
 
             <!-- Player card -->
-            <VBox spacing="14" prefWidth="240" minWidth="240"
-                  style="-fx-background-color: #161b22;
-                         -fx-background-radius: 10;
-                         -fx-border-color: #30363d; -fx-border-radius: 10; -fx-border-width: 1;
-                         -fx-padding: 20;">
+            <VBox spacing="14" prefWidth="240" minWidth="240" styleClass="panel">
 
-                <Label fx:id="lblCardClass"
-                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-font-family: Georgia;"/>
+                <Label fx:id="lblCardClass" styleClass="card-title"/>
 
-                <Separator style="-fx-background-color: #30363d;"/>
+                <Separator/>
 
                 <!-- HP row -->
-                <VBox spacing="5">
+                <VBox spacing="6">
                     <HBox alignment="CENTER_LEFT" spacing="6">
-                        <Label text="HP"
-                               style="-fx-font-size: 11; -fx-text-fill: #6e7681;"/>
+                        <Label text="HP" styleClass="text-stat-label"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Label fx:id="lblHp"
-                               style="-fx-font-size: 11; -fx-text-fill: #e6edf3;"/>
+                        <Label fx:id="lblHp" styleClass="text-stat-value"/>
                     </HBox>
-                    <ProgressBar fx:id="progressHp" prefWidth="200" prefHeight="10"
-                                 style="-fx-accent: #cf222e; -fx-background-color: #30363d;
-                                        -fx-background-radius: 5; -fx-border-radius: 5;"/>
+                    <ProgressBar fx:id="progressHp" prefWidth="200" prefHeight="8" styleClass="progress-hp"/>
                 </VBox>
 
                 <!-- Stats grid -->
-                <VBox spacing="7">
+                <VBox spacing="9">
                     <HBox alignment="CENTER_LEFT">
-                        <Label text="ATTACK"
-                               style="-fx-font-size: 12; -fx-text-fill: #6e7681;" prefWidth="80"/>
-                        <Label fx:id="lblAttack"
-                               style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #e6edf3;"/>
+                        <Label text="ATTACK" styleClass="text-stat-label" prefWidth="80"/>
+                        <Label fx:id="lblAttack" styleClass="text-stat-value"/>
                     </HBox>
                     <HBox alignment="CENTER_LEFT">
-                        <Label text="SPEED"
-                               style="-fx-font-size: 12; -fx-text-fill: #6e7681;" prefWidth="80"/>
-                        <Label fx:id="lblSpeed"
-                               style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #e6edf3;"/>
+                        <Label text="SPEED" styleClass="text-stat-label" prefWidth="80"/>
+                        <Label fx:id="lblSpeed" styleClass="text-stat-value"/>
                     </HBox>
                     <HBox alignment="CENTER_LEFT">
-                        <Label text="COINS"
-                               style="-fx-font-size: 12; -fx-text-fill: #6e7681;" prefWidth="80"/>
-                        <Label fx:id="lblCoins"
-                               style="-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #f0c040;"/>
+                        <Label text="COINS" styleClass="text-stat-label" prefWidth="80"/>
+                        <Label fx:id="lblCoins" styleClass="text-coin-value"/>
                     </HBox>
                 </VBox>
 
-                <Separator style="-fx-background-color: #30363d;"/>
+                <Separator/>
 
-                <!-- Potions -->
-                <VBox spacing="5">
-                    <Label text="INVENTORY"
-                           style="-fx-font-size: 10; -fx-text-fill: #6e7681;"/>
-                    <HBox spacing="10">
-                        <Label fx:id="lblHealPots"
-                               style="-fx-font-size: 12; -fx-text-fill: #3fb950;"/>
-                        <Label fx:id="lblDmgPots"
-                               style="-fx-font-size: 12; -fx-text-fill: #ff7b72;"/>
+                <!-- Inventory -->
+                <VBox spacing="6">
+                    <Label text="INVENTORY" styleClass="text-stat-label"/>
+                    <HBox spacing="14">
+                        <Label fx:id="lblHealPots" styleClass="text-pot-heal"/>
+                        <Label fx:id="lblDmgPots"  styleClass="text-pot-dmg"/>
                     </HBox>
                 </VBox>
 
             </VBox>
 
-            <!-- Gap -->
-            <Region prefWidth="16"/>
-
             <!-- Event log -->
             <VBox HBox.hgrow="ALWAYS" spacing="0">
-                <Label text="EVENT LOG"
-                       style="-fx-font-size: 10; -fx-text-fill: #6e7681;
-                              -fx-padding: 0 0 8 2;"/>
+                <Label text="EVENT LOG" styleClass="log-section-label"/>
                 <ScrollPane fx:id="scrollLog" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"
-                            fitToWidth="true" pannable="false"
-                            style="-fx-background-color: #161b22;
-                                   -fx-background: #161b22;
-                                   -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
-                                   -fx-background-radius: 8;">
-                    <VBox fx:id="logBox" spacing="2"
-                          style="-fx-padding: 16 10; -fx-background-color: #161b22;"/>
+                            fitToWidth="true" pannable="false">
+                    <VBox fx:id="logBox" spacing="2">
+                        <padding>
+                            <Insets top="16" right="14" bottom="16" left="14"/>
+                        </padding>
+                    </VBox>
                 </ScrollPane>
             </VBox>
 
@@ -138,83 +105,32 @@
 
     <!-- ── BOTTOM: action buttons (swap by state) ───────────────────── -->
     <bottom>
-        <VBox style="-fx-background-color: #161b22;
-                     -fx-border-color: #30363d; -fx-border-width: 1 0 0 0;
-                     -fx-padding: 16 24;">
+        <VBox styleClass="world-footer">
 
             <!-- EXPLORING buttons -->
-            <HBox fx:id="paneExploring" spacing="12" alignment="CENTER_LEFT">
-                <Button text="ADVANCE ▶" onAction="#onAdvance"
-                        prefWidth="150" prefHeight="42"
-                        style="-fx-font-size: 14; -fx-font-weight: bold;
-                               -fx-background-color: #f0c040; -fx-text-fill: #0d1117;
-                               -fx-background-radius: 8; -fx-cursor: hand;"/>
-                <Button text="INVENTORY" onAction="#onInventory"
-                        prefWidth="130" prefHeight="42"
-                        style="-fx-font-size: 13; -fx-font-weight: bold;
-                               -fx-background-color: #1f6feb; -fx-text-fill: #ffffff;
-                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+            <HBox fx:id="paneExploring" spacing="14" alignment="CENTER_LEFT">
+                <Button text="ADVANCE ▶"  onAction="#onAdvance"     prefWidth="160" styleClass="btn-primary"/>
+                <Button text="INVENTORY"  onAction="#onInventory"   prefWidth="140" styleClass="btn-secondary"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button text="↩ acceder al historial de la aventura" onAction="#onShowHistory"
-                        prefHeight="42"
-                        style="-fx-font-size: 11;
-                               -fx-background-color: transparent; -fx-text-fill: #8b949e;
-                               -fx-cursor: hand;
-                               -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
-                               -fx-background-radius: 8; -fx-padding: 4 14;"/>
-                <Button text="SAVE &amp; QUIT" onAction="#onSaveQuit"
-                        prefWidth="130" prefHeight="42"
-                        style="-fx-font-size: 13;
-                               -fx-background-color: transparent; -fx-text-fill: #6e7681;
-                               -fx-cursor: hand;
-                               -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
-                               -fx-background-radius: 8;"/>
+                <Button text="↩ acceder al historial de la aventura" onAction="#onShowHistory" styleClass="btn-ghost"/>
+                <Button text="SAVE &amp; QUIT" onAction="#onSaveQuit" prefWidth="140" styleClass="btn-secondary"/>
             </HBox>
 
             <!-- BATTLE buttons -->
-            <HBox fx:id="paneBattle" spacing="12" alignment="CENTER_LEFT" visible="false" managed="false">
-                <Button text="⚔ ATTACK" onAction="#onAttack"
-                        prefWidth="140" prefHeight="42"
-                        style="-fx-font-size: 14; -fx-font-weight: bold;
-                               -fx-background-color: #cf222e; -fx-text-fill: #ffffff;
-                               -fx-background-radius: 8; -fx-cursor: hand;"/>
-                <Button fx:id="btnHealPotion" onAction="#onUseHealPotion"
-                        prefWidth="160" prefHeight="42"
-                        style="-fx-font-size: 13;
-                               -fx-background-color: #238636; -fx-text-fill: #ffffff;
-                               -fx-background-radius: 8; -fx-cursor: hand;"/>
-                <Button fx:id="btnDmgPotion" onAction="#onUseDmgPotion"
-                        prefWidth="160" prefHeight="42"
-                        style="-fx-font-size: 13;
-                               -fx-background-color: #8b2fc9; -fx-text-fill: #ffffff;
-                               -fx-background-radius: 8; -fx-cursor: hand;"/>
+            <HBox fx:id="paneBattle" spacing="14" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Button text="⚔ ATTACK"  onAction="#onAttack"        prefWidth="150" styleClass="btn-attack"/>
+                <Button fx:id="btnHealPotion" onAction="#onUseHealPotion" prefWidth="170" styleClass="btn-heal"/>
+                <Button fx:id="btnDmgPotion"  onAction="#onUseDmgPotion"  prefWidth="170" styleClass="btn-buff"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button text="ESCAPE" onAction="#onEscape"
-                        prefWidth="110" prefHeight="42"
-                        style="-fx-font-size: 13;
-                               -fx-background-color: transparent; -fx-text-fill: #6e7681;
-                               -fx-cursor: hand;
-                               -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
-                               -fx-background-radius: 8;"/>
+                <Button text="ESCAPE"     onAction="#onEscape"       styleClass="btn-ghost"/>
             </HBox>
 
             <!-- LORE CHOICE buttons -->
-            <HBox fx:id="paneChoice" spacing="12" alignment="CENTER_LEFT" visible="false" managed="false">
-                <Label text="What do you do?"
-                       style="-fx-font-size: 14; -fx-text-fill: #e6edf3; -fx-font-style: italic;"/>
+            <HBox fx:id="paneChoice" spacing="14" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label text="What do you do?" styleClass="log-prompt"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button text="YES" onAction="#onChoiceYes"
-                        prefWidth="110" prefHeight="42"
-                        style="-fx-font-size: 14; -fx-font-weight: bold;
-                               -fx-background-color: #238636; -fx-text-fill: #ffffff;
-                               -fx-background-radius: 8; -fx-cursor: hand;"/>
-                <Button text="NO" onAction="#onChoiceNo"
-                        prefWidth="110" prefHeight="42"
-                        style="-fx-font-size: 14; -fx-font-weight: bold;
-                               -fx-background-color: transparent; -fx-text-fill: #6e7681;
-                               -fx-cursor: hand;
-                               -fx-border-color: #30363d; -fx-border-radius: 8; -fx-border-width: 1;
-                               -fx-background-radius: 8;"/>
+                <Button text="YES" onAction="#onChoiceYes" prefWidth="120" styleClass="btn-primary"/>
+                <Button text="NO"  onAction="#onChoiceNo"  prefWidth="120" styleClass="btn-secondary"/>
             </HBox>
 
         </VBox>

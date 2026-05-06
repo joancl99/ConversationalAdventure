@@ -6,6 +6,7 @@ import com.adventure.event.ShopOffer;
 import com.adventure.item.ItemType;
 import com.adventure.model.*;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -52,10 +53,10 @@ public class ShopController {
         int price = potions.getPotionPrice();
         PurchaseResult result = villager.buyPotion("heal", potions, coins);
         if (result.isSuccess()) {
-            showFeedback("💊 Heal potion purchased!", "#3fb950");
-            session.addToLog("  💊 Purchased: Heal Potion  (-" + price + " coins)", "#3fb950");
+            showFeedback("💊 Heal potion purchased!", "feedback-success");
+            session.addToLog("  💊 Purchased: Heal Potion  (-" + price + " coins)", LogPalette.HEAL);
         } else {
-            showFeedback("Not enough coins. Need " + price + "c.", "#cf222e");
+            showFeedback("Not enough coins. Need " + price + "c.", "feedback-error");
         }
         refreshPotionButtons();
         refreshStatus();
@@ -66,10 +67,10 @@ public class ShopController {
         int price = potions.getPotionPrice();
         PurchaseResult result = villager.buyPotion("damage", potions, coins);
         if (result.isSuccess()) {
-            showFeedback("⚗  Damage potion purchased!", "#bc8cff");
-            session.addToLog("  ⚗  Purchased: Damage Potion  (-" + price + " coins)", "#bc8cff");
+            showFeedback("⚗  Damage potion purchased!", "feedback-buff");
+            session.addToLog("  ⚗  Purchased: Damage Potion  (-" + price + " coins)", LogPalette.BUFF);
         } else {
-            showFeedback("Not enough coins. Need " + price + "c.", "#cf222e");
+            showFeedback("Not enough coins. Need " + price + "c.", "feedback-error");
         }
         refreshPotionButtons();
         refreshStatus();
@@ -77,7 +78,7 @@ public class ShopController {
 
     @FXML
     private void onLeave() {
-        session.addToLog("  Left the shop.  [Coins remaining: " + coins.getCoins() + "]", "#6e7681");
+        session.addToLog("  Left the shop.  [Coins remaining: " + coins.getCoins() + "]", LogPalette.SOFT);
         sceneManager.showWorld();
     }
 
@@ -90,16 +91,16 @@ public class ShopController {
 
         if (items.isEmpty()) {
             Label lbl = new Label("All items from this merchant have been purchased.");
-            lbl.setStyle("-fx-font-size: 13; -fx-text-fill: #6e7681; -fx-font-style: italic;");
+            lbl.getStyleClass().add("note-italic");
             itemsSection.getChildren().add(lbl);
             return;
         }
 
         Label header = new Label("ITEMS");
-        header.setStyle("-fx-font-size: 11; -fx-text-fill: #6e7681; -fx-padding: 0 0 10 0;");
+        header.getStyleClass().add("section-label");
         itemsSection.getChildren().add(header);
 
-        HBox cards = new HBox(16);
+        HBox cards = new HBox(18);
         cards.setAlignment(Pos.TOP_LEFT);
         for (ItemType item : items) {
             cards.getChildren().add(buildItemCard(item));
@@ -107,51 +108,36 @@ public class ShopController {
         itemsSection.getChildren().add(cards);
 
         Separator sep = new Separator();
-        sep.setStyle("-fx-background-color: #30363d;");
-        VBox.setMargin(sep, new javafx.geometry.Insets(16, 0, 0, 0));
+        VBox.setMargin(sep, new Insets(20, 0, 0, 0));
         itemsSection.getChildren().add(sep);
     }
 
     private VBox buildItemCard(ItemType item) {
-        VBox card = new VBox(10);
-        card.setPrefWidth(200);
+        VBox card = new VBox(12);
+        card.setPrefWidth(210);
         card.setAlignment(Pos.TOP_LEFT);
-        card.setStyle(
-            "-fx-background-color: #161b22;" +
-            "-fx-background-radius: 10;" +
-            "-fx-border-color: " + tierAccentColor() + ";" +
-            "-fx-border-radius: 10;" +
-            "-fx-border-width: 1;" +
-            "-fx-padding: 16;"
-        );
+        card.getStyleClass().add("panel-frame");
 
         Label name = new Label(item.getItemName());
-        name.setStyle("-fx-font-size: 13; -fx-font-weight: bold; -fx-text-fill: #e6edf3;");
+        name.getStyleClass().add("item-name");
         name.setWrapText(true);
-        name.setMaxWidth(168);
+        name.setMaxWidth(180);
 
         Separator sep = new Separator();
-        sep.setStyle("-fx-background-color: #30363d;");
 
-        VBox stats = new VBox(5);
+        VBox stats = new VBox(6);
         if (item.getItemHP() != 0)
-            stats.getChildren().add(statRow("HP",    "+" + item.getItemHP()));
+            stats.getChildren().add(statRow("HP",  "+" + item.getItemHP()));
         if (item.getItemAttack() != 0)
-            stats.getChildren().add(statRow("ATK",   "+" + item.getItemAttack()));
+            stats.getChildren().add(statRow("ATK", "+" + item.getItemAttack()));
         if (item.getItemAttackSpeed() != 0)
-            stats.getChildren().add(statRow("SPD",   "+" + item.getItemAttackSpeed()));
+            stats.getChildren().add(statRow("SPD", "+" + item.getItemAttackSpeed()));
 
-        boolean canAfford = coins.getCoins() >= item.getItemPrice();
         Button buyBtn = new Button("BUY  —  " + item.getItemPrice() + " coins");
-        buyBtn.setPrefWidth(168);
+        buyBtn.setPrefWidth(178);
         buyBtn.setPrefHeight(36);
-        buyBtn.setDisable(!canAfford);
-        buyBtn.setStyle(
-            "-fx-font-size: 12; -fx-font-weight: bold;" +
-            "-fx-background-color: " + (canAfford ? "#1f6feb" : "#30363d") + ";" +
-            "-fx-text-fill: " + (canAfford ? "#ffffff" : "#6e7681") + ";" +
-            "-fx-background-radius: 6; -fx-cursor: " + (canAfford ? "hand" : "default") + ";"
-        );
+        buyBtn.getStyleClass().add("btn-secondary");
+        buyBtn.setDisable(coins.getCoins() < item.getItemPrice());
         buyBtn.setOnAction(e -> onBuyItem(item));
 
         card.getChildren().addAll(name, sep, stats, buyBtn);
@@ -162,10 +148,10 @@ public class ShopController {
         HBox row = new HBox();
         row.setAlignment(Pos.CENTER_LEFT);
         Label lbl = new Label(label);
-        lbl.setStyle("-fx-font-size: 12; -fx-text-fill: #6e7681;");
-        lbl.setPrefWidth(40);
+        lbl.getStyleClass().add("text-stat-label");
+        lbl.setPrefWidth(44);
         Label val = new Label(value);
-        val.setStyle("-fx-font-size: 12; -fx-font-weight: bold; -fx-text-fill: #e6edf3;");
+        val.getStyleClass().add("text-stat-value");
         row.getChildren().addAll(lbl, val);
         return row;
     }
@@ -173,15 +159,15 @@ public class ShopController {
     private void onBuyItem(ItemType item) {
         PurchaseResult result = villager.buyItem(player, item, coins);
         if (result.isSuccess()) {
-            showFeedback("✓ " + item.getItemName() + " purchased! Stats upgraded.", "#3fb950");
+            showFeedback("✓ " + item.getItemName() + " purchased! Stats upgraded.", "feedback-success");
             session.addToLog("  ✓ Purchased: " + item.getItemName()
-                    + "  (-" + item.getItemPrice() + " coins)", "#3fb950");
-            if (item.getItemHP()          != 0) session.addToLog("    HP  +" + item.getItemHP(),          "#3fb950");
-            if (item.getItemAttack()      != 0) session.addToLog("    ATK +" + item.getItemAttack(),      "#ff7b72");
-            if (item.getItemAttackSpeed() != 0) session.addToLog("    SPD +" + item.getItemAttackSpeed(), "#58a6ff");
+                    + "  (-" + item.getItemPrice() + " coins)", LogPalette.HEAL);
+            if (item.getItemHP()          != 0) session.addToLog("    HP  +" + item.getItemHP(),          LogPalette.HEAL);
+            if (item.getItemAttack()      != 0) session.addToLog("    ATK +" + item.getItemAttack(),      LogPalette.DAMAGE);
+            if (item.getItemAttackSpeed() != 0) session.addToLog("    SPD +" + item.getItemAttackSpeed(), LogPalette.LORE);
             refreshItemsSection();
         } else {
-            showFeedback("Not enough coins. Need " + item.getItemPrice() + "c.", "#cf222e");
+            showFeedback("Not enough coins. Need " + item.getItemPrice() + "c.", "feedback-error");
         }
         refreshPotionButtons();
         refreshStatus();
@@ -189,17 +175,9 @@ public class ShopController {
 
     // ── UI helpers ─────────────────────────────────────────────────────────────
     private void applyTierStyle() {
-        String tierName  = offer.getTierName();
-        String bg        = tierBgColor();
-        String textColor = offer.getTier() == ShopOffer.Tier.BRONZE ? "#0d1117" : "#0d1117";
-
-        lblTierBadge.setText(tierName.toUpperCase());
-        lblTierBadge.setStyle(
-            "-fx-font-size: 11; -fx-font-weight: bold;" +
-            "-fx-background-color: " + bg + ";" +
-            "-fx-text-fill: " + textColor + ";" +
-            "-fx-padding: 3 8; -fx-background-radius: 4;"
-        );
+        String tierColor = tierColor(offer.getTier());
+        lblTierBadge.setText(offer.getTierName().toUpperCase());
+        lblTierBadge.setStyle("-fx-text-fill: " + tierColor + "; -fx-border-color: " + tierColor + ";");
         lblCoinsHeader.setText("💰 " + coins.getCoins() + " coins");
     }
 
@@ -220,26 +198,23 @@ public class ShopController {
         );
     }
 
-    private void showFeedback(String msg, String hexColor) {
+    private void showFeedback(String msg, String styleClass) {
         lblFeedback.setText(msg);
-        lblFeedback.setStyle("-fx-font-size: 13; -fx-text-fill: " + hexColor + "; -fx-padding: 16 0 0 0;");
+        lblFeedback.getStyleClass().removeAll("feedback-success", "feedback-buff", "feedback-error");
+        lblFeedback.getStyleClass().add(styleClass);
     }
 
-    private String tierBgColor() {
-        return switch (offer.getTier()) {
-            case BRONZE -> "#f0c040";
-            case SILVER -> "#58a6ff";
-            case GOLDEN -> "#bc8cff";
-            default     -> "#30363d";
-        };
-    }
-
-    private String tierAccentColor() {
-        return switch (offer.getTier()) {
-            case BRONZE -> "#f0c040";
-            case SILVER -> "#58a6ff";
-            case GOLDEN -> "#bc8cff";
-            default     -> "#30363d";
+    /**
+     * Manuscript pigment hierarchy by tier:
+     *  bronze = humble earth-tone tinta, lapis = the costly imported blue,
+     *  gold-leaf = reserved for the most important illuminations.
+     */
+    private static String tierColor(ShopOffer.Tier tier) {
+        return switch (tier) {
+            case BRONZE -> "#8b7a52";  // -frame
+            case SILVER -> "#4a6fa5";  // -lapis
+            case GOLDEN -> "#b8884e";  // -gold-leaf
+            case NONE   -> "#5a7160";  // -ink-soft fallback
         };
     }
 }

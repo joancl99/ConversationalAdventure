@@ -1,10 +1,23 @@
 package com.adventure.ui.fx;
 
 import com.adventure.engine.Save;
+import com.adventure.model.Classes;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class GameOverController implements BaseController {
+
+    @FXML private Label ornament;
+    @FXML private Label title;
+    @FXML private Label subtitle;
+    @FXML private HBox  divider;
+    @FXML private VBox  stats;
+    @FXML private VBox  actions;
 
     @FXML private Label lblWins;
     @FXML private Label lblClass;
@@ -18,12 +31,13 @@ public class GameOverController implements BaseController {
         int wins = session.getBattleManager().getWinCounter();
         lblWins.setText("You fell after " + wins + (wins == 1 ? " victory." : " victories."));
 
-        String className  = session.getPlayer().getPlayerClass().getClassName();
-        String classColor = classColor(session.getPlayer().getPlayerClass().name());
-        lblClass.setText("Playing as: " + className);
-        lblClass.setStyle("-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: " + classColor + ";");
+        Classes cls = session.getPlayer().getPlayerClass();
+        lblClass.setText(cls.getClassName());
+        lblClass.getStyleClass().add("text-" + cls.name().toLowerCase());
 
         Save.resetSave();
+
+        runStaggeredEntrance(ornament, title, subtitle, divider, stats, actions);
     }
 
     @FXML
@@ -36,11 +50,22 @@ public class GameOverController implements BaseController {
         sceneManager.showMainMenu();
     }
 
-    private String classColor(String name) {
-        return switch (name) {
-            case "WARRIOR" -> "#f0c040";
-            case "MAGE"    -> "#58a6ff";
-            default        -> "#bc8cff";
-        };
+    /**
+     * Staggered fade-in — each node enters 220ms after the previous one.
+     * Total reveal ≈ 1.7s, slow enough to read as a manuscript being written
+     * onto the page rather than a UI animation.
+     */
+    private static void runStaggeredEntrance(Node... nodes) {
+        int delay = 0;
+        int step  = 220;
+        for (Node n : nodes) {
+            n.setOpacity(0);
+            FadeTransition ft = new FadeTransition(Duration.millis(620), n);
+            ft.setFromValue(0);
+            ft.setToValue(1);
+            ft.setDelay(Duration.millis(delay));
+            ft.play();
+            delay += step;
+        }
     }
 }

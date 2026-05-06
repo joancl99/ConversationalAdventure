@@ -74,6 +74,20 @@
     -fx-font-size: 17;
     -fx-text-fill: -ink-soft;
 }
+.title-page {
+    -fx-font-family: "Cinzel", "Trajan Pro", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+    -fx-text-fill: -ink-deep;
+}
+.empty-state {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 15;
+    -fx-text-fill: -ink-soft;
+    -fx-line-spacing: 6;
+    -fx-padding: 24 0 24 0;
+}
 
 .text-papiro      { -fx-text-fill: -ink; }
 .text-papiro-soft { -fx-text-fill: -ink-soft; }
@@ -314,4 +328,274 @@
 .separator .line {
     -fx-border-color: -frame-light;
     -fx-border-width: 0 0 1 0;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  World screen                                                    ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+/* ── Top / bottom bars ─────────────────────────────────────────────── */
+.world-header {
+    -fx-background-color: -vellum-soft;
+    -fx-border-color: -frame-light;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 14 28 14 28;
+}
+.world-footer {
+    -fx-background-color: -vellum-soft;
+    -fx-border-color: -frame-light;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 16 28 16 28;
+}
+
+/* ── Header typography ─────────────────────────────────────────────── */
+.title-wordmark {
+    -fx-font-family: "Cinzel", "Trajan Pro", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+    -fx-text-fill: -gold-leaf;
+}
+.text-divider-dot {
+    -fx-font-family: "Cambria", "Georgia", serif;
+    -fx-font-size: 22;
+    -fx-text-fill: -frame-light;
+}
+.text-class-name {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    /* colour applied dynamically via .text-warrior/-mage/-rogue */
+}
+.text-progress-label {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 13;
+    -fx-text-fill: -ink-soft;
+}
+
+/* ── Inventory potion counters ─────────────────────────────────────── */
+.text-pot-heal {
+    -fx-font-family: "JetBrains Mono", "Consolas", "Courier New", monospace;
+    -fx-font-size: 13;
+    -fx-text-fill: -moss-deep;
+}
+.text-pot-dmg {
+    -fx-font-family: "JetBrains Mono", "Consolas", "Courier New", monospace;
+    -fx-font-size: 13;
+    -fx-text-fill: -rogue;
+}
+
+/* ── Event log ─────────────────────────────────────────────────────── */
+.log-section-label {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-size: 10;
+    -fx-text-fill: -ink-soft;
+    -fx-padding: 0 0 8 4;
+}
+.log-entry {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-size: 14;
+    -fx-padding: 3 6 3 6;
+}
+.log-prompt {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 17;
+    -fx-text-fill: -ink-deep;
+}
+
+/* ── Battle action buttons ─────────────────────────────────────────── */
+/* ATTACK — vermillion: blood, danger, the only fill that earns its weight. */
+.btn-attack {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-text-fill: -vermillion;
+    -fx-background-color: transparent;
+    -fx-border-color: -vermillion;
+    -fx-border-width: 1.2;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
+    -fx-padding: 14 32;
+    -fx-cursor: hand;
+}
+.btn-attack:hover {
+    -fx-background-color: rgba(168, 64, 48, 0.10);
+    -fx-text-fill: -vermillion-soft;
+    -fx-border-color: -vermillion-soft;
+    -fx-effect: dropshadow(gaussian, rgba(168, 64, 48, 0.30), 18, 0.0, 0, 0);
+}
+.btn-attack:pressed { -fx-background-color: rgba(168, 64, 48, 0.18); }
+
+/* HEAL — moss: living green, the calm restorative. */
+.btn-heal {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+    -fx-text-fill: -moss-deep;
+    -fx-background-color: transparent;
+    -fx-border-color: -moss;
+    -fx-border-width: 1.2;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
+    -fx-padding: 14 28;
+    -fx-cursor: hand;
+}
+.btn-heal:hover {
+    -fx-background-color: rgba(94, 138, 94, 0.10);
+    -fx-border-color: -moss-deep;
+    -fx-effect: dropshadow(gaussian, -moss-glow, 18, 0.0, 0, 0);
+}
+.btn-heal:pressed { -fx-background-color: rgba(94, 138, 94, 0.18); }
+
+/* BUFF — mulberry: the arcane augmentation. */
+.btn-buff {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+    -fx-text-fill: -rogue;
+    -fx-background-color: transparent;
+    -fx-border-color: -rogue;
+    -fx-border-width: 1.2;
+    -fx-border-radius: 1;
+    -fx-background-radius: 1;
+    -fx-padding: 14 28;
+    -fx-cursor: hand;
+}
+.btn-buff:hover {
+    -fx-background-color: rgba(140, 90, 156, 0.10);
+    -fx-effect: dropshadow(gaussian, -rogue-glow, 18, 0.0, 0, 0);
+}
+.btn-buff:pressed { -fx-background-color: rgba(140, 90, 156, 0.18); }
+
+.btn-attack:disabled, .btn-heal:disabled, .btn-buff:disabled {
+    -fx-opacity: 0.40;
+    -fx-cursor: default;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  Shop screen                                                     ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+/* Section headers (POTIONS, ITEMS) */
+.section-label {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-size: 11;
+    -fx-text-fill: -ink-soft;
+    -fx-padding: 0 0 12 0;
+}
+
+/* Tier chip — thin-bordered Cinzel uppercase, colour applied dynamically. */
+.tier-chip {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 10;
+    -fx-padding: 5 12 5 12;
+    -fx-border-width: 1;
+    -fx-background-color: transparent;
+    /* -fx-text-fill and -fx-border-color set inline by ShopController. */
+}
+
+/* Headline coin counter — slightly larger than text-coin-value. */
+.text-coin-large {
+    -fx-font-family: "JetBrains Mono", "Consolas", "Courier New", monospace;
+    -fx-font-size: 15;
+    -fx-text-fill: -gold-leaf;
+}
+
+/* Item card title (item name) */
+.item-name {
+    -fx-font-family: "Cinzel", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-text-fill: -ink-deep;
+}
+
+/* Feedback line — italic Garamond, colour by outcome. */
+.feedback-success {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 14;
+    -fx-text-fill: -moss-deep;
+    -fx-padding: 16 0 0 0;
+}
+.feedback-buff {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 14;
+    -fx-text-fill: -rogue;
+    -fx-padding: 16 0 0 0;
+}
+.feedback-error {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 14;
+    -fx-text-fill: -vermillion;
+    -fx-padding: 16 0 0 0;
+}
+
+/* Quiet italic note inside scroll content (e.g. "all items purchased"). */
+.note-italic {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 14;
+    -fx-text-fill: -ink-soft;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  Game-over screen — funereal manuscript rubrication              ║
+   ║  Vermillion-soft was the historic ink for chapter terminators.   ║
+   ║  No glow. Death is mute.                                         ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+.ornament-cross {
+    -fx-font-family: "Cambria", "Georgia", serif;
+    -fx-font-size: 56;
+    -fx-text-fill: -vermillion-soft;
+}
+.title-finis {
+    -fx-font-family: "Cinzel", "Trajan Pro", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 60;
+    -fx-text-fill: -vermillion-soft;
+}
+.text-mourning {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 17;
+    -fx-text-fill: -ink-soft;
+}
+.text-elegy {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 15;
+    -fx-text-fill: -ink-soft;
+}
+
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  Victory screen — illuminated capital                            ║
+   ║  Gold leaf. The hero is sainted in the manuscript.               ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+.ornament-illumination {
+    -fx-font-family: "Cambria", "Georgia", serif;
+    -fx-font-size: 60;
+    -fx-text-fill: -gold-bright;
+    -fx-effect: dropshadow(gaussian, -gold-glow, 28, 0.0, 0, 0);
+}
+.text-acclaim {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 18;
+    -fx-text-fill: -gold-soft;
+}
+.text-honour {
+    -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
+    -fx-font-style: italic;
+    -fx-font-size: 15;
+    -fx-text-fill: -ink-soft;
+}
+/* Heroic class display — bigger than title-section, intentional ceremony */
+.title-honour {
+    -fx-font-family: "Cinzel", "Trajan Pro", "Cambria", "Georgia", serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 36;
 }

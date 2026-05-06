@@ -28,7 +28,7 @@ public class HistoryController implements BaseController {
 
         if (log.isEmpty()) {
             Label empty = new Label("No hay eventos registrados todavía.\nAvanza en el mundo para comenzar tu aventura.");
-            empty.setStyle("-fx-font-size: 14; -fx-text-fill: #6e7681; -fx-padding: 24 0; -fx-line-spacing: 6;");
+            empty.getStyleClass().add("empty-state");
             empty.setWrapText(true);
             historyBox.getChildren().add(empty);
         } else {
@@ -50,13 +50,14 @@ public class HistoryController implements BaseController {
 
     private void renderEntry(LogEntry entry) {
         if (entry.isSeparator()) {
-            historyBox.getChildren().add(buildSeparator("#30363d"));
+            // Aged-paper rule between events — frame-faint, the manuscript's quietest line.
+            historyBox.getChildren().add(buildSeparator("#d4c79c"));
             return;
         }
 
         String text = entry.text();
 
-        // Heavy separator lines (━━━) → colored 1px rule
+        // Heavy separator lines (━━━) → colored 1px rule using the entry's own ink.
         if (!text.isBlank() && text.chars().allMatch(c -> c == '━' || c == ' ')) {
             historyBox.getChildren().add(buildSeparator(entry.color()));
             return;
@@ -66,12 +67,8 @@ public class HistoryController implements BaseController {
         lbl.setWrapText(true);
         lbl.setMaxWidth(Double.MAX_VALUE);
         lbl.setAlignment(Pos.TOP_LEFT);
-        lbl.setStyle(
-                "-fx-font-size: 13;" +
-                "-fx-text-fill: " + entry.color() + ";" +
-                "-fx-padding: 4 2 4 2;" +
-                "-fx-line-spacing: 2;"
-        );
+        lbl.getStyleClass().add("log-entry");
+        lbl.setStyle("-fx-text-fill: " + entry.color() + "; -fx-line-spacing: 2;");
         historyBox.getChildren().add(lbl);
     }
 
