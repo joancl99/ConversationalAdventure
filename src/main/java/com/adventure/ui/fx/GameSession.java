@@ -49,7 +49,7 @@ public class GameSession {
     }
 
     public void addSeparatorToLog() {
-        sessionLog.add(new LogEntry("", "#30363d", true));
+        sessionLog.add(new LogEntry("", "#c6d0a4", true));
     }
 
     public List<LogEntry> getSessionLog() {

@@ -4,10 +4,14 @@ import com.adventure.engine.*;
 import com.adventure.enemy.EnemyType;
 import com.adventure.event.*;
 import com.adventure.model.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.util.Duration;
+import java.util.ArrayDeque;
 import java.util.Random;
 
 public class WorldController implements BaseController {
@@ -92,7 +96,7 @@ public class WorldController implements BaseController {
         if (!session.getSessionLog().isEmpty()) {
             session.addSeparatorToLog();
         }
-        logBox.getChildren().clear();
+        clearLog();
         int roll = rand.nextInt(100);
         if      (roll < 30)  triggerEnemy();
         else if (roll < 50)  triggerChest();
@@ -109,6 +113,7 @@ public class WorldController implements BaseController {
 
     @FXML
     private void onInventory() {
+        flushReveal();
         log("── Inventory ──────────────────────────────", LOG_RULE);
         log("  Heal potions  : " + potions.getHealPotions(), LOG_HEAL);
         log("  Damage potions: " + potions.getDamagePotions(), LOG_BUFF);
@@ -126,6 +131,7 @@ public class WorldController implements BaseController {
     // ── Battle actions ─────────────────────────────────────────────────────────
     @FXML
     private void onAttack() {
+        flushReveal();   // a second click snaps any narration still typing
         // Turn order is recalculated every time the player acts (speeds can change via potions)
         boolean playerFirst = calcPlayerFirst();
 
@@ -153,6 +159,7 @@ public class WorldController implements BaseController {
 
     @FXML
     private void onUseHealPotion() {
+        flushReveal();
         PotionUseResult r = battleManager.useHealPotion(player, potions);
         switch (r.getStatus()) {
             case HEALED -> {
@@ -182,6 +189,7 @@ public class WorldController implements BaseController {
 
     @FXML
     private void onUseDmgPotion() {
+        flushReveal();
         PotionUseResult r = battleManager.useDamagePotion(player, potions);
         switch (r.getStatus()) {
             case BUFFED -> log("⚗  Damage potion used! Attack +" + r.getValue()
@@ -198,6 +206,7 @@ public class WorldController implements BaseController {
 
     @FXML
     private void onEscape() {
+        flushReveal();
         if (battleManager.tryEscape()) {
             log("You managed to escape!", LOG_SOFT);
             setState(WorldState.EXPLORING);
@@ -211,6 +220,7 @@ public class WorldController implements BaseController {
     // ── Lore choice actions ────────────────────────────────────────────────────
     @FXML
     private void onChoiceYes() {
+        flushReveal();
         applyLoreEffect(pendingLore.getEffectOnYes());
         setState(WorldState.EXPLORING);
         pendingLore = null;
@@ -218,6 +228,7 @@ public class WorldController implements BaseController {
 
     @FXML
     private void onChoiceNo() {
+        flushReveal();
         applyLoreEffect(pendingLore.getEffectOnNo());
         setState(WorldState.EXPLORING);
         pendingLore = null;
@@ -463,13 +474,79 @@ public class WorldController implements BaseController {
 
     private void log(String text, String hexColor) {
         session.addToLog(text, hexColor);
-        Label lbl = new Label(text);
+        Label lbl = new Label();              // starts empty; revealed character by character
         lbl.setWrapText(true);
         lbl.setMaxWidth(Double.MAX_VALUE);
         lbl.getStyleClass().add("log-entry");
         lbl.setStyle("-fx-text-fill: " + hexColor + ";");
         lbl.setAlignment(Pos.TOP_LEFT);
         logBox.getChildren().add(lbl);
+
+        // Decorative rules appear at once — only narration is typed out.
+        boolean instant = hexColor.equals(LOG_RULE);
+        enqueueReveal(lbl, text, instant);
+    }
+
+    // ── Text reveal (typewriter narration) ──────────────────────────────────────
+    // Riverland narrates one character at a time. Lines are queued so they reveal
+    // in order; the model is already updated synchronously, so this is purely visual.
+    private static final double REVEAL_MS_PER_CHAR = 12;
+
+    private record RevealTask(Label label, String text, boolean instant) {}
+
+    private final ArrayDeque<RevealTask> revealQueue = new ArrayDeque<>();
+    private Timeline    revealTimeline;
+    private RevealTask  activeTask;
+
+    private void enqueueReveal(Label label, String text, boolean instant) {
+        revealQueue.add(new RevealTask(label, text, instant));
+        if (revealTimeline == null) startNextReveal();
+    }
+
+    private void startNextReveal() {
+        // Drain any instant (or empty) lines immediately, then type the next real one.
+        while (true) {
+            activeTask = revealQueue.poll();
+            if (activeTask == null) { revealTimeline = null; return; }
+            if (activeTask.instant() || activeTask.text().isEmpty()) {
+                activeTask.label().setText(activeTask.text());
+                snapScroll();
+                continue;
+            }
+            break;
+        }
+
+        final String full = activeTask.text();
+        final Label  lbl  = activeTask.label();
+        final int[]  i    = {0};
+        revealTimeline = new Timeline(new KeyFrame(Duration.millis(REVEAL_MS_PER_CHAR), e -> {
+            i[0]++;
+            lbl.setText(full.substring(0, Math.min(i[0], full.length())));
+            snapScroll();
+        }));
+        revealTimeline.setCycleCount(full.length());
+        revealTimeline.setOnFinished(e -> { revealTimeline = null; startNextReveal(); });
+        revealTimeline.play();
+    }
+
+    /** Complete the line being typed and every queued line at once (e.g. on a second click). */
+    private void flushReveal() {
+        if (revealTimeline != null) { revealTimeline.stop(); revealTimeline = null; }
+        if (activeTask != null) { activeTask.label().setText(activeTask.text()); activeTask = null; }
+        for (RevealTask t : revealQueue) t.label().setText(t.text());
+        revealQueue.clear();
+        snapScroll();
+    }
+
+    /** Cancel pending reveals and wipe the visible log (used when advancing to a new event). */
+    private void clearLog() {
+        if (revealTimeline != null) { revealTimeline.stop(); revealTimeline = null; }
+        activeTask = null;
+        revealQueue.clear();
+        logBox.getChildren().clear();
+    }
+
+    private void snapScroll() {
         scrollLog.layout();
         scrollLog.setVvalue(1.0);
     }

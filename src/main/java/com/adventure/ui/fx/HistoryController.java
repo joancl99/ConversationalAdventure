@@ -50,8 +50,8 @@ public class HistoryController implements BaseController {
 
     private void renderEntry(LogEntry entry) {
         if (entry.isSeparator()) {
-            // Aged-paper rule between events — frame-faint, the manuscript's quietest line.
-            historyBox.getChildren().add(buildSeparator("#d4c79c"));
+            // Quiet rule between events — frame-faint, the palette's softest line.
+            historyBox.getChildren().add(buildSeparator("#dfe6c6"));
             return;
         }
 

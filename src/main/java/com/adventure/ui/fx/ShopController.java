@@ -205,16 +205,16 @@ public class ShopController {
     }
 
     /**
-     * Manuscript pigment hierarchy by tier:
-     *  bronze = humble earth-tone tinta, lapis = the costly imported blue,
-     *  gold-leaf = reserved for the most important illuminations.
+     * Tier colour hierarchy (Living Meadow palette):
+     *  bronze = humble earth-tone, river-blue = the costly imported pigment,
+     *  sun-gold = reserved for the richest wares.
      */
     private static String tierColor(ShopOffer.Tier tier) {
         return switch (tier) {
-            case BRONZE -> "#8b7a52";  // -frame
-            case SILVER -> "#4a6fa5";  // -lapis
-            case GOLDEN -> "#b8884e";  // -gold-leaf
-            case NONE   -> "#5a7160";  // -ink-soft fallback
+            case BRONZE -> "#a8895a";  // warm bronze
+            case SILVER -> "#3d8fd1";  // river blue
+            case GOLDEN -> "#e0a82e";  // sun gold
+            case NONE   -> "#5f7556";  // ink-soft fallback
         };
     }
 }

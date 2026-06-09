@@ -1,54 +1,57 @@
 /* ╔══════════════════════════════════════════════════════════════════╗
-   ║  RIVERLAND — Illuminated Manuscript theme                        ║
-   ║  Aged vellum, moss-green ink, gold leaf, vermillion capitals.    ║
-   ║  Calm, alive, never harsh on the eye.                            ║
+   ║  RIVERLAND — Living Meadow theme                                 ║
+   ║  Sunlit outdoors, fresh grass green, river blue, treasure gold.  ║
+   ║  Bright, colourful, inviting — a world you want to walk into.    ║
    ╚══════════════════════════════════════════════════════════════════╝ */
 
 /* ── Palette (lookup colors) ───────────────────────────────────────── */
 .root {
-    /* Vellum / parchment backgrounds — warm cream, never pure white */
-    -vellum-deep:    #d8caa0;
-    -vellum:         #e3d6ad;
-    -vellum-soft:    #ecdfb8;
+    /* Surfaces — bright, clean, warm near-white (panels & cards) */
+    -vellum-deep:    #e9e7d4;
+    -vellum:         #f4f2e6;
+    -vellum-soft:    #fcfbf3;
 
-    /* Inks — dark forest green, gentler than black for long reading */
-    -ink-deep:       #1f3528;
-    -ink:            #2d4a38;
-    -ink-soft:       #5a7160;
-    -ink-faint:      #8b9a8c;
+    /* Inks — deep readable forest greens (text) */
+    -ink-deep:       #20351d;
+    -ink:            #314c2b;
+    -ink-soft:       #5f7556;
+    -ink-faint:      #9aa890;
 
-    /* Frames — warm earth browns, like aged book bindings */
-    -frame-deep:     #6b5a3c;
-    -frame:          #8b7a52;
-    -frame-light:    #b09c6e;
-    -frame-faint:    #d4c79c;
+    /* Frames — soft fresh green-tan borders */
+    -frame-deep:     #8a9a66;
+    -frame:          #a7b67f;
+    -frame-light:    #c6d0a4;
+    -frame-faint:    #dfe6c6;
 
-    /* Living moss — the alive, calming green */
-    -moss:           #5e8a5e;
-    -moss-bright:    #7aa07a;
-    -moss-deep:      #3d6845;
-    -moss-glow:      rgba(94, 138, 94, 0.22);
+    /* Meadow green — the living hero colour */
+    -moss:           #4caf50;
+    -moss-bright:    #74c96f;
+    -moss-deep:      #2f7d33;
+    -moss-glow:      rgba(76, 175, 80, 0.32);
 
-    /* Illuminated manuscript palette */
-    -gold-leaf:      #b8884e;
-    -gold-bright:    #d4a55e;
-    -gold-soft:      #9a7042;
-    -gold-glow:      rgba(184, 136, 78, 0.22);
+    /* Sun gold — treasure, warmth, coins */
+    -gold-leaf:      #e0a82e;
+    -gold-bright:    #f4c64e;
+    -gold-soft:      #c2871c;
+    -gold-glow:      rgba(224, 168, 46, 0.30);
 
-    -vermillion:     #a84030;
-    -vermillion-soft:#7a2e23;
-    -lapis:          #4a6fa5;
+    /* Dragonfire — danger, attack */
+    -vermillion:     #e0512f;
+    -vermillion-soft:#b23a22;
+    /* River blue */
+    -lapis:          #3d8fd1;
 
     /* Per-class accents */
-    -warrior:        #b8884e;
-    -mage:           #4a6fa5;
-    -rogue:          #8c5a9c;
+    -warrior:        #e0a82e;
+    -mage:           #3d8fd1;
+    -rogue:          #9b59b6;
 
-    -warrior-glow:   rgba(184, 136, 78, 0.30);
-    -mage-glow:      rgba(74, 111, 165, 0.30);
-    -rogue-glow:     rgba(140, 90, 156, 0.30);
+    -warrior-glow:   rgba(224, 168, 46, 0.34);
+    -mage-glow:      rgba(61, 143, 209, 0.34);
+    -rogue-glow:     rgba(155, 89, 182, 0.34);
 
-    -fx-background-color: radial-gradient(center 50% 42%, radius 80%, -vellum-soft 0%, -vellum 60%, -vellum-deep 100%);
+    /* Outdoor daylight: soft sky above, fresh meadow below */
+    -fx-background-color: linear-gradient(to bottom, #dff1fb 0%, #e9f5dc 45%, #d3ecb4 100%);
     -fx-font-family: "EB Garamond", "Cambria", "Georgia", serif;
     -fx-font-size: 14;
     -fx-text-fill: -ink;
@@ -126,22 +129,23 @@
     -fx-font-weight: bold;
     -fx-font-size: 14;
     -fx-text-fill: -moss-deep;
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(76, 175, 80, 0.16);
     -fx-border-color: -moss;
     -fx-border-width: 1.2;
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
     -fx-padding: 14 32;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, -moss-glow, 8, 0.0, 0, 2);
 }
 .btn-primary:hover {
-    -fx-background-color: rgba(94, 138, 94, 0.10);
+    -fx-background-color: rgba(76, 175, 80, 0.30);
     -fx-text-fill: -moss-deep;
     -fx-border-color: -moss-deep;
     -fx-effect: dropshadow(gaussian, -moss-glow, 18, 0.0, 0, 0);
 }
 .btn-primary:pressed {
-    -fx-background-color: rgba(94, 138, 94, 0.18);
+    -fx-background-color: rgba(76, 175, 80, 0.42);
 }
 
 .btn-secondary {
@@ -152,8 +156,8 @@
     -fx-background-color: transparent;
     -fx-border-color: -frame-light;
     -fx-border-width: 1;
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
     -fx-padding: 14 32;
     -fx-cursor: hand;
 }
@@ -194,8 +198,8 @@
     -fx-font-size: 14;
     -fx-background-color: transparent;
     -fx-border-width: 1.2;
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
     -fx-padding: 14 32;
     -fx-cursor: hand;
 }
@@ -224,20 +228,29 @@
     -fx-background-color: -vellum-soft;
     -fx-border-color: -frame-light;
     -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
     -fx-padding: 22;
+    -fx-effect: dropshadow(gaussian, rgba(47, 79, 47, 0.13), 14, 0.0, 0, 3);
 }
 .panel-frame {
     -fx-background-color: -vellum-soft;
     -fx-border-color: -gold-leaf;
     -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
     -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(47, 79, 47, 0.13), 14, 0.0, 0, 3);
 }
 
 /* Class-coloured card frames (used in class select) */
 .panel-warrior, .panel-mage, .panel-rogue {
     -fx-background-color: -vellum-soft;
     -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
     -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(47, 79, 47, 0.13), 14, 0.0, 0, 3);
 }
 .panel-warrior { -fx-border-color: -warrior; }
 .panel-mage    { -fx-border-color: -mage;    }
@@ -265,8 +278,11 @@
     -fx-font-family: "Cambria", "Georgia", serif;
 }
 .divider-line {
-    -fx-background-color: -frame-light;
-    -fx-pref-height: 1;
+    -fx-background-color: -frame;
+    -fx-pref-height: 2;
+    -fx-min-height: 2;
+    -fx-max-height: 2;
+    -fx-background-radius: 1;
 }
 
 /* ── ProgressBar ───────────────────────────────────────────────────── */
@@ -414,8 +430,8 @@
     -fx-background-color: transparent;
     -fx-border-color: -vermillion;
     -fx-border-width: 1.2;
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
     -fx-padding: 14 32;
     -fx-cursor: hand;
 }
@@ -436,8 +452,8 @@
     -fx-background-color: transparent;
     -fx-border-color: -moss;
     -fx-border-width: 1.2;
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
     -fx-padding: 14 28;
     -fx-cursor: hand;
 }
@@ -457,8 +473,8 @@
     -fx-background-color: transparent;
     -fx-border-color: -rogue;
     -fx-border-width: 1.2;
-    -fx-border-radius: 1;
-    -fx-background-radius: 1;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
     -fx-padding: 14 28;
     -fx-cursor: hand;
 }
