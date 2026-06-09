@@ -4,3 +4,7 @@ out/
 target/
 *.class
 saveFile/
+
+# autoskills tooling (local)
+.agents/
+skills-lock.json
